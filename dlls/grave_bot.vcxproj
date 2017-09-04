@@ -21,27 +21,28 @@
   <PropertyGroup Label="Globals">
     <SccProjectName>"$/SDKSrc/Public/dlls", NVGBAAAA</SccProjectName>
     <SccLocalPath>.</SccLocalPath>
-    <ProjectGuid>{19B734B7-D65D-4E6D-B3FA-70D21D671FAC}</ProjectGuid>
+    <ProjectGuid>{B2628822-823C-4580-87F5-4447C0180BDA}</ProjectGuid>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v120</PlatformToolset>
     <UseOfMfc>false</UseOfMfc>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release Metamod|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v120</PlatformToolset>
     <UseOfMfc>false</UseOfMfc>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v120</PlatformToolset>
     <UseOfMfc>false</UseOfMfc>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug Metamod|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v120</PlatformToolset>
     <UseOfMfc>false</UseOfMfc>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
@@ -129,12 +130,8 @@
       <AdditionalDependencies>user32.lib;advapi32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <CustomBuildStep>
-      <Command>copy $(TargetDir)%(Filename).dll C:\Steam\SteamApps\ghoul%40nocensmundus.net\half-life\crabbed\dlls 
-copy $(TargetDir)%(Filename).dll C:\Steam\SteamApps\ghoul%40nocensmundus.net\half-life\si\dlls 
-copy $(TargetDir)%(Filename).dll C:\Steam\SteamApps\ghoul%40nocensmundus.net\half-life\valve\dlls 
-copy $(TargetDir)%(Filename).dll C:\Steam\SteamApps\ghoul%40nocensmundus.net\HLServer\crabbed\dlls 
-copy $(TargetDir)%(Filename).dll C:\Steam\SteamApps\ghoul%40nocensmundus.net\HLServer\valve\dlls 
-copy $(TargetDir)%(Filename).dll C:\Steam\SteamApps\ghoul%40nocensmundus.net\HLServer\si\dlls </Command>
+      <Command>
+      </Command>
       <Message>Performing Custom Build Step on %(FullPath)</Message>
       <Outputs>$(TargetName);%(Outputs)</Outputs>
     </CustomBuildStep>
@@ -184,12 +181,8 @@ copy $(TargetDir)%(Filename).dll C:\Steam\SteamApps\ghoul%40nocensmundus.net\HLS
       <AdditionalDependencies>user32.lib;advapi32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <CustomBuildStep>
-      <Command>copy $(TargetDir)%(Filename).dll C:\Steam\SteamApps\ghoul%40nocensmundus.net\half-life\crabbed\dlls 
-copy $(TargetDir)%(Filename).dll C:\Steam\SteamApps\ghoul%40nocensmundus.net\half-life\si\dlls 
-copy $(TargetDir)%(Filename).dll C:\Steam\SteamApps\ghoul%40nocensmundus.net\half-life\valve\dlls 
-copy $(TargetDir)%(Filename).dll C:\Steam\SteamApps\ghoul%40nocensmundus.net\HLServer\crabbed\dlls 
-copy $(TargetDir)%(Filename).dll C:\Steam\SteamApps\ghoul%40nocensmundus.net\HLServer\valve\dlls 
-copy $(TargetDir)%(Filename).dll C:\Steam\SteamApps\ghoul%40nocensmundus.net\HLServer\si\dlls </Command>
+      <Command>
+      </Command>
       <Message>Performing Custom Build Step on %(FullPath)</Message>
       <Outputs>$(TargetName);%(Outputs)</Outputs>
     </CustomBuildStep>
@@ -209,6 +202,7 @@ copy $(TargetDir)%(Filename).dll C:\Steam\SteamApps\ghoul%40nocensmundus.net\HLS
       <PrecompiledHeaderOutputFile>.\Release_Metamod\grave_bot.pch</PrecompiledHeaderOutputFile>
       <ObjectFileName>.\Release_Metamod\</ObjectFileName>
       <ProgramDataBaseFileName>.\Release_Metamod\</ProgramDataBaseFileName>
+      <EnableEnhancedInstructionSet>StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
     </ClCompile>
     <Midl>
       <SuppressStartupBanner>true</SuppressStartupBanner>
@@ -236,12 +230,8 @@ copy $(TargetDir)%(Filename).dll C:\Steam\SteamApps\ghoul%40nocensmundus.net\HLS
       <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <CustomBuildStep>
-      <Command>copy $(TargetDir)%(Filename).dll C:\Steam\SteamApps\ghoul%40nocensmundus.net\half-life\crabbed\dlls 
-copy $(TargetDir)%(Filename).dll C:\Steam\SteamApps\ghoul%40nocensmundus.net\half-life\si\dlls 
-copy $(TargetDir)%(Filename).dll C:\Steam\SteamApps\ghoul%40nocensmundus.net\half-life\valve\dlls 
-copy $(TargetDir)%(Filename).dll C:\Steam\SteamApps\ghoul%40nocensmundus.net\HLServer\crabbed\dlls 
-copy $(TargetDir)%(Filename).dll C:\Steam\SteamApps\ghoul%40nocensmundus.net\HLServer\valve\dlls 
-copy $(TargetDir)%(Filename).dll C:\Steam\SteamApps\ghoul%40nocensmundus.net\HLServer\si\dlls </Command>
+      <Command>
+      </Command>
       <Message>Performing Custom Build Step on %(FullPath)</Message>
       <Outputs>$(TargetName);%(Outputs)</Outputs>
     </CustomBuildStep>
@@ -261,6 +251,7 @@ copy $(TargetDir)%(Filename).dll C:\Steam\SteamApps\ghoul%40nocensmundus.net\HLS
       <PrecompiledHeaderOutputFile>.\Release\grave_bot.pch</PrecompiledHeaderOutputFile>
       <ObjectFileName>.\Release\</ObjectFileName>
       <ProgramDataBaseFileName>.\Release\</ProgramDataBaseFileName>
+      <EnableEnhancedInstructionSet>StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
     </ClCompile>
     <Midl>
       <SuppressStartupBanner>true</SuppressStartupBanner>
@@ -288,12 +279,8 @@ copy $(TargetDir)%(Filename).dll C:\Steam\SteamApps\ghoul%40nocensmundus.net\HLS
       <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <CustomBuildStep>
-      <Command>copy $(TargetDir)%(Filename).dll C:\Steam\SteamApps\ghoul%40nocensmundus.net\half-life\crabbed\dlls 
-copy $(TargetDir)%(Filename).dll C:\Steam\SteamApps\ghoul%40nocensmundus.net\half-life\si\dlls 
-copy $(TargetDir)%(Filename).dll C:\Steam\SteamApps\ghoul%40nocensmundus.net\half-life\valve\dlls 
-copy $(TargetDir)%(Filename).dll C:\Steam\SteamApps\ghoul%40nocensmundus.net\HLServer\crabbed\dlls 
-copy $(TargetDir)%(Filename).dll C:\Steam\SteamApps\ghoul%40nocensmundus.net\HLServer\valve\dlls 
-copy $(TargetDir)%(Filename).dll C:\Steam\SteamApps\ghoul%40nocensmundus.net\HLServer\si\dlls </Command>
+      <Command>
+      </Command>
       <Message>Performing Custom Build Step on %(FullPath)</Message>
       <Outputs>$(TargetName);%(Outputs)</Outputs>
     </CustomBuildStep>

@@ -1,9 +1,9 @@
-CPP = g++
+CPP = g++-4.8
 TARGET = gravebot_mm
-ARCHFLAG = i586
+ARCHFLAG = i686
 BASEFLAGS = -Dstricmp=strcasecmp -Dstrcmpi=strcasecmp -DMETAMOD_BUILD
 OPTFLAGS = 
-CPPFLAGS = ${BASEFLAGS} ${OPTFLAGS} -march=${ARCHFLAG} -O2 -w -I"../common" -I"../dlls" -I"../engine" -I"../pm_shared" -I"../metamod" 
+CPPFLAGS = ${BASEFLAGS} ${OPTFLAGS} -march=${ARCHFLAG} -mtune=generic -msse2 -O2 -m32 -mfpmath=sse -finline-functions -pipe -w -I"../common" -I"../dlls" -I"../engine" -I"../pm_shared" -I"../metamod" 
 
 OBJ = 	bot.o \
 	bot_client.o \
@@ -19,9 +19,9 @@ OBJ = 	bot.o \
 	util.o \
 	waypoint.o
 
-${TARGET}_i386.so: ${OBJ}
+${TARGET}.so: ${OBJ}
 	${CPP} -fPIC -shared -static -o $@ ${OBJ} -Xlinker -Map -Xlinker ${TARGET}.map -ldl
-	strip -s ${TARGET}_i386.so 
+	strip -s ${TARGET}.so 
 	mv *.o Release_Metamod
 	mv *.map Release_Metamod
 	mv $@ Release_Metamod

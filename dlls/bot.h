@@ -17,9 +17,9 @@ typedef int BOOL;
 #endif
 
 #ifndef METAMOD_BUILD
-   #define GRAVEBOT_VERSION "0.3" // non-metamod
+   #define GRAVEBOT_VERSION "0.4b1-APG" // non-metamod
 #else
-   #define GRAVEBOT_VERSION "0.3mm" // metamod
+   #define GRAVEBOT_VERSION "0.4b1_mm-APG" // metamod
 #endif
 
 

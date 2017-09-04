@@ -185,7 +185,7 @@ plugin_info_t Plugin_info = {
    "Grave Bot", // plugin name
    GRAVEBOT_VERSION, // plugin version
    __DATE__, // date of creation
-   "Ghoul", // plugin author
+   "Ghoul & RoboCop", // plugin author
    "http://gravebot.bots-united.com/", // plugin URL
    "GRAVEBOT", // plugin logtag
    PT_STARTUP, // when loadable
