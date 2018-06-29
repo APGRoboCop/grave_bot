@@ -1,5 +1,13 @@
+<<<<<<< HEAD
 LIBRARY hl
 EXPORTS
  GetEntityAPI = _GetEntityAPI
  GetNewDLLFunctions = _GetNewDLLFunctions
 
+=======
+LIBRARY hl
+EXPORTS
+ GetEntityAPI = _GetEntityAPI
+ GetNewDLLFunctions = _GetNewDLLFunctions
+
+>>>>>>> 3f195a42c7b84bf4071b789634ebbe14b6297ebc

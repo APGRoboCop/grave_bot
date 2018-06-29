@@ -1,4 +1,11 @@
+<<<<<<< HEAD
 EXPORTS
 	GiveFnptrsToDll			@1
 SECTIONS
 	.data READ WRITE
+=======
+EXPORTS
+	GiveFnptrsToDll			@1
+SECTIONS
+	.data READ WRITE
+>>>>>>> 3f195a42c7b84bf4071b789634ebbe14b6297ebc
