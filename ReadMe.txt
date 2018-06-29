@@ -1,6 +1,13 @@
 ===========================================================================================
-===============================Grave Bot===Readme===01/23/05=======================b0.3====
+===============================Grave Bot===Readme===04/Sept/17=============================
 ===========================================================================================
+
+ChangeLog v0.4-beta1:-
+>> Non-Metamod GraveBot build support removed
+>> Fixed the h_export.cpp for Linux Server to detect SI build as 'si.so' not 'si_i386.so'
+>> Both builds optimised for SSE2
+>> Win32 build recompiled by VS2013
+>> Linux build recompiled by G++ 4.8
 
 +--------+
 | NOTICE |
@@ -88,13 +95,13 @@ modfolder\grave_bot.cfg
 modfolder\grave_bot_names.txt
 modfolder\maps\*.gbw
 
-
-
 +--------------------+
 | Credits and Thanks |
 +--------------------+
 
 Ghoul: Programming, Website, some Waypointing
+
+RoboCop: Minor fixes
 
 CoCoNUT: Waypointing
 
