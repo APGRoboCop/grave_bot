@@ -5,7 +5,6 @@
 ChangeLog v0.4-beta2:-
 >> Both builds now support Meta API 5:13
 
->>>>>>> 594320fd6db9c6f9b3b7d743a0270568ddbba6bd
 ChangeLog v0.4-beta1:-
 >> Non-Metamod GraveBot build support removed
 >> Fixed the h_export.cpp for Linux Server to detect SI build as 'si.so' not 'si_i386.so'
