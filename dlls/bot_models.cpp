@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> 594320fd6db9c6f9b3b7d743a0270568ddbba6bd
 //
 // HPB bot - botman's High Ping Bastard bot
 //
@@ -256,9 +252,6 @@ void LoadBotModels(void)
    }
 }
 
-<<<<<<< HEAD
-=======
-=======
 //
 // HPB bot - botman's High Ping Bastard bot
 //
@@ -269,7 +262,6 @@ void LoadBotModels(void)
 
 #include "extdll.h"
 #include "util.h"
-
 
 #include "bot.h"
 
@@ -317,7 +309,6 @@ char *gearbox_bot_names[GEARBOX_MAX_SKINS] = {
 
 char *holywars_bot_names[HOLYWARS_MAX_SKINS] = {
    "Akedo", "B.A.D.", "Barney", "Gordon", "Helmet"};
-
 
 #ifndef __linux__
 
@@ -512,6 +503,3 @@ void LoadBotModels(void)
          break;  // break out if max models reached
    }
 }
-
->>>>>>> 3f195a42c7b84bf4071b789634ebbe14b6297ebc
->>>>>>> 594320fd6db9c6f9b3b7d743a0270568ddbba6bd
