@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> 594320fd6db9c6f9b3b7d743a0270568ddbba6bd
 //
 // HPB_bot - botman's High Ping Bastard bot
 //
@@ -37,9 +33,6 @@ void BotClient_SI_Notice(void *p, edict_t *pEdict);
 void BotClient_SI_Battery(void *p, edict_t *pEdict);
 void BotClient_SI_VoteInfo(void *p, edict_t *pEdict);
 
-<<<<<<< HEAD
-=======
-=======
 //
 // HPB_bot - botman's High Ping Bastard bot
 //
@@ -74,6 +67,3 @@ void BotClient_SI_Goal(void *p, edict_t *pEdict);
 void BotClient_SI_Notice(void *p, edict_t *pEdict);
 void BotClient_SI_Battery(void *p, edict_t *pEdict);
 void BotClient_SI_VoteInfo(void *p, edict_t *pEdict);
-
->>>>>>> 3f195a42c7b84bf4071b789634ebbe14b6297ebc
->>>>>>> 594320fd6db9c6f9b3b7d743a0270568ddbba6bd
