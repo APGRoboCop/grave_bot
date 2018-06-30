@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> 594320fd6db9c6f9b3b7d743a0270568ddbba6bd
 //
 // HPB_bot - botman's High Ping Bastard bot
 //
@@ -74,9 +70,6 @@ float BotAssessSecondaryAmmo( bot_t *pBot, int weapon_id );
 
 #endif // BOT_FUNC_H
 
-<<<<<<< HEAD
-=======
-=======
 //
 // HPB_bot - botman's High Ping Bastard bot
 //
@@ -148,6 +141,3 @@ float BotAssessPrimaryAmmo( bot_t *pBot, int weapon_id );
 float BotAssessSecondaryAmmo( bot_t *pBot, int weapon_id );
 
 #endif // BOT_FUNC_H
-
->>>>>>> 3f195a42c7b84bf4071b789634ebbe14b6297ebc
->>>>>>> 594320fd6db9c6f9b3b7d743a0270568ddbba6bd
