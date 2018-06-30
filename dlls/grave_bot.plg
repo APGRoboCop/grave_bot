@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 594320fd6db9c6f9b3b7d743a0270568ddbba6bd
 <html>
 <body>
 <pre>
@@ -88,3 +92,98 @@ grave_bot.dll - 0 error(s), 0 warning(s)
 </pre>
 </body>
 </html>
+<<<<<<< HEAD
+=======
+=======
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: grave_bot - Win32 Release--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating temporary file "C:\DOCUME~1\Ghoul\LOCALS~1\Temp\RSP7D.tmp" with contents
+[
+/nologo /G5 /MT /W3 /GX /Zi /O2 /I "..\dlls" /I "..\engine" /I "..\common" /I "..\pm_shared" /I "..\metamod" /I "..\\" /D "NDEBUG" /D "WIN32" /D "_WINDOWS" /D "VALVE_DLL" /Fp".\Release/grave_bot.pch" /YX /Fo".\Release/" /Fd".\Release/" /FD /c 
+"F:\HL Mods\Grave Bot\dlls\bot.cpp"
+"F:\HL Mods\Grave Bot\dlls\bot_client.cpp"
+"F:\HL Mods\Grave Bot\dlls\bot_combat.cpp"
+"F:\HL Mods\Grave Bot\dlls\bot_navigate.cpp"
+"F:\HL Mods\Grave Bot\dlls\bot_start.cpp"
+"F:\HL Mods\Grave Bot\dlls\bot_weapons.cpp"
+"F:\HL Mods\Grave Bot\dlls\bot_weapons_hldm.cpp"
+"F:\HL Mods\Grave Bot\dlls\bot_weapons_si.cpp"
+"F:\HL Mods\Grave Bot\dlls\dll.cpp"
+"F:\HL Mods\Grave Bot\dlls\engine.cpp"
+"F:\HL Mods\Grave Bot\dlls\h_export.cpp"
+"F:\HL Mods\Grave Bot\dlls\linkfunc.cpp"
+"F:\HL Mods\Grave Bot\dlls\util.cpp"
+"F:\HL Mods\Grave Bot\dlls\waypoint.cpp"
+]
+Creating command line "cl.exe @C:\DOCUME~1\Ghoul\LOCALS~1\Temp\RSP7D.tmp" 
+Creating temporary file "C:\DOCUME~1\Ghoul\LOCALS~1\Temp\RSP7E.tmp" with contents
+[
+kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib /nologo /subsystem:windows /dll /incremental:no /pdb:".\Release/grave_bot.pdb" /map:".\Release/grave_bot.map" /debug /machine:I386 /def:".\grave_bot.def" /out:"Release\grave_bot.dll" /implib:".\Release/grave_bot.lib" 
+".\Release\bot.obj"
+".\Release\bot_client.obj"
+".\Release\bot_combat.obj"
+".\Release\bot_navigate.obj"
+".\Release\bot_start.obj"
+".\Release\bot_weapons.obj"
+".\Release\bot_weapons_hldm.obj"
+".\Release\bot_weapons_si.obj"
+".\Release\dll.obj"
+".\Release\engine.obj"
+".\Release\h_export.obj"
+".\Release\linkfunc.obj"
+".\Release\util.obj"
+".\Release\waypoint.obj"
+]
+Creating command line "link.exe @C:\DOCUME~1\Ghoul\LOCALS~1\Temp\RSP7E.tmp"
+Creating temporary file "C:\DOCUME~1\Ghoul\LOCALS~1\Temp\RSP7F.bat" with contents
+[
+@echo off
+copy .\Release\grave_bot.dll C:\Steam\SteamApps\ghoul@nocensmundus.net\half-life\crabbed\dlls
+copy .\Release\grave_bot.dll C:\Steam\SteamApps\ghoul@nocensmundus.net\half-life\si\dlls
+copy .\Release\grave_bot.dll C:\Steam\SteamApps\ghoul@nocensmundus.net\half-life\valve\dlls
+copy .\Release\grave_bot.dll C:\Steam\SteamApps\ghoul@nocensmundus.net\HLServer\crabbed\dlls
+copy .\Release\grave_bot.dll C:\Steam\SteamApps\ghoul@nocensmundus.net\HLServer\valve\dlls
+copy .\Release\grave_bot.dll C:\Steam\SteamApps\ghoul@nocensmundus.net\HLServer\si\dlls
+]
+Creating command line "C:\DOCUME~1\Ghoul\LOCALS~1\Temp\RSP7F.bat"
+Compiling...
+bot.cpp
+bot_client.cpp
+bot_combat.cpp
+bot_navigate.cpp
+bot_start.cpp
+bot_weapons.cpp
+bot_weapons_hldm.cpp
+bot_weapons_si.cpp
+dll.cpp
+engine.cpp
+h_export.cpp
+linkfunc.cpp
+util.cpp
+waypoint.cpp
+Linking...
+   Creating library .\Release/grave_bot.lib and object .\Release/grave_bot.exp
+<h3>Output Window</h3>
+Performing Custom Build Step on .\Release\grave_bot.dll
+        1 file(s) copied.
+        1 file(s) copied.
+        1 file(s) copied.
+        1 file(s) copied.
+        1 file(s) copied.
+        1 file(s) copied.
+
+
+
+<h3>Results</h3>
+grave_bot.dll - 0 error(s), 0 warning(s)
+</pre>
+</body>
+</html>
+>>>>>>> 3f195a42c7b84bf4071b789634ebbe14b6297ebc
+>>>>>>> 594320fd6db9c6f9b3b7d743a0270568ddbba6bd

@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 594320fd6db9c6f9b3b7d743a0270568ddbba6bd
 Microsoft Developer Studio Workspace File, Format Version 6.00
 # WARNING: DO NOT EDIT OR DELETE THIS WORKSPACE FILE!
 
@@ -35,3 +39,45 @@ Package=<3>
 
 ###############################################################################
 
+<<<<<<< HEAD
+=======
+=======
+Microsoft Developer Studio Workspace File, Format Version 6.00
+# WARNING: DO NOT EDIT OR DELETE THIS WORKSPACE FILE!
+
+###############################################################################
+
+Project: "grave_bot"=.\grave_bot.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+    begin source code control
+    "$/SDKSrc/Public/dlls", NVGBAAAA
+    .
+    end source code control
+}}}
+
+Package=<4>
+{{{
+}}}
+
+###############################################################################
+
+Global:
+
+Package=<5>
+{{{
+    begin source code control
+    "$/SDKSrc/Public/dlls", NVGBAAAA
+    .
+    end source code control
+}}}
+
+Package=<3>
+{{{
+}}}
+
+###############################################################################
+
+>>>>>>> 3f195a42c7b84bf4071b789634ebbe14b6297ebc
+>>>>>>> 594320fd6db9c6f9b3b7d743a0270568ddbba6bd

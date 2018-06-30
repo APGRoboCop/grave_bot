@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 594320fd6db9c6f9b3b7d743a0270568ddbba6bd
 # Microsoft Developer Studio Generated Dependency File, included by grave_bot.mak
 
 .\bot.cpp : \
@@ -480,3 +484,490 @@
 	".\waypoint.h"\
 	"c:\microsoft visual studio\vc98\include\basetsd.h"\
 	
+<<<<<<< HEAD
+=======
+=======
+# Microsoft Developer Studio Generated Dependency File, included by grave_bot.mak
+
+.\bot.cpp : \
+	"..\common\const.h"\
+	"..\common\crc.h"\
+	"..\common\cvardef.h"\
+	"..\common\entity_state.h"\
+	"..\common\event_flags.h"\
+	"..\common\in_buttons.h"\
+	"..\common\studio_event.h"\
+	"..\common\weaponinfo.h"\
+	"..\engine\archtypes.h"\
+	"..\engine\custom.h"\
+	"..\engine\edict.h"\
+	"..\engine\eiface.h"\
+	"..\engine\progdefs.h"\
+	"..\engine\sequence.h"\
+	"..\engine\studio.h"\
+	"..\pm_shared\pm_info.h"\
+	".\activity.h"\
+	".\basemonster.h"\
+	".\bot.h"\
+	".\bot_func.h"\
+	".\bot_weapons.h"\
+	".\cbase.h"\
+	".\cdll_dll.h"\
+	".\enginecallback.h"\
+	".\extdll.h"\
+	".\monsterevent.h"\
+	".\saverestore.h"\
+	".\schedule.h"\
+	".\util.h"\
+	".\vector.h"\
+	".\waypoint.h"\
+	"c:\microsoft visual studio\vc98\include\basetsd.h"\
+	
+
+.\bot_client.cpp : \
+	"..\common\const.h"\
+	"..\common\crc.h"\
+	"..\common\cvardef.h"\
+	"..\common\entity_state.h"\
+	"..\common\event_flags.h"\
+	"..\common\in_buttons.h"\
+	"..\common\studio_event.h"\
+	"..\common\weaponinfo.h"\
+	"..\engine\archtypes.h"\
+	"..\engine\custom.h"\
+	"..\engine\edict.h"\
+	"..\engine\eiface.h"\
+	"..\engine\progdefs.h"\
+	"..\engine\sequence.h"\
+	"..\engine\studio.h"\
+	"..\pm_shared\pm_info.h"\
+	".\activity.h"\
+	".\basemonster.h"\
+	".\bot.h"\
+	".\bot_client.h"\
+	".\bot_func.h"\
+	".\bot_weapons.h"\
+	".\cbase.h"\
+	".\cdll_dll.h"\
+	".\enginecallback.h"\
+	".\extdll.h"\
+	".\monsterevent.h"\
+	".\saverestore.h"\
+	".\schedule.h"\
+	".\util.h"\
+	".\vector.h"\
+	".\waypoint.h"\
+	"c:\microsoft visual studio\vc98\include\basetsd.h"\
+	
+
+.\bot_combat.cpp : \
+	"..\common\const.h"\
+	"..\common\crc.h"\
+	"..\common\cvardef.h"\
+	"..\common\entity_state.h"\
+	"..\common\event_flags.h"\
+	"..\common\in_buttons.h"\
+	"..\common\studio_event.h"\
+	"..\common\weaponinfo.h"\
+	"..\engine\archtypes.h"\
+	"..\engine\custom.h"\
+	"..\engine\edict.h"\
+	"..\engine\eiface.h"\
+	"..\engine\progdefs.h"\
+	"..\engine\sequence.h"\
+	"..\engine\studio.h"\
+	"..\pm_shared\pm_info.h"\
+	".\activity.h"\
+	".\basemonster.h"\
+	".\bot.h"\
+	".\bot_func.h"\
+	".\bot_weapons.h"\
+	".\cbase.h"\
+	".\cdll_dll.h"\
+	".\enginecallback.h"\
+	".\extdll.h"\
+	".\monsterevent.h"\
+	".\saverestore.h"\
+	".\schedule.h"\
+	".\util.h"\
+	".\vector.h"\
+	".\waypoint.h"\
+	"c:\microsoft visual studio\vc98\include\basetsd.h"\
+	
+
+.\bot_navigate.cpp : \
+	"..\common\const.h"\
+	"..\common\crc.h"\
+	"..\common\cvardef.h"\
+	"..\common\entity_state.h"\
+	"..\common\event_flags.h"\
+	"..\common\in_buttons.h"\
+	"..\common\studio_event.h"\
+	"..\common\weaponinfo.h"\
+	"..\engine\archtypes.h"\
+	"..\engine\custom.h"\
+	"..\engine\edict.h"\
+	"..\engine\eiface.h"\
+	"..\engine\progdefs.h"\
+	"..\engine\sequence.h"\
+	"..\engine\studio.h"\
+	"..\pm_shared\pm_info.h"\
+	".\activity.h"\
+	".\basemonster.h"\
+	".\bot.h"\
+	".\bot_func.h"\
+	".\bot_weapons.h"\
+	".\cbase.h"\
+	".\cdll_dll.h"\
+	".\enginecallback.h"\
+	".\extdll.h"\
+	".\monsterevent.h"\
+	".\saverestore.h"\
+	".\schedule.h"\
+	".\util.h"\
+	".\vector.h"\
+	".\waypoint.h"\
+	"c:\microsoft visual studio\vc98\include\basetsd.h"\
+	
+
+.\bot_start.cpp : \
+	"..\common\const.h"\
+	"..\common\crc.h"\
+	"..\common\cvardef.h"\
+	"..\common\entity_state.h"\
+	"..\common\event_flags.h"\
+	"..\common\in_buttons.h"\
+	"..\common\studio_event.h"\
+	"..\common\weaponinfo.h"\
+	"..\engine\archtypes.h"\
+	"..\engine\custom.h"\
+	"..\engine\edict.h"\
+	"..\engine\eiface.h"\
+	"..\engine\progdefs.h"\
+	"..\engine\sequence.h"\
+	"..\engine\studio.h"\
+	"..\pm_shared\pm_info.h"\
+	".\activity.h"\
+	".\basemonster.h"\
+	".\bot.h"\
+	".\bot_func.h"\
+	".\bot_weapons.h"\
+	".\cbase.h"\
+	".\cdll_dll.h"\
+	".\enginecallback.h"\
+	".\extdll.h"\
+	".\monsterevent.h"\
+	".\saverestore.h"\
+	".\schedule.h"\
+	".\util.h"\
+	".\vector.h"\
+	"c:\microsoft visual studio\vc98\include\basetsd.h"\
+	
+
+.\bot_weapons.cpp : \
+	"..\common\const.h"\
+	"..\common\crc.h"\
+	"..\common\cvardef.h"\
+	"..\common\entity_state.h"\
+	"..\common\event_flags.h"\
+	"..\common\in_buttons.h"\
+	"..\common\studio_event.h"\
+	"..\common\weaponinfo.h"\
+	"..\engine\archtypes.h"\
+	"..\engine\custom.h"\
+	"..\engine\edict.h"\
+	"..\engine\eiface.h"\
+	"..\engine\progdefs.h"\
+	"..\engine\sequence.h"\
+	"..\engine\studio.h"\
+	"..\pm_shared\pm_info.h"\
+	".\activity.h"\
+	".\basemonster.h"\
+	".\bot.h"\
+	".\bot_weapons.h"\
+	".\cbase.h"\
+	".\cdll_dll.h"\
+	".\enginecallback.h"\
+	".\extdll.h"\
+	".\monsterevent.h"\
+	".\saverestore.h"\
+	".\schedule.h"\
+	".\util.h"\
+	".\vector.h"\
+	"c:\microsoft visual studio\vc98\include\basetsd.h"\
+	
+
+.\bot_weapons_hldm.cpp : \
+	"..\common\const.h"\
+	"..\common\crc.h"\
+	"..\common\cvardef.h"\
+	"..\common\entity_state.h"\
+	"..\common\event_flags.h"\
+	"..\common\in_buttons.h"\
+	"..\common\studio_event.h"\
+	"..\common\weaponinfo.h"\
+	"..\engine\archtypes.h"\
+	"..\engine\custom.h"\
+	"..\engine\edict.h"\
+	"..\engine\eiface.h"\
+	"..\engine\progdefs.h"\
+	"..\engine\sequence.h"\
+	"..\engine\studio.h"\
+	"..\pm_shared\pm_info.h"\
+	".\activity.h"\
+	".\basemonster.h"\
+	".\bot.h"\
+	".\bot_weapons.h"\
+	".\cbase.h"\
+	".\cdll_dll.h"\
+	".\enginecallback.h"\
+	".\extdll.h"\
+	".\monsterevent.h"\
+	".\saverestore.h"\
+	".\schedule.h"\
+	".\util.h"\
+	".\vector.h"\
+	"c:\microsoft visual studio\vc98\include\basetsd.h"\
+	
+
+.\bot_weapons_si.cpp : \
+	"..\common\const.h"\
+	"..\common\crc.h"\
+	"..\common\cvardef.h"\
+	"..\common\entity_state.h"\
+	"..\common\event_flags.h"\
+	"..\common\in_buttons.h"\
+	"..\common\studio_event.h"\
+	"..\common\weaponinfo.h"\
+	"..\engine\archtypes.h"\
+	"..\engine\custom.h"\
+	"..\engine\edict.h"\
+	"..\engine\eiface.h"\
+	"..\engine\progdefs.h"\
+	"..\engine\sequence.h"\
+	"..\engine\studio.h"\
+	"..\pm_shared\pm_info.h"\
+	".\activity.h"\
+	".\basemonster.h"\
+	".\bot.h"\
+	".\bot_weapons.h"\
+	".\cbase.h"\
+	".\cdll_dll.h"\
+	".\enginecallback.h"\
+	".\extdll.h"\
+	".\monsterevent.h"\
+	".\saverestore.h"\
+	".\schedule.h"\
+	".\util.h"\
+	".\vector.h"\
+	"c:\microsoft visual studio\vc98\include\basetsd.h"\
+	
+
+.\dll.cpp : \
+	"..\common\const.h"\
+	"..\common\crc.h"\
+	"..\common\cvardef.h"\
+	"..\common\entity_state.h"\
+	"..\common\event_flags.h"\
+	"..\common\in_buttons.h"\
+	"..\common\studio_event.h"\
+	"..\common\weaponinfo.h"\
+	"..\engine\archtypes.h"\
+	"..\engine\custom.h"\
+	"..\engine\edict.h"\
+	"..\engine\eiface.h"\
+	"..\engine\progdefs.h"\
+	"..\engine\sequence.h"\
+	"..\engine\studio.h"\
+	"..\pm_shared\pm_info.h"\
+	".\activity.h"\
+	".\basemonster.h"\
+	".\bot.h"\
+	".\bot_func.h"\
+	".\bot_weapons.h"\
+	".\cbase.h"\
+	".\cdll_dll.h"\
+	".\enginecallback.h"\
+	".\extdll.h"\
+	".\monsterevent.h"\
+	".\saverestore.h"\
+	".\schedule.h"\
+	".\util.h"\
+	".\vector.h"\
+	".\waypoint.h"\
+	"c:\microsoft visual studio\vc98\include\basetsd.h"\
+	
+
+.\engine.cpp : \
+	"..\common\const.h"\
+	"..\common\crc.h"\
+	"..\common\cvardef.h"\
+	"..\common\entity_state.h"\
+	"..\common\event_flags.h"\
+	"..\common\in_buttons.h"\
+	"..\common\studio_event.h"\
+	"..\common\weaponinfo.h"\
+	"..\engine\archtypes.h"\
+	"..\engine\custom.h"\
+	"..\engine\edict.h"\
+	"..\engine\eiface.h"\
+	"..\engine\progdefs.h"\
+	"..\engine\sequence.h"\
+	"..\engine\studio.h"\
+	"..\pm_shared\pm_info.h"\
+	".\activity.h"\
+	".\basemonster.h"\
+	".\bot.h"\
+	".\bot_client.h"\
+	".\bot_func.h"\
+	".\cbase.h"\
+	".\cdll_dll.h"\
+	".\dll.h"\
+	".\engine.h"\
+	".\enginecallback.h"\
+	".\extdll.h"\
+	".\monsterevent.h"\
+	".\saverestore.h"\
+	".\schedule.h"\
+	".\util.h"\
+	".\vector.h"\
+	"c:\microsoft visual studio\vc98\include\basetsd.h"\
+	
+
+.\h_export.cpp : \
+	"..\common\const.h"\
+	"..\common\crc.h"\
+	"..\common\cvardef.h"\
+	"..\common\entity_state.h"\
+	"..\common\event_flags.h"\
+	"..\common\in_buttons.h"\
+	"..\common\studio_event.h"\
+	"..\common\weaponinfo.h"\
+	"..\engine\archtypes.h"\
+	"..\engine\custom.h"\
+	"..\engine\edict.h"\
+	"..\engine\eiface.h"\
+	"..\engine\progdefs.h"\
+	"..\engine\sequence.h"\
+	"..\engine\studio.h"\
+	"..\pm_shared\pm_info.h"\
+	".\activity.h"\
+	".\basemonster.h"\
+	".\bot.h"\
+	".\cbase.h"\
+	".\cdll_dll.h"\
+	".\dll.h"\
+	".\engine.h"\
+	".\enginecallback.h"\
+	".\extdll.h"\
+	".\monsterevent.h"\
+	".\saverestore.h"\
+	".\schedule.h"\
+	".\util.h"\
+	".\vector.h"\
+	"c:\microsoft visual studio\vc98\include\basetsd.h"\
+	
+
+.\linkfunc.cpp : \
+	"..\common\const.h"\
+	"..\common\crc.h"\
+	"..\common\cvardef.h"\
+	"..\common\entity_state.h"\
+	"..\common\event_flags.h"\
+	"..\common\in_buttons.h"\
+	"..\common\studio_event.h"\
+	"..\common\weaponinfo.h"\
+	"..\engine\archtypes.h"\
+	"..\engine\custom.h"\
+	"..\engine\edict.h"\
+	"..\engine\eiface.h"\
+	"..\engine\progdefs.h"\
+	"..\engine\sequence.h"\
+	"..\engine\studio.h"\
+	"..\pm_shared\pm_info.h"\
+	".\activity.h"\
+	".\basemonster.h"\
+	".\bot.h"\
+	".\cbase.h"\
+	".\cdll_dll.h"\
+	".\enginecallback.h"\
+	".\extdll.h"\
+	".\monsterevent.h"\
+	".\saverestore.h"\
+	".\schedule.h"\
+	".\util.h"\
+	".\vector.h"\
+	"c:\microsoft visual studio\vc98\include\basetsd.h"\
+	
+
+.\util.cpp : \
+	"..\common\const.h"\
+	"..\common\crc.h"\
+	"..\common\cvardef.h"\
+	"..\common\entity_state.h"\
+	"..\common\event_flags.h"\
+	"..\common\in_buttons.h"\
+	"..\common\studio_event.h"\
+	"..\common\weaponinfo.h"\
+	"..\engine\archtypes.h"\
+	"..\engine\custom.h"\
+	"..\engine\edict.h"\
+	"..\engine\eiface.h"\
+	"..\engine\progdefs.h"\
+	"..\engine\sequence.h"\
+	"..\engine\studio.h"\
+	"..\pm_shared\pm_info.h"\
+	".\activity.h"\
+	".\basemonster.h"\
+	".\bot.h"\
+	".\bot_func.h"\
+	".\bot_weapons.h"\
+	".\cbase.h"\
+	".\cdll_dll.h"\
+	".\dll.h"\
+	".\engine.h"\
+	".\enginecallback.h"\
+	".\extdll.h"\
+	".\monsterevent.h"\
+	".\saverestore.h"\
+	".\schedule.h"\
+	".\util.h"\
+	".\vector.h"\
+	"c:\microsoft visual studio\vc98\include\basetsd.h"\
+	
+
+.\waypoint.cpp : \
+	"..\common\const.h"\
+	"..\common\crc.h"\
+	"..\common\cvardef.h"\
+	"..\common\entity_state.h"\
+	"..\common\event_flags.h"\
+	"..\common\in_buttons.h"\
+	"..\common\studio_event.h"\
+	"..\common\weaponinfo.h"\
+	"..\engine\archtypes.h"\
+	"..\engine\custom.h"\
+	"..\engine\edict.h"\
+	"..\engine\eiface.h"\
+	"..\engine\progdefs.h"\
+	"..\engine\sequence.h"\
+	"..\engine\studio.h"\
+	"..\pm_shared\pm_info.h"\
+	".\activity.h"\
+	".\basemonster.h"\
+	".\bot.h"\
+	".\bot_weapons.h"\
+	".\cbase.h"\
+	".\cdll_dll.h"\
+	".\enginecallback.h"\
+	".\extdll.h"\
+	".\monsterevent.h"\
+	".\saverestore.h"\
+	".\schedule.h"\
+	".\util.h"\
+	".\vector.h"\
+	".\waypoint.h"\
+	"c:\microsoft visual studio\vc98\include\basetsd.h"\
+	
+>>>>>>> 3f195a42c7b84bf4071b789634ebbe14b6297ebc
+>>>>>>> 594320fd6db9c6f9b3b7d743a0270568ddbba6bd

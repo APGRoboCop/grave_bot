@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 594320fd6db9c6f9b3b7d743a0270568ddbba6bd
 CPP = g++-4.8
 TARGET = gravebot
 ARCHFLAG = i686
@@ -39,4 +43,50 @@ distclean:
 	${CPP} ${CPPFLAGS} -c $< -o $@
 
 %.o:	%.c
+<<<<<<< HEAD
+=======
+=======
+CPP = g++-4.8
+TARGET = gravebot
+ARCHFLAG = i686
+BASEFLAGS = -Dstricmp=strcasecmp -Dstrcmpi=strcasecmp
+OPTFLAGS = 
+CPPFLAGS = ${BASEFLAGS} ${OPTFLAGS} -march=${ARCHFLAG} -mtune=generic -msse2 -O2 -m32 -mfpmath=sse -finline-functions -pipe -w -I"../metamod" -I"../common" -I"../dlls" -I"../engine" -I"../pm_shared"
+
+OBJ = 	bot.o \
+	bot_client.o \
+	bot_combat.o \
+	bot_navigate.o \
+	bot_start.o \
+	bot_weapons.o \
+	bot_weapons_hldm.o \
+	bot_weapons_si.o \
+	dll.o \
+	engine.o \
+	h_export.o \
+	linkfunc.o \
+	util.o \
+	waypoint.o
+
+${TARGET}.so: ${OBJ}
+	${CPP} -fPIC -shared -static -o $@ ${OBJ} -Xlinker -Map -Xlinker ${TARGET}.map -ldl
+	strip -s ${TARGET}.so 
+	mv *.o Release
+	mv *.map Release
+	mv $@ Release
+
+clean:
+	rm -f Release/*.o
+	rm -f Release/*.map
+
+distclean:
+	rm -rf Release
+	mkdir Release	
+
+%.o:	%.cpp
+	${CPP} ${CPPFLAGS} -c $< -o $@
+
+%.o:	%.c
+>>>>>>> 3f195a42c7b84bf4071b789634ebbe14b6297ebc
+>>>>>>> 594320fd6db9c6f9b3b7d743a0270568ddbba6bd
 	${CPP} ${CPPFLAGS} -c $< -o $@

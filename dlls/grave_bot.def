@@ -1,4 +1,17 @@
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 594320fd6db9c6f9b3b7d743a0270568ddbba6bd
 EXPORTS
 	GiveFnptrsToDll			@1
 SECTIONS
 	.data READ WRITE
+<<<<<<< HEAD
+=======
+=======
+EXPORTS
+	GiveFnptrsToDll			@1
+SECTIONS
+	.data READ WRITE
+>>>>>>> 3f195a42c7b84bf4071b789634ebbe14b6297ebc
+>>>>>>> 594320fd6db9c6f9b3b7d743a0270568ddbba6bd

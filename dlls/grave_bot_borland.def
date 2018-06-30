@@ -1,5 +1,19 @@
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 594320fd6db9c6f9b3b7d743a0270568ddbba6bd
 LIBRARY hl
 EXPORTS
  GetEntityAPI = _GetEntityAPI
  GetNewDLLFunctions = _GetNewDLLFunctions
 
+<<<<<<< HEAD
+=======
+=======
+LIBRARY hl
+EXPORTS
+ GetEntityAPI = _GetEntityAPI
+ GetNewDLLFunctions = _GetNewDLLFunctions
+
+>>>>>>> 3f195a42c7b84bf4071b789634ebbe14b6297ebc
+>>>>>>> 594320fd6db9c6f9b3b7d743a0270568ddbba6bd
