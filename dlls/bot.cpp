@@ -55,7 +55,7 @@ extern float is_team_play;
 extern edict_t *clients[32];
 static FILE *fp;
 
-double PI = 3.1415926535897932384626433832795;
+double pi = 3.1415926535897932384626433832795;
 
 #define PLAYER_SEARCH_RADIUS     40.0
 
@@ -156,7 +156,7 @@ extern float msecval;
 
 void BotSpawnInit( bot_t *pBot )
 {
-	int i = 0;
+	int i;
 //	ALERT(at_console, "BotSpawnInit\n");
 	pBot->f_max_speed = CVAR_GET_FLOAT("sv_maxspeed");/* * speed_mod[pBot->bot_skill];*/
 	pBot->v_curr_direction = g_vecZero;
@@ -858,7 +858,7 @@ int BotInFieldOfView(bot_t *pBot, Vector dest)
 	// 45 degrees to the right is the limit of the normal view angle
 	
 	// rsm - START angle bug fix
-	int angle = abs((int)view_angle - (int)entity_angles.y);
+	int angle = fabs((int)view_angle - (int)entity_angles.y);
 	
 	if (angle > 180)
 		angle = 360 - angle;
@@ -2313,7 +2313,7 @@ void BotThink( bot_t *pBot )
 		if (dgrad < -180)
 			dgrad += 360;
 		// radians
-		dgrad = dgrad * PI;
+		dgrad = dgrad * pi;
 		dgrad = dgrad / 180;
 		// send our movement toward our goal
 		pBot->f_move_speed = (pBot->f_max_speed) * (cos(dgrad));

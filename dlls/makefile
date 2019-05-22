@@ -1,10 +1,11 @@
-CPP = g++-4.8
+CPP = g++
 TARGET = gravebot_mm
 ARCHFLAG = i686
 BASEFLAGS = -Dstricmp=strcasecmp -Dstrcmpi=strcasecmp -DMETAMOD_BUILD
 OPTFLAGS = 
-CPPFLAGS = ${BASEFLAGS} ${OPTFLAGS} -march=${ARCHFLAG} \
-	-mtune=generic -msse -msse2 -O2 -m32 -mfpmath=sse -w \
+CPPFLAGS = ${BASEFLAGS} ${OPTFLAGS} -march=${ARCHFLAG} -m32 \
+	-O2 -mtune=generic -msse -msse2 -mfpmath=sse -w -s -pipe \
+	-Wno-write-strings -Wno-unused-local-typedefs -funsafe-math-optimizations \
 	-I"../common" -I"../dlls" -I"../engine" -I"../pm_shared" -I"../metamod" 
 
 OBJ = 	bot.o \

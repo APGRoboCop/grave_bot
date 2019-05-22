@@ -1717,7 +1717,7 @@ int BotFindWaypointGoal( bot_t *pBot )
 		{
 			if (b_chat_debug)
 			{
-				sprintf(pBot->debugchat, "I found a waypoint goal for enemy at %i!\n", pBot->name, index);
+				sprintf(pBot->debugchat, "I found a waypoint goal for enemy at %i!\n", int(pBot->name), index);
 				UTIL_HostSay(pBot->pEdict, 0, pBot->debugchat);
 			}
 			pBot->wpt_goal_type = WPT_GOAL_ENEMY;
@@ -1853,7 +1853,7 @@ int BotFindWaypointGoalSI( bot_t *pBot )
 				}
 			}
 			// these subroles all have specific locations for the bot to defend
-			else if ((pBot->subrole = ROLE_SUB_DEF_BASE) && (pBot->v_defend != g_vecZero))
+			else if (((pBot->subrole = ROLE_SUB_DEF_BASE)) && (pBot->v_defend != g_vecZero))
 			{
 				index = WaypointFindNearest(pBot->v_defend, pEdict, 512, team, pBot->exclude_points);
 				//index = WaypointFindNearestGoal(pBot->v_defend, pEdict, 512, team, 0, pBot->exclude_points);
@@ -2419,10 +2419,10 @@ void BotTurnAtWall( bot_t *pBot, TraceResult *tr )
    // D1 and D2 are the difference (in degrees) between the bot's current
    // angle and Y1 or Y2 (respectively).
 
-   D1 = abs(Y - Y1);
-   if (D1 > 179) D1 = abs(D1 - 360);
-   D2 = abs(Y - Y2);
-   if (D2 > 179) D2 = abs(D2 - 360);
+   D1 = fabs(Y - Y1);
+   if (D1 > 179) D1 = fabs(D1 - 360);
+   D2 = fabs(Y - Y2);
+   if (D2 > 179) D2 = fabs(D2 - 360);
 
    // If difference 1 (D1) is more than difference 2 (D2) then the bot will
    // have to turn LESS if it heads in direction Y1 otherwise, head in

@@ -195,7 +195,7 @@ void WaypointAddPath(short int add_index, short int path_index)
 #endif
 	}
 	
-	p = (PATH *)malloc(sizeof(PATH));
+	p = static_cast<PATH *>(malloc(sizeof(PATH)));
 	
 	if (p == NULL)
 	{
@@ -2546,28 +2546,28 @@ void WaypointRouteInit(void)
 			
 			UTIL_BuildFileName(filename2, "maps", mapname);
 			
-			if (access(filename2, 0) == 0)  // does the .gbX file exist?
+			if (_access(filename2, 0) == 0)  // does the .gbX file exist?
 			{
-				file1 = open(filename, O_RDONLY);
-				file2 = open(filename2, O_RDONLY);
+				file1 = _open(filename, O_RDONLY);
+				file2 = _open(filename2, O_RDONLY);
 				
 				fstat(file1, &stat1);
 				fstat(file2, &stat2);
 				
-				close(file1);
-				close(file2);
+				_close(file1);
+				_close(file2);
 				
 				if (stat1.st_mtime < stat2.st_mtime)  // is .gbw older than .gbX file?
 				{
 					sprintf(msg, "loading Grave Bot waypoint paths for team %d\n", matrix+1);
 					SERVER_PRINT( msg);
 					
-					shortest_path[matrix] = (unsigned short *)malloc(sizeof(unsigned short) * array_size);
+					shortest_path[matrix] = static_cast<unsigned short *>(malloc(sizeof(unsigned short) * array_size));
 					
 					if (shortest_path[matrix] == NULL)
 						ALERT(at_error, "Grave Bot - Error allocating memory for shortest path!");
 					
-					from_to[matrix] = (unsigned short *)malloc(sizeof(unsigned short) * array_size);
+					from_to[matrix] = static_cast<unsigned short *>(malloc(sizeof(unsigned short) * array_size));
 					
 					if (from_to[matrix] == NULL)
 						ALERT(at_error, "Grave Bot - Error allocating memory for from to matrix!");
@@ -2628,12 +2628,12 @@ void WaypointRouteInit(void)
 				sprintf(msg, "calculating Grave Bot waypoint paths for team %d...\n", matrix+1);
 				SERVER_PRINT( msg);
 				
-				shortest_path[matrix] = (unsigned short *)malloc(sizeof(unsigned short) * array_size);
+				shortest_path[matrix] = static_cast<unsigned short *>(malloc(sizeof(unsigned short) * array_size));
 				
 				if (shortest_path[matrix] == NULL)
 					ALERT(at_error, "Grave Bot - Error allocating memory for shortest path!");
 				
-				from_to[matrix] = (unsigned short *)malloc(sizeof(unsigned short) * array_size);
+				from_to[matrix] = static_cast<unsigned short *>(malloc(sizeof(unsigned short) * array_size));
 				
 				if (from_to[matrix] == NULL)
 					ALERT(at_error, "Grave Bot - Error allocating memory for from to matrix!");
@@ -2682,7 +2682,7 @@ void WaypointRouteInit(void)
 										{
 											offset = row * route_num_waypoints + index;
 											
-											pShortestPath[offset] = (unsigned short)distance;
+											pShortestPath[offset] = static_cast<unsigned short>(distance);
 										}
 									}
 								}
@@ -2716,7 +2716,7 @@ void WaypointRouteInit(void)
 						// if couldn't write enough data, close file and delete it
 						
 						fclose(bfp);
-						unlink(filename2);
+						_unlink(filename2);
 					}
 					else
 					{
@@ -2727,7 +2727,7 @@ void WaypointRouteInit(void)
 						if (num_items != array_size)
 						{
 							// if couldn't write enough data, delete file
-							unlink(filename2);
+							_unlink(filename2);
 						}
 					}
 				}

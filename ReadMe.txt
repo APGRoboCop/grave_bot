@@ -4,13 +4,14 @@
 
 ChangeLog v0.4-beta2:-
 >> Both builds now support Meta API 5:13
+>> Win32 build recompiled by VS2017
+>> Linux build recompiled by G++-7
+>> Fixed fmax & fmix not declared for G++-7
 
 ChangeLog v0.4-beta1:-
 >> Non-Metamod GraveBot build support removed
 >> Fixed the h_export.cpp for Linux Server to detect SI build as 'si.so' not 'si_i386.so'
 >> Both builds optimised for SSE2
->> Win32 build recompiled by VS2013
->> Linux build recompiled by G++ 4.8
 
 +--------+
 | NOTICE |

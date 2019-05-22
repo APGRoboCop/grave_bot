@@ -153,7 +153,7 @@ enum
 	CARRY_RSRC
 };
 
-extern double PI;
+extern double pi;
 
 typedef struct
 {

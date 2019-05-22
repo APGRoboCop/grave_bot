@@ -915,7 +915,7 @@ void BotShootAtEnemy( bot_t *pBot )
 	// bot skill 1 (0 for indexes) has perfect aim
 	if (pBot->bot_skill > 0)
 	{	// speed of enemy matters (don't let it be less than 1)
-		f_velocity = max(pBot->pBotEnemy->v.velocity.Length() * 0.01, 1);
+		f_velocity = fmax(pBot->pBotEnemy->v.velocity.Length() * 0.01, 1);
 		// multiple our deltas by the velocity
 		d_x += pBot->f_aim_x_angle_delta * f_velocity;
 		d_y += pBot->f_aim_y_angle_delta * f_velocity;

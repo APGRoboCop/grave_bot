@@ -6,6 +6,9 @@
 // bot_client.h
 //
 
+#ifndef BOT_CLIENT_H
+#define BOT_CLIENT_H
+
 void BotClient_Valve_WeaponList(void *p, edict_t *pEdict);
 void BotClient_Valve_CurrentWeapon(void *p, edict_t *pEdict);
 void BotClient_Valve_AmmoX(void *p, edict_t *pEdict);
@@ -33,3 +36,4 @@ void BotClient_SI_Notice(void *p, edict_t *pEdict);
 void BotClient_SI_Battery(void *p, edict_t *pEdict);
 void BotClient_SI_VoteInfo(void *p, edict_t *pEdict);
 
+#endif // BOT_CLIENT_H

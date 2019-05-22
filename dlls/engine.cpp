@@ -367,7 +367,7 @@ void pfnMessageBegin(int msg_dest, int msg_type, const float *pOrigin, edict_t *
 	{
 		int index = -1;
 		
-		if (debug_engine) { fp=fopen("bot.txt","a"); fprintf(fp,"pfnMessageBegin: edict=%x dest=%d type=%d\n",ed,msg_dest,msg_type); fclose(fp); }
+		if (debug_engine) { fp=fopen("bot.txt","a"); fprintf(fp,"pfnMessageBegin: edict=%x dest=%d type=%d\n",unsigned(ed),msg_dest,msg_type); fclose(fp); }
 		
 		if (ed)
 		{
@@ -496,7 +496,7 @@ void pfnWriteByte(int iValue)
 		
 		// if this message is for a bot, call the client message function...
 		if (botMsgFunction)
-			(*botMsgFunction)((void *)&iValue, botMsgEdict/*botMsgIndex*/);
+			(*botMsgFunction)(static_cast<void *>(&iValue), botMsgEdict/*botMsgIndex*/);
 	}
 	
    #ifndef METAMOD_BUILD
@@ -513,7 +513,7 @@ void pfnWriteChar(int iValue)
 		
 		// if this message is for a bot, call the client message function...
 		if (botMsgFunction)
-			(*botMsgFunction)((void *)&iValue, botMsgEdict/*botMsgIndex*/);
+			(*botMsgFunction)(static_cast<void *>(&iValue), botMsgEdict/*botMsgIndex*/);
 	}
 	
    #ifndef METAMOD_BUILD
@@ -530,7 +530,7 @@ void pfnWriteShort(int iValue)
 		
 		// if this message is for a bot, call the client message function...
 		if (botMsgFunction)
-			(*botMsgFunction)((void *)&iValue, botMsgEdict/*botMsgIndex*/);
+			(*botMsgFunction)(static_cast<void *>(&iValue), botMsgEdict/*botMsgIndex*/);
 	}
 	
    #ifndef METAMOD_BUILD
@@ -547,7 +547,7 @@ void pfnWriteLong(int iValue)
 		
 		// if this message is for a bot, call the client message function...
 		if (botMsgFunction)
-			(*botMsgFunction)((void *)&iValue, botMsgEdict/*botMsgIndex*/);
+			(*botMsgFunction)(static_cast<void *>(&iValue), botMsgEdict/*botMsgIndex*/);
 	}
 	
    #ifndef METAMOD_BUILD
@@ -564,7 +564,7 @@ void pfnWriteAngle(float flValue)
 		
 		// if this message is for a bot, call the client message function...
 		if (botMsgFunction)
-			(*botMsgFunction)((void *)&flValue, botMsgEdict/*botMsgIndex*/);
+			(*botMsgFunction)(static_cast<void *>(&flValue), botMsgEdict/*botMsgIndex*/);
 	}
 	
    #ifndef METAMOD_BUILD
@@ -581,7 +581,7 @@ void pfnWriteCoord(float flValue)
 		
 		// if this message is for a bot, call the client message function...
 		if (botMsgFunction)
-			(*botMsgFunction)((void *)&flValue, botMsgEdict/*botMsgIndex*/);
+			(*botMsgFunction)(static_cast<void *>(&flValue), botMsgEdict/*botMsgIndex*/);
 	}
 	
    #ifndef METAMOD_BUILD
@@ -615,7 +615,7 @@ void pfnWriteEntity(int iValue)
 		
 		// if this message is for a bot, call the client message function...
 		if (botMsgFunction)
-			(*botMsgFunction)((void *)&iValue, botMsgEdict/*botMsgIndex*/);
+			(*botMsgFunction)(static_cast<void *>(&iValue), botMsgEdict/*botMsgIndex*/);
 	}
 	
    #ifndef METAMOD_BUILD
@@ -917,7 +917,12 @@ int pfnRegUserMsg(const char *pszName, int iSize)
 
 void pfnSetClientMaxspeed(const edict_t *pEdict, float fNewMaxspeed)
 {
-	if (debug_engine) { fp=fopen("bot.txt","a"); fprintf(fp,"pfnSetClientMaxspeed: edict=%x %f\n",pEdict,fNewMaxspeed); fclose(fp); }
+	if (debug_engine)
+	{
+		fp = fopen("bot.txt", "a");
+		fprintf(fp, "pfnSetClientMaxspeed: edict=%x %f\n", unsigned(pEdict), fNewMaxspeed);
+		fclose(fp);
+	}
 	
 	// change our max speed to whatever the mod tells us it is
 	bot_t *pBot = UTIL_GetBotPointer(const_cast<edict_t*>(pEdict));

@@ -84,48 +84,48 @@ void BotClient_Valve_WeaponList(void *p, edict_t *pEdict)
 	if (state == 0)
 	{
 		state++;
-		strcpy(bot_weapon.szClassname, (char *)p);
+		strcpy(bot_weapon.szClassname, static_cast<char *>(p));
 	}
 	else if (state == 1)
 	{
 		state++;
-		bot_weapon.iAmmo1 = *(int *)p;  // ammo index 1
+		bot_weapon.iAmmo1 = *static_cast<int *>(p);  // ammo index 1
 	}
 	else if (state == 2)
 	{
 		state++;
-		bot_weapon.iAmmo1Max = *(int *)p;  // max ammo1
+		bot_weapon.iAmmo1Max = *static_cast<int *>(p);  // max ammo1
 	}
 	else if (state == 3)
 	{
 		state++;
-		bot_weapon.iAmmo2 = *(int *)p;  // ammo index 2
+		bot_weapon.iAmmo2 = *static_cast<int *>(p);  // ammo index 2
 	}
 	else if (state == 4)
 	{
 		state++;
-		bot_weapon.iAmmo2Max = *(int *)p;  // max ammo2
+		bot_weapon.iAmmo2Max = *static_cast<int *>(p);  // max ammo2
 	}
 	else if (state == 5)
 	{
 		state++;
-		bot_weapon.iSlot = *(int *)p;  // slot for this weapon
+		bot_weapon.iSlot = *static_cast<int *>(p);  // slot for this weapon
 	}
 	else if (state == 6)
 	{
 		state++;
-		bot_weapon.iPosition = *(int *)p;  // position in slot
+		bot_weapon.iPosition = *static_cast<int *>(p);  // position in slot
 	}
 	else if (state == 7)
 	{
 		state++;
-		bot_weapon.iId = *(int *)p;  // weapon ID
+		bot_weapon.iId = *static_cast<int *>(p);  // weapon ID
 	}
 	else if (state == 8)
 	{
 		state = 0;
 		
-		bot_weapon.iFlags = *(int *)p;  // flags for weapon (WTF???)
+		bot_weapon.iFlags = *static_cast<int *>(p);  // flags for weapon (WTF???)
 		
 		// store away this weapon with it's ammo information...
 		weapon_defs[bot_weapon.iId] = bot_weapon;
@@ -153,18 +153,18 @@ void BotClient_Valve_CurrentWeapon(void *p, edict_t *pEdict)
 	if (state == 0)
 	{
 		state++;
-		iState = *(int *)p;  // state of the current weapon
+		iState = *static_cast<int *>(p);  // state of the current weapon
 	}
 	else if (state == 1)
 	{
 		state++;
-		iId = *(int *)p;  // weapon ID of current weapon
+		iId = *static_cast<int *>(p);  // weapon ID of current weapon
 	}
 	else if (state == 2)
 	{
 		state = 0;
 		
-		iClip = *(int *)p;  // ammo currently in the clip for this weapon
+		iClip = *static_cast<int *>(p);  // ammo currently in the clip for this weapon
 		
 		if (iId <= 31 && iId >= 0)
 		{
@@ -210,13 +210,13 @@ void BotClient_Valve_AmmoX(void *p, edict_t *pEdict)
 	if (state == 0)
 	{
 		state++;
-		index = *(int *)p;  // ammo index (for type of ammo)
+		index = *static_cast<int *>(p);  // ammo index (for type of ammo)
 	}
 	else if (state == 1)
 	{
 		state = 0;
 		
-		ammount = *(int *)p;  // the ammount of ammo currently available
+		ammount = *static_cast<int *>(p);  // the ammount of ammo currently available
 		
 		pBot->m_rgAmmo[index] = ammount;  // store it away
 		
@@ -253,13 +253,13 @@ void BotClient_Valve_AmmoPickup(void *p, edict_t *pEdict)
 	if (state == 0)
 	{
 		state++;
-		index = *(int *)p;
+		index = *static_cast<int *>(p);
 	}
 	else if (state == 1)
 	{
 		state = 0;
 		
-		ammount = *(int *)p;
+		ammount = *static_cast<int *>(p);
 		
 		pBot->m_rgAmmo[index] = ammount;
 		
@@ -294,33 +294,33 @@ void BotClient_Valve_Damage(void *p, edict_t *pEdict)
 	if (state == 0)
 	{
 		state++;
-		damage_armor = *(int *)p;
+		damage_armor = *static_cast<int *>(p);
 	}
 	else if (state == 1)
 	{
 		state++;
-		damage_taken = *(int *)p;
+		damage_taken = *static_cast<int *>(p);
 	}
 	else if (state == 2)
 	{
 		state++;
-		damage_bits = *(int *)p;
+		damage_bits = *static_cast<int *>(p);
 	}
 	else if (state == 3)
 	{
 		state++;
-		damage_origin.x = *(float *)p;
+		damage_origin.x = *static_cast<float *>(p);
 	}
 	else if (state == 4)
 	{
 		state++;
-		damage_origin.y = *(float *)p;
+		damage_origin.y = *static_cast<float *>(p);
 	}
 	else if (state == 5)
 	{
 		state = 0;
 		
-		damage_origin.z = *(float *)p;
+		damage_origin.z = *static_cast<float *>(p);
 		
 		if ((damage_armor > 0) || (damage_taken > 0))
 		{
@@ -368,17 +368,17 @@ void BotClient_Valve_ScreenFade(void *p, edict_t *pEdict)
 	if (state == 0)
 	{
 		state++;
-		duration = *(int *)p;
+		duration = *static_cast<int *>(p);
 	}
 	else if (state == 1)
 	{
 		state++;
-		hold_time = *(int *)p;
+		hold_time = *static_cast<int *>(p);
 	}
 	else if (state == 2)
 	{
 		state++;
-		fade_flags = *(int *)p;
+		fade_flags = *static_cast<int *>(p);
 	}
 	else if (state == 6)
 	{
@@ -406,7 +406,7 @@ void BotClient_Valve_ItemPickup(void *p, edict_t *pEdict)
 		return;
 
 	char itemname[64];
-	strcpy(itemname,(char *)p);
+	strcpy(itemname,static_cast<char *>(p));
 
 	if (strcmp(itemname, "item_longjump") == 0)
 	{
@@ -448,38 +448,38 @@ void BotClient_SI_WeaponList(void *p, edict_t *pEdict)
 	if (state == 0)
 	{
 		state++;
-		strcpy(bot_weapon.szClassname, (char *)p);
+		strcpy(bot_weapon.szClassname, static_cast<char *>(p));
 	}
 	else if (state == 1)
 	{
 		state++;
-		bot_weapon.iAmmo1 = *(int *)p;  // ammo index 1
+		bot_weapon.iAmmo1 = *static_cast<int *>(p);  // ammo index 1
 	}
 	else if (state == 2)
 	{
 		state++;
-		bot_weapon.iAmmo1Max = *(int *)p;  // max ammo1
+		bot_weapon.iAmmo1Max = *static_cast<int *>(p);  // max ammo1
 	}
 	else if (state == 3)
 	{
 		state++;
-		bot_weapon.iAmmo2 = *(int *)p;  // ammo index 2
+		bot_weapon.iAmmo2 = *static_cast<int *>(p);  // ammo index 2
 	}
 	else if (state == 4)
 	{
 		state++;
-		bot_weapon.iAmmo2Max = *(int *)p;  // max ammo2
+		bot_weapon.iAmmo2Max = *static_cast<int *>(p);  // max ammo2
 	}
 	else if (state == 5)
 	{
 		state++;
-		bot_weapon.iId = *(int *)p;  // weapon ID
+		bot_weapon.iId = *static_cast<int *>(p);  // weapon ID
 	}
 	else if (state == 6)
 	{
 		state = 0;
 		
-		bot_weapon.iFlags = *(int *)p;  // flags for weapon (WTF???)
+		bot_weapon.iFlags = *static_cast<int *>(p);  // flags for weapon (WTF???)
 		
 		// store away this weapon with it's ammo information...
 		weapon_defs[bot_weapon.iId] = bot_weapon;
@@ -507,23 +507,23 @@ void BotClient_SI_CurrentWeapon(void *p, edict_t *pEdict)
 	if (state == 0)
 	{
 		state++;
-		iState = *(int *)p;  // state of the current weapon
+		iState = *static_cast<int *>(p);  // state of the current weapon
 	}
 	else if (state == 1)
 	{
 		state++;
-		iId = *(int *)p;  // weapon ID of current weapon
+		iId = *static_cast<int *>(p);  // weapon ID of current weapon
 	}
 	else if (state == 2)
 	{
 		state++;
-		iClip = *(int *)p;  // ammo currently in the clip for this weapon
+		iClip = *static_cast<int *>(p);  // ammo currently in the clip for this weapon
 	}
 	else if (state == 3)
 	{
 		state = 0;
 		
-		iClip2 = *(int *)p;  // ammo currently in the secondary clip for this weapon
+		iClip2 = *static_cast<int *>(p);  // ammo currently in the secondary clip for this weapon
 		
 		if (iId <= 31 && iId >= 0)
 		{
@@ -602,12 +602,12 @@ void BotClient_SI_TeamCash(void *p, edict_t *pEdict)
 	if (state == 0)
 	{
 		state++;
-		cash = *(long *)p;
+		cash = *static_cast<long *>(p);
 	}
 	else if (state == 1)
 	{
 		state = 0;
-		team = *(int *)p;
+		team = *static_cast<int *>(p);
 	}
 
 	if (team > -1)
@@ -637,7 +637,7 @@ void BotClient_SI_CarryInfo(void *p, edict_t *pEdict)
 	if (state == 0)
 	{
 		state++;
-		carrying = *(int *)p;
+		carrying = *static_cast<int *>(p);
 		// make sure this is a valid bot
 		if (pBot)
 		{
@@ -716,7 +716,7 @@ void BotClient_SI_CarryInfo(void *p, edict_t *pEdict)
 	{	// who are we carrying?
 		state = 0;
 		if (pBot)
-			strcpy(pBot->c_carry_name, (char *)p);
+			strcpy(pBot->c_carry_name, static_cast<char *>(p));
 	}
 }
 
@@ -738,12 +738,12 @@ void BotClient_SI_Goal(void *p, edict_t *pEdict)
 	if (state == 0)
 	{	// what is our research goal?
 		state++;
-		goal = *(int *)p;
+		goal = *static_cast<int *>(p);
 	}
 	else if (state == 1)
 	{	// which team?
 		state = 0;
-		team = *(int *)p;
+		team = *static_cast<int *>(p);
 	}
 
 	// update this team's goal
@@ -771,7 +771,7 @@ void BotClient_SI_Notice(void *p, edict_t *pEdict)
 	if (state == 0)
 	{
 		state++;
-		notice = *(int *)p;
+		notice = *static_cast<int *>(p);
 	}
 	else if (state == 1)
 	{	// string param1
@@ -825,7 +825,7 @@ void BotClient_SI_Battery(void *p, edict_t *pEdict)
 	else if (state == 1)
 	{	// max battery
 		state = 0;
-		max_battery = *(int *)p;
+		max_battery = *static_cast<int *>(p);
 	}
 
 	// update this bot's max battery (armor)
@@ -864,7 +864,7 @@ void BotClient_SI_VoteInfo(void *p, edict_t *pEdict)
 	// read our BYTEs and LONGs as integers
 	if (state >= 0 && state <= 7)
 	{
-		data[sec][byte] = *(int *)p;
+		data[sec][byte] = *static_cast<int *>(p);
 		
 		if (byte > 0)
 		{
