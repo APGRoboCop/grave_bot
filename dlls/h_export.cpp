@@ -21,6 +21,10 @@
 #include <fstream>
 #endif
 
+#ifdef _WIN32
+#define strcmpi _strcmpi
+#endif
+
 #ifndef METAMOD_BUILD
    #include "extdll.h"
    #include "enginecallback.h"
@@ -176,7 +180,7 @@ BOOL WINAPI DllMain(HINSTANCE hinstDLL, DWORD fdwReason, LPVOID lpvReserved)
          #endif
       #endif
 	}
-	else */if (_strcmpi(mod_name, "si") == 0)
+	else */if (strcmpi(mod_name, "si") == 0)
 	{
 		mod_id = SI_DLL;
 

@@ -21,6 +21,13 @@
 #include <sstream>
 #endif
 
+#ifdef _WIN32
+#define access _access
+#define open _open
+#define close _close
+#define unlink _unlink
+#endif
+
 #ifndef METAMOD_BUILD
    #include "extdll.h"
    #include "enginecallback.h"
@@ -2546,16 +2553,16 @@ void WaypointRouteInit(void)
 			
 			UTIL_BuildFileName(filename2, "maps", mapname);
 			
-			if (_access(filename2, 0) == 0)  // does the .gbX file exist?
+			if (access(filename2, 0) == 0)  // does the .gbX file exist?
 			{
-				file1 = _open(filename, O_RDONLY);
-				file2 = _open(filename2, O_RDONLY);
+				file1 = open(filename, O_RDONLY);
+				file2 = open(filename2, O_RDONLY);
 				
 				fstat(file1, &stat1);
 				fstat(file2, &stat2);
 				
-				_close(file1);
-				_close(file2);
+				close(file1);
+				close(file2);
 				
 				if (stat1.st_mtime < stat2.st_mtime)  // is .gbw older than .gbX file?
 				{
@@ -2716,7 +2723,7 @@ void WaypointRouteInit(void)
 						// if couldn't write enough data, close file and delete it
 						
 						fclose(bfp);
-						_unlink(filename2);
+						unlink(filename2);
 					}
 					else
 					{
@@ -2727,7 +2734,7 @@ void WaypointRouteInit(void)
 						if (num_items != array_size)
 						{
 							// if couldn't write enough data, delete file
-							_unlink(filename2);
+							unlink(filename2);
 						}
 					}
 				}
