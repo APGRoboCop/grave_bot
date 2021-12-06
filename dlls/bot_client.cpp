@@ -139,7 +139,7 @@ void BotClient_Valve_CurrentWeapon(void *p, edict_t *pEdict)
 	if (!pEdict)
 		return;
 
-	static bot_t *pBot = NULL;
+	static bot_t *pBot = nullptr;
 	pBot = UTIL_GetBotPointer(pEdict);
 
 	if (!pBot)
@@ -196,7 +196,7 @@ void BotClient_Valve_AmmoX(void *p, edict_t *pEdict)
 	if (!pEdict)
 		return;
 
-	static bot_t *pBot = NULL;
+	static bot_t *pBot = nullptr;
 	pBot = UTIL_GetBotPointer(pEdict);
 
 	if (!pBot)
@@ -239,7 +239,7 @@ void BotClient_Valve_AmmoPickup(void *p, edict_t *pEdict)
 	if (!pEdict)
 		return;
 
-	static bot_t *pBot = NULL;
+	static bot_t *pBot = nullptr;
 	pBot = UTIL_GetBotPointer(pEdict);
 
 	if (!pBot)
@@ -279,7 +279,7 @@ void BotClient_Valve_Damage(void *p, edict_t *pEdict)
 	if (!pEdict)
 		return;
 
-	static bot_t *pBot = NULL;
+	static bot_t *pBot = nullptr;
 	pBot = UTIL_GetBotPointer(pEdict);
 
 	if (!pBot)
@@ -330,7 +330,7 @@ void BotClient_Valve_Damage(void *p, edict_t *pEdict)
 			
 			// if the bot doesn't have an enemy and someone is shooting at it then
 			// turn in the attacker's direction...
-			if (pBot->pBotEnemy == NULL)
+			if (pBot->pBotEnemy == nullptr)
 			{
 				pBot->dmg_origin = damage_origin;
 				pBot->f_dmg_time = gpGlobals->time + 1.0;
@@ -353,7 +353,7 @@ void BotClient_Valve_ScreenFade(void *p, edict_t *pEdict)
 	if (!pEdict)
 		return;
 
-	static bot_t *pBot = NULL;
+	static bot_t *pBot = nullptr;
 	pBot = UTIL_GetBotPointer(pEdict);
 
 	if (!pBot)
@@ -399,7 +399,7 @@ void BotClient_Valve_ItemPickup(void *p, edict_t *pEdict)
 	if (!pEdict)
 		return;
 
-	static bot_t *pBot = NULL;
+	static bot_t *pBot = nullptr;
 	pBot = UTIL_GetBotPointer(pEdict);
 
 	if (!pBot)
@@ -492,7 +492,7 @@ void BotClient_SI_CurrentWeapon(void *p, edict_t *pEdict)
 	if (!pEdict)
 		return;
 
-	static bot_t *pBot = NULL;
+	static bot_t *pBot = nullptr;
 	pBot = UTIL_GetBotPointer(pEdict);
 
 	if (!pBot)
@@ -625,7 +625,7 @@ void BotClient_SI_CarryInfo(void *p, edict_t *pEdict)
 	if (!pEdict)
 		return;
 
-	static bot_t *pBot = NULL;
+	static bot_t *pBot = nullptr;
 	pBot = UTIL_GetBotPointer(pEdict);
 
 //	if (!pBot)
@@ -652,7 +652,7 @@ void BotClient_SI_CarryInfo(void *p, edict_t *pEdict)
 				pBot->waypoint_goal = -1;
 			}
 			// forget our enemy
-			pBot->pBotEnemy = NULL;
+			pBot->pBotEnemy = nullptr;
 			// reeval goal and role
 			pBot->f_evaluate_goal_time = pBot->f_role_check = 0;
 		}
@@ -682,8 +682,8 @@ void BotClient_SI_CarryInfo(void *p, edict_t *pEdict)
 		// force this bot to go after the thief
 		if (final_index > -1 && final_index < 32)
 		{	// loop through nearby entities for the entity this player just grabbed
-			edict_t *pEntity = NULL;
-			while ((pEntity = UTIL_FindEntityInSphere(pEntity, pEdict->v.origin, 32)) != NULL)
+			edict_t *pEntity = nullptr;
+			while ((pEntity = UTIL_FindEntityInSphere(pEntity, pEdict->v.origin, 32)) != nullptr)
 			{	// can't be same as player
 				if (pEntity == pEdict)
 					continue;
@@ -759,7 +759,7 @@ void BotClient_SI_Notice(void *p, edict_t *pEdict)
 	if (!pEdict)
 		return;
 
-	static bot_t *pBot = NULL;
+	static bot_t *pBot = nullptr;
 	pBot = UTIL_GetBotPointer(pEdict);
 
 	if (!pBot)
@@ -809,7 +809,7 @@ void BotClient_SI_Battery(void *p, edict_t *pEdict)
 	if (!pEdict)
 		return;
 
-	static bot_t *pBot = NULL;
+	static bot_t *pBot = nullptr;
 	pBot = UTIL_GetBotPointer(pEdict);
 
 	if (!pBot)

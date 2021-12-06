@@ -40,8 +40,8 @@ extern char g_argv[1024];
 
 int debug_engine = 0;
 
-void (*botMsgFunction)(void *, edict_t *) = NULL;
-void (*botMsgEndFunction)(void *, edict_t *) = NULL;
+void (*botMsgFunction)(void *, edict_t *) = nullptr;
+void (*botMsgEndFunction)(void *, edict_t *) = nullptr;
 edict_t *botMsgEdict;
 //int botMsgIndex;
 extern float g_flVomiting[32];
@@ -371,8 +371,8 @@ void pfnMessageBegin(int msg_dest, int msg_type, const float *pOrigin, edict_t *
 		
 		if (ed)
 		{
-			botMsgFunction = NULL;     // no msg function until known otherwise
-			botMsgEndFunction = NULL;  // no msg end function until known otherwise
+			botMsgFunction = nullptr;     // no msg function until known otherwise
+			botMsgEndFunction = nullptr;  // no msg end function until known otherwise
 			//botMsgIndex = index;       // index of bot receiving message
 			botMsgEdict = ed;
 
@@ -431,9 +431,9 @@ void pfnMessageBegin(int msg_dest, int msg_type, const float *pOrigin, edict_t *
 		}
 		else if (msg_dest == MSG_ALL)
 		{
-			botMsgFunction = NULL;  // no msg function until known otherwise
+			botMsgFunction = nullptr;  // no msg function until known otherwise
 			//botMsgIndex = -1;       // index of bot receiving message (none)
-			botMsgEdict = NULL;
+			botMsgEdict = nullptr;
 
 			if (msg_type == message_DeathMsg)
 				botMsgFunction = BotClient_Valve_DeathMsg;
@@ -442,9 +442,9 @@ void pfnMessageBegin(int msg_dest, int msg_type, const float *pOrigin, edict_t *
 		{
 			// Steam makes the WeaponList message be sent differently
 			
-			botMsgFunction = NULL;  // no msg function until known otherwise
+			botMsgFunction = nullptr;  // no msg function until known otherwise
 			//botMsgIndex = -1;       // index of bot receiving message (none)
-			botMsgEdict = NULL;
+			botMsgEdict = nullptr;
 
 			if (mod_id == CRABBED_DLL || mod_id == VALVE_DLL)
 			{
@@ -473,13 +473,13 @@ void pfnMessageEnd(void)
 		if (debug_engine) { fp=fopen("bot.txt","a"); fprintf(fp,"pfnMessageEnd:\n"); fclose(fp); }
 		
 		if (botMsgEndFunction)
-			(*botMsgEndFunction)(NULL, botMsgEdict);
+			(*botMsgEndFunction)(nullptr, botMsgEdict);
 			//(*botMsgEndFunction)(NULL, botMsgIndex);  // NULL indicated msg end
 		
 		// clear out the bot message function pointers...
-		botMsgFunction = NULL;
-		botMsgEndFunction = NULL;
-		botMsgEdict = NULL;
+		botMsgFunction = nullptr;
+		botMsgEndFunction = nullptr;
+		botMsgEdict = nullptr;
 	}
 	
    #ifndef METAMOD_BUILD

@@ -50,7 +50,7 @@ void BotStartGame( bot_t *pBot )
 		{
 			// go into spectator mode if we're not already, to fix rejoin bug
 			if (pEdict->v.view_ofs != g_vecZero)
-				FakeClientCommand(pEdict, "spectate", NULL, NULL);
+				FakeClientCommand(pEdict, "spectate", nullptr, nullptr);
 			
 			// select our team after one second
 			if (pBot->f_create_time + 1.0 <= gpGlobals->time)
@@ -94,7 +94,7 @@ void BotStartGame( bot_t *pBot )
 			// save our team
 			pBot->bot_team = atoi(c_team) - 1;
 
-			FakeClientCommand(pEdict, "setteam", c_team, NULL);
+			FakeClientCommand(pEdict, "setteam", c_team, nullptr);
 
 			return;
 		}
@@ -111,7 +111,7 @@ void BotStartGame( bot_t *pBot )
 
 			pBot->bot_class = atoi(c_model) - 1;
 
-			FakeClientCommand(pEdict, "setmodel", c_model, NULL);
+			FakeClientCommand(pEdict, "setmodel", c_model, nullptr);
 
 			pBot->not_started = 0;
 			return;

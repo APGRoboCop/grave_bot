@@ -66,18 +66,18 @@ edict_t *BotFindEnemy( bot_t *pBot )
 //	ALERT(at_console, "BotFindEnemy\n");
 	Vector vecEnd;
 	static bool flag=TRUE;
-	edict_t *pent = NULL;
+	edict_t *pent = nullptr;
 	edict_t *pNewEnemy;
-	edict_t *pRemember = NULL;
+	edict_t *pRemember = nullptr;
 	float nearestdistance;
 	int i;
 	
 	edict_t *pEdict = pBot->pEdict;
 	
 	if (pEdict->v.flags & FL_GODMODE)
-		return NULL;
+		return nullptr;
 	
-	if (pBot->pBotEnemy != NULL)  // does the bot already have an enemy?
+	if (pBot->pBotEnemy != nullptr)  // does the bot already have an enemy?
 	{
 		vecEnd = UTIL_GetOrigin(pBot->pBotEnemy) + pBot->pBotEnemy->v.view_ofs;
 
@@ -89,7 +89,7 @@ edict_t *BotFindEnemy( bot_t *pBot )
 			//	pEdict->v.button |= IN_JUMP;
 			
 			// don't have an enemy anymore so null out the pointer...
-			pBot->pBotEnemy = NULL;
+			pBot->pBotEnemy = nullptr;
 		}
 		else if (FInViewCone( &vecEnd, pEdict ) &&
 			FVisible( vecEnd, pEdict ))
@@ -107,18 +107,18 @@ edict_t *BotFindEnemy( bot_t *pBot )
 		{	// remember our enemy for 2 seconds even if they're not visible
 			if (pBot->f_bot_see_enemy_time > (gpGlobals->time - 2))
 				pRemember = pBot->pBotEnemy;
-			pBot->pBotEnemy = NULL;
+			pBot->pBotEnemy = nullptr;
 			pBot->f_ignore_wpt_time = 0.0;
 		}
 	}
 	
-	pent = NULL;
-	pNewEnemy = NULL;
+	pent = nullptr;
+	pNewEnemy = nullptr;
 	nearestdistance = 1000;
 	
-	if (pNewEnemy == NULL)
+	if (pNewEnemy == nullptr)
 	{
-		edict_t *pMonster = NULL;
+		edict_t *pMonster = nullptr;
 		Vector vecEnd;
 			
 		nearestdistance = 2500;
@@ -130,7 +130,7 @@ edict_t *BotFindEnemy( bot_t *pBot )
 		while (!FNullEnt(pMonster = UTIL_FindEntityInSphere(pMonster, pEdict->v.origin, nearestdistance)))
 		{
 			// ignore our remembered enemy
-			if ((pRemember != NULL) && (pMonster == pRemember))
+			if ((pRemember != nullptr) && (pMonster == pRemember))
 				continue;
 
 			// not a player are they?
@@ -194,7 +194,7 @@ edict_t *BotFindEnemy( bot_t *pBot )
 				nearestdistance = distance;
 				pNewEnemy = pMonster;
 				
-				pBot->pBotUser = NULL;  // don't follow user when enemy found
+				pBot->pBotUser = nullptr;  // don't follow user when enemy found
 			}
 		}
 
@@ -207,7 +207,7 @@ edict_t *BotFindEnemy( bot_t *pBot )
 			if ((pPlayer) && (!pPlayer->free) && (pPlayer != pEdict) && (pPlayer->v.flags & FL_CLIENT))
 			{
 				// ignore our remembered enemy
-				if ((pRemember != NULL) && (pPlayer == pRemember))
+				if ((pRemember != nullptr) && (pPlayer == pRemember))
 					continue;
 
 				// skip this player if not valid
@@ -256,17 +256,17 @@ edict_t *BotFindEnemy( bot_t *pBot )
 						nearestdistance = distance;
 						pNewEnemy = pPlayer;
 						
-						pBot->pBotUser = NULL;  // don't follow user when enemy found
+						pBot->pBotUser = nullptr;  // don't follow user when enemy found
 					}
 				}
 			}
 		}
 	}
 	// couldn't find a new enemy so remember the old one we can't see
-	if (pNewEnemy == NULL && pRemember != NULL)
+	if (pNewEnemy == nullptr && pRemember != nullptr)
 		pNewEnemy = pRemember;
 	// are we engaging an enemy?  Don't forget about them
-	if (pNewEnemy == NULL && pBot->b_engaging_enemy && pBot->pBotEnemy != NULL)
+	if (pNewEnemy == nullptr && pBot->b_engaging_enemy && pBot->pBotEnemy != nullptr)
 		pNewEnemy = pBot->pBotEnemy;
 
 	if (pNewEnemy)
@@ -322,17 +322,17 @@ int BotGetEnemyWeapon( edict_t *pEnemy )
 {
 //	ALERT(at_console, "BotGetEnemyWeapon\n");
 
-	bot_weapon_select_t *pSelect = NULL;
+	bot_weapon_select_t *pSelect = nullptr;
 	pSelect = WeaponGetSelectPointer();
 
-	if ((pEnemy->v.flags & FL_CLIENT) && (pSelect != NULL))
+	if ((pEnemy->v.flags & FL_CLIENT) && (pSelect != nullptr))
 	{
 		int select_index = 0;
 
 		while (pSelect[select_index].iId)
 		{	// does our enemy weapon model match this weapon's model?
 			// compare!
-			if (strstr(STRING(pEnemy->v.weaponmodel), pSelect[select_index].weapon_model) != NULL)
+			if (strstr(STRING(pEnemy->v.weaponmodel), pSelect[select_index].weapon_model) != nullptr)
 				break;
 
 			select_index++;
@@ -348,11 +348,11 @@ bool BotShouldEngageEnemy( bot_t *pBot, edict_t *pEnemy )
 {	// this function might need some tweaking?
 //	ALERT(at_console, "BotShouldEngageEnemy\n");
 	
-	bot_weapon_select_t *pSelect = NULL;
+	bot_weapon_select_t *pSelect = nullptr;
 	pSelect = WeaponGetSelectPointer();
 
 	// must have enemy and the enemy must be a client
-	if ((pSelect == NULL) || (pEnemy == NULL) || 
+	if ((pSelect == nullptr) || (pEnemy == nullptr) || 
 		(strcmp(STRING(pEnemy->v.classname), "player") != 0))
 		return FALSE;
 
@@ -433,8 +433,8 @@ Vector BotBodyTarget( edict_t *pBotEnemy, bot_t *pBot )
 bool BotFireWeapon( Vector v_enemy, bot_t *pBot, int weapon_choice, bool nofire)
 {
 //ALERT(at_console, "BotFireWeapon\n");
-	bot_weapon_select_t *pSelect = NULL;
-	bot_fire_delay_t *pDelay = NULL;
+	bot_weapon_select_t *pSelect = nullptr;
+	bot_fire_delay_t *pDelay = nullptr;
 	int select_index;
 	int iId;
 	int primary_percent;
@@ -1167,8 +1167,8 @@ void BotAssessGrenades( bot_t *pBot )
 {
 //	ALERT(at_console, "BotAssessGrenades\n");
 	edict_t *pEdict = pBot->pEdict;
-	edict_t *pGrenade = NULL;
-	edict_t *pNewGrenade = NULL;
+	edict_t *pGrenade = nullptr;
+	edict_t *pNewGrenade = nullptr;
 	Vector vecEnd;
 	float nearestdistance = 16384;
 	float mindistance = 256;
@@ -1213,7 +1213,7 @@ void BotAssessGrenades( bot_t *pBot )
 		
 		float distance = (pGrenade->v.origin - pEdict->v.origin).Length();
 		// our current enemy is closer, forget the grenade
-		if (pBot->pBotEnemy != NULL &&
+		if (pBot->pBotEnemy != nullptr &&
 			(pGrenade->v.origin - UTIL_GetOrigin(pBot->pBotEnemy)).Length() < distance)
 			continue;
 		// is the grenade the right distance away?
@@ -1222,7 +1222,7 @@ void BotAssessGrenades( bot_t *pBot )
             nearestdistance = distance;
             pNewGrenade = pGrenade;
 			
-            pBot->pBotUser = NULL;  // don't follow user when we've found a grenade
+            pBot->pBotUser = nullptr;  // don't follow user when we've found a grenade
 		}
 	}
 	
@@ -1237,10 +1237,10 @@ void BotAssessGrenades( bot_t *pBot )
 bool BotWeaponPrimaryDistance( bot_t *pBot, float distance, int weapon_id )
 {
 //	ALERT(at_console, "BotWeaponPrimaryDistance\n");
-	bot_weapon_select_t *pSelect = NULL;
+	bot_weapon_select_t *pSelect = nullptr;
 	pSelect = WeaponGetSelectPointer();
 	// select pointer not valid?
-	if (pSelect == NULL)
+	if (pSelect == nullptr)
 		return FALSE;
 
 	int select_index = 0;
@@ -1266,10 +1266,10 @@ bool BotWeaponPrimaryDistance( bot_t *pBot, float distance, int weapon_id )
 bool BotWeaponSecondaryDistance( bot_t *pBot, float distance, int weapon_id )
 {
 //	ALERT(at_console, "BotWeaponSecondaryDistance\n");
-	bot_weapon_select_t *pSelect = NULL;
+	bot_weapon_select_t *pSelect = nullptr;
 	pSelect = WeaponGetSelectPointer();
 	// select pointer not valid?
-	if (pSelect == NULL)
+	if (pSelect == nullptr)
 		return FALSE;
 
 	int select_index = 0;
@@ -1295,11 +1295,11 @@ bool BotWeaponSecondaryDistance( bot_t *pBot, float distance, int weapon_id )
 float BotAssessPrimaryAmmo( bot_t *pBot, int weapon_id )
 {
 //	ALERT(at_console, "BotAssessPrimaryAmmo\n");
-	bot_weapon_select_t *pSelect = NULL;
+	bot_weapon_select_t *pSelect = nullptr;
 	pSelect = WeaponGetSelectPointer();
 	int team = UTIL_GetTeam(pBot->pEdict);
 	// select pointer not valid?
-	if (pSelect == NULL)
+	if (pSelect == nullptr)
 		return AMMO_NONE;
 	// does this weapon even use ammo?	
 	if (weapon_defs[weapon_id].iAmmo1 == -1 || weapon_defs[weapon_id].iAmmo1Max <= 0)
@@ -1343,11 +1343,11 @@ float BotAssessPrimaryAmmo( bot_t *pBot, int weapon_id )
 float BotAssessSecondaryAmmo( bot_t *pBot, int weapon_id )
 {
 //	ALERT(at_console, "BotAssessSecondaryAmmo\n");
-	bot_weapon_select_t *pSelect = NULL;
+	bot_weapon_select_t *pSelect = nullptr;
 	pSelect = WeaponGetSelectPointer();
 	int team = UTIL_GetTeam(pBot->pEdict);
 	// select pointer not valid?
-	if (pSelect == NULL)
+	if (pSelect == nullptr)
 		return AMMO_NONE;
 	// does this weapon even use ammo?	
 	if (weapon_defs[weapon_id].iAmmo2 == -1 || weapon_defs[weapon_id].iAmmo2Max <= 0)

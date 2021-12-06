@@ -101,7 +101,7 @@ edict_t *UTIL_FindEntityInSphere( edict_t *pentStart, const Vector &vecCenter, f
 	if (!FNullEnt(pentEntity))
 		return pentEntity;
 	
-	return NULL;
+	return nullptr;
 }
 
 
@@ -113,7 +113,7 @@ edict_t *UTIL_FindEntityByString( edict_t *pentStart, const char *szKeyword, con
 	
 	if (!FNullEnt(pentEntity))
 		return pentEntity;
-	return NULL;
+	return nullptr;
 }
 
 edict_t *UTIL_FindEntityByClassname( edict_t *pentStart, const char *szName )
@@ -132,7 +132,7 @@ void UTIL_SayText( const char *pText, edict_t *pEdict )
 	if (gmsgSayText == 0)
 		gmsgSayText = REG_USER_MSG( "SayText", -1 );
 	
-	pfnMessageBegin( MSG_ONE, gmsgSayText, NULL, pEdict );
+	pfnMessageBegin( MSG_ONE, gmsgSayText, nullptr, pEdict );
 	pfnWriteByte( ENTINDEX(pEdict) );
 	pfnWriteString( pText );
 	pfnMessageEnd();
@@ -148,16 +148,16 @@ void UTIL_HostSay( edict_t *pEntity, int teamonly, char *message )
 	edict_t *client;
 	
 	// make sure the text has content
-	for ( pc = message; pc != NULL && *pc != 0; pc++ )
+	for ( pc = message; pc != nullptr && *pc != 0; pc++ )
 	{
 		if ( isprint( *pc ) && !isspace( *pc ) )
 		{
-			pc = NULL;   // we've found an alphanumeric character,  so text is valid
+			pc = nullptr;   // we've found an alphanumeric character,  so text is valid
 			break;
 		}
 	}
 	
-	if ( pc != NULL )
+	if ( pc != nullptr)
 		return;  // no character found, so say nothing
 	
 	// turn on color set 2  (color on,  no sound)
@@ -183,8 +183,8 @@ void UTIL_HostSay( edict_t *pEntity, int teamonly, char *message )
 	
 	sender_team = UTIL_GetTeam(pEntity);
 	
-	client = NULL;
-	while ( ((client = UTIL_FindEntityByClassname( client, "player" )) != NULL) &&
+	client = nullptr;
+	while ( ((client = UTIL_FindEntityByClassname( client, "player" )) != nullptr) &&
 		(!FNullEnt(client)) ) 
 	{
 		if ( client == pEntity )  // skip sender of message
@@ -195,14 +195,14 @@ void UTIL_HostSay( edict_t *pEntity, int teamonly, char *message )
 		if ( teamonly && (sender_team != player_team) )
 			continue;
 		
-		pfnMessageBegin( MSG_ONE, gmsgSayText, NULL, client );
+		pfnMessageBegin( MSG_ONE, gmsgSayText, nullptr, client );
 		pfnWriteByte( ENTINDEX(pEntity) );
 		pfnWriteString( text );
 		pfnMessageEnd();
 	}
 	
 	// print to the sending client
-	pfnMessageBegin( MSG_ONE, gmsgSayText, NULL, pEntity );
+	pfnMessageBegin( MSG_ONE, gmsgSayText, nullptr, pEntity );
 	pfnWriteByte( ENTINDEX(pEntity) );
 	pfnWriteString( text );
 	pfnMessageEnd();
@@ -236,7 +236,7 @@ int UTIL_GetTeam(edict_t *pEntity)
 			pName = teamlist;
 			pName = strtok(pName, ";");
 			
-			while (pName != NULL && *pName)
+			while (pName != nullptr && *pName)
 			{
 				// check that team isn't defined twice
 				for (i=0; i < num_teams; i++)
@@ -247,7 +247,7 @@ int UTIL_GetTeam(edict_t *pEntity)
 					strcpy(team_names[num_teams], pName);
 					num_teams++;
 				}
-				pName = strtok(NULL, ";");
+				pName = strtok(nullptr, ";");
 			}
 		}
 		
@@ -281,7 +281,7 @@ int UTIL_PlayersOnTeam( int team )
 {
 	int index;
 	int count = 0;
-	edict_t *pPlayer = NULL;
+	edict_t *pPlayer = nullptr;
 
 	// count number of players on this team...
 	for (index = 1; index <= gpGlobals->maxClients; index++)
@@ -302,7 +302,7 @@ int UTIL_ClientsOnTeam( int team )
 {
 	int index;
 	int count = 0;
-	edict_t *pPlayer = NULL;
+	edict_t *pPlayer = nullptr;
 
 	// count number of clients on this team...
 	for (index = 1; index <= gpGlobals->maxClients; index++)
@@ -324,7 +324,7 @@ int UTIL_BotsOnTeam( int team )
 {
 	int index;
 	int count = 0;
-	edict_t *pPlayer = NULL;
+	edict_t *pPlayer = nullptr;
 
 	// count number of bots on this team...
 	for (index = 1; index <= gpGlobals->maxClients; index++)
@@ -362,7 +362,7 @@ extern int m_spriteTexture;
 void UTIL_DrawBeam(edict_t *pEntity, Vector start, Vector end, int life, int width,
 					  int noise, int red, int green, int blue, int brightness, int speed)
 {
-	MESSAGE_BEGIN(MSG_ONE, SVC_TEMPENTITY, NULL, pEntity);
+	MESSAGE_BEGIN(MSG_ONE, SVC_TEMPENTITY, nullptr, pEntity);
 	WRITE_BYTE( TE_BEAMPOINTS);
 	WRITE_COORD(start.x);
 	WRITE_COORD(start.y);
@@ -401,7 +401,7 @@ bot_t *UTIL_GetBotPointer(edict_t *pEdict)
 	if (index < 32)
 		return (&bots[index]);
 	
-	return NULL;  // return NULL if edict is not a bot
+	return nullptr;  // return NULL if edict is not a bot
 }
 
 
@@ -498,7 +498,7 @@ Vector GetGunPosition(edict_t *pEdict)
 
 void UTIL_SelectItem(edict_t *pEdict, char *item_name)
 {
-	FakeClientCommand(pEdict, item_name, NULL, NULL);
+	FakeClientCommand(pEdict, item_name, nullptr, nullptr);
 }
 
 
@@ -547,7 +547,7 @@ bool UpdateSounds(edict_t *pEdict, edict_t *pPlayer)
 			if (distance < (volume * sensitivity))
 			{
 				bot_t *pBot = UTIL_GetBotPointer(pEdict);
-				if (pBot && pBot->pBotEnemy != NULL && !pBot->b_use_health_station &&
+				if (pBot && pBot->pBotEnemy != nullptr && !pBot->b_use_health_station &&
 					!pBot->b_use_HEV_station)
 				{
 					// just use dmg time, does the same thing
@@ -573,7 +573,7 @@ void UTIL_ShowMenu( edict_t *pEdict, int slots, int displaytime, bool needmore, 
 	if (gmsgShowMenu == 0)
 		gmsgShowMenu = REG_USER_MSG( "ShowMenu", -1 );
 	
-	pfnMessageBegin( MSG_ONE, gmsgShowMenu, NULL, pEdict );
+	pfnMessageBegin( MSG_ONE, gmsgShowMenu, nullptr, pEdict );
 	
 	pfnWriteShort( slots );
 	pfnWriteChar( displaytime );
@@ -626,6 +626,6 @@ void UTIL_StringToStringArray( char *pVector[], int count, const char *pString )
 
 	for ( j++; j < count; j++ )
 	{
-		pVector[j] = 0;
+		pVector[j] = nullptr;
 	}
 }

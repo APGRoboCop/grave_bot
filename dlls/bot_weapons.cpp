@@ -30,7 +30,7 @@ extern bot_fire_delay_t si_fire_delay[];
 bot_weapon_select_t *WeaponGetSelectPointer( void )
 {
 //	ALERT(at_console, "WeaponGetSelectPointer\n");
-	bot_weapon_select_t *pSelect = NULL;
+	bot_weapon_select_t *pSelect = nullptr;
 
 	if (mod_id == CRABBED_DLL || mod_id == VALVE_DLL)
 		pSelect = &valve_weapon_select[0];
@@ -43,7 +43,7 @@ bot_weapon_select_t *WeaponGetSelectPointer( void )
 bot_fire_delay_t *WeaponGetDelayPointer( void )
 {
 //	ALERT(at_console, "WeaponGetDelayPointer\n");
-	bot_fire_delay_t *pDelay = NULL;
+	bot_fire_delay_t *pDelay = nullptr;
 
 	if (mod_id == CRABBED_DLL || mod_id == VALVE_DLL)
 		pDelay = &valve_fire_delay[0];
@@ -56,7 +56,7 @@ bot_fire_delay_t *WeaponGetDelayPointer( void )
 int WeaponGetSelectIndex( int iId )
 {
 //	ALERT(at_console, "WeaponGetSelectIndex\n");
-	bot_weapon_select_t *pSelect = NULL;
+	bot_weapon_select_t *pSelect = nullptr;
 	pSelect = WeaponGetSelectPointer();
 
 	int select_index = 0;
@@ -77,7 +77,7 @@ int WeaponGetBest( void )
 //	ALERT(at_console, "WeaponGetBest\n");
 	int weapon = -1;
 
-	bot_weapon_select_t *pSelect = NULL;
+	bot_weapon_select_t *pSelect = nullptr;
 	pSelect = WeaponGetSelectPointer();
 
 	int select_index = 0;
@@ -102,7 +102,7 @@ int WeaponGetWorst( void )
 //	ALERT(at_console, "WeaponGetWorst\n");
 	int weapon = -1;
 
-	bot_weapon_select_t *pSelect = NULL;
+	bot_weapon_select_t *pSelect = nullptr;
 	pSelect = WeaponGetSelectPointer();
 
 	int select_index = 0;
@@ -127,7 +127,7 @@ int WeaponGetNextBest( int iId )
 //	ALERT(at_console, "WeaponGetNextBest\n");
 	int weapon = -1;
 
-	bot_weapon_select_t *pSelect = NULL;
+	bot_weapon_select_t *pSelect = nullptr;
 	pSelect = WeaponGetSelectPointer();
 
 	int select_index = 0;
@@ -149,7 +149,7 @@ int WeaponGetNextWorse( int iId )
 //	ALERT(at_console, "WeaponGetNextWorse\n");
 	int weapon = -1;
 
-	bot_weapon_select_t *pSelect = NULL;
+	bot_weapon_select_t *pSelect = nullptr;
 	pSelect = WeaponGetSelectPointer();
 
 	int select_index = 0;
