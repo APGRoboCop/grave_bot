@@ -3,7 +3,7 @@
 ===========================================================================================
 
 ChangeLog v0.4-beta4:-
->> Modernised the code for C++11
+>> Modernised the code for C++14
 >> Reduced redundancy
 >> GraveBot can load and detect both the older Linux SI v1.1 and the latest v1.4b
 

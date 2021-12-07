@@ -1,7 +1,7 @@
 CPP = g++
 TARGET = gravebot_mm
 ARCHFLAG = i686
-BASEFLAGS = -Dstricmp=strcasecmp -Dstrcmpi=strcasecmp -DMETAMOD_BUILD
+BASEFLAGS = -Dstricmp=strcasecmp -Dstrcmpi=strcasecmp -std=gnu++14 -static-libstdc++ -shared-libgcc -DMETAMOD_BUILD
 OPTFLAGS = 
 CPPFLAGS = ${BASEFLAGS} ${OPTFLAGS} -march=${ARCHFLAG} -m32 \
 	-O2 -mtune=generic -mmmx -msse -msse2 -mfpmath=sse -w -s -pipe \
