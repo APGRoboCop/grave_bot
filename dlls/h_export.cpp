@@ -186,9 +186,9 @@ BOOL WINAPI DllMain(HINSTANCE hinstDLL, DWORD fdwReason, LPVOID lpvReserved)
 
       #ifndef METAMOD_BUILD
          #ifndef __linux__
-		         h_Library = LoadLibrary("si\dlls\si.dll"); // and load the library
+		         h_Library = LoadLibrary("%s\\dlls\\%s.dll"); // and load the library
          #else
-		         h_Library = dlopen("si/dlls/si.so", RTLD_NOW);
+		         h_Library = dlopen("%s/dlls/%s.so", RTLD_NOW);
          #endif
       #endif
 	}
