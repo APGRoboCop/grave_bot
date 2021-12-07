@@ -1,6 +1,11 @@
 ===========================================================================================
-===============================Grave Bot===Readme===22/May/2019===========================
+===============================Grave Bot===Readme===07/Dec/2021============================
 ===========================================================================================
+
+ChangeLog v0.4-beta4:-
+>> Modernised the code for C++11
+>> Reduced redundancy
+>> GraveBot can load and detect both the older Linux SI v1.1 and the latest v1.4b
 
 ChangeLog v0.4-beta3:-
 >> Changed C style casts with C++ casts
