@@ -58,8 +58,8 @@ extern int g_iSciCount[2];
 extern bot_research_t g_Researched[2][NUM_RESEARCH_OPTIONS];
 int g_iResearchGoal[2] = { 0, 0 };
 
-extern void RoleCount( void );
-extern void RoleDetermine( void );
+extern void RoleCount();
+extern void RoleDetermine();
 
 extern WAYPOINT waypoints[MAX_WAYPOINTS];
 extern int num_waypoints;  // number of waypoints currently in use

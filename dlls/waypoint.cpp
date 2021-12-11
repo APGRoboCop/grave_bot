@@ -79,7 +79,7 @@ unsigned short *from_to[4] = {nullptr, nullptr, nullptr, nullptr};
 static FILE *fp;
 
 
-void WaypointDebug(void)
+void WaypointDebug()
 {
 	int y = 1, x = 1;
 	
@@ -95,7 +95,7 @@ void WaypointDebug(void)
 
 
 // free the linked list of waypoint path nodes...
-void WaypointFree(void)
+void WaypointFree()
 {
 	for (int i=0; i < MAX_WAYPOINTS; i++)
 	{
@@ -125,7 +125,7 @@ void WaypointFree(void)
 
 
 // initialize the waypoint structures...
-void WaypointInit(void)
+void WaypointInit()
 {
 	int i;
 	
@@ -1924,7 +1924,7 @@ bool WaypointLoad(edict_t *pEntity, char *ext)
 }
 
 
-void WaypointSave(void)
+void WaypointSave()
 {
 	char filename[256];
 	char mapname[64];
@@ -2486,7 +2486,7 @@ void WaypointFloyds(unsigned short *shortest_path, unsigned short *from_to)
 
 // load the waypoint route files (.gb1, .gb2, etc.) or generate them if
 // they don't exist...
-void WaypointRouteInit(void)
+void WaypointRouteInit()
 {
 	unsigned int index;
 	bool build_matrix[4];

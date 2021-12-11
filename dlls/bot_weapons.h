@@ -217,11 +217,11 @@ typedef struct
 	int		iFlags;					// flags???
 } bot_weapon_t;
 
-bot_weapon_select_t *WeaponGetSelectPointer( void );
-bot_fire_delay_t *WeaponGetDelayPointer( void );
+bot_weapon_select_t *WeaponGetSelectPointer();
+bot_fire_delay_t *WeaponGetDelayPointer();
 int WeaponGetSelectIndex( int iId );
-int WeaponGetBest( void );
-int WeaponGetWorst( void );
+int WeaponGetBest();
+int WeaponGetWorst();
 int WeaponGetNextBest( int iId );
 int WeaponGetNextWorse( int iId );
 int WeaponIdToResearch( int iId );

@@ -54,7 +54,7 @@ void BotAvoidContact( bot_t *pBot );
 void BotDodgeCrabs( bot_t *pBot );
 bool BotLookForDrop( bot_t *pBot );
 
-void BotCheckTeamplay(void);
+void BotCheckTeamplay();
 edict_t *BotFindEnemy( bot_t *pBot );
 int BotGetEnemyWeapon( edict_t *pEnemy );
 bool BotShouldEngageEnemy( bot_t *pBot, edict_t *pEnemy );

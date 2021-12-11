@@ -466,7 +466,7 @@ void pfnMessageBegin(int msg_dest, int msg_type, const float *pOrigin, edict_t *
    #endif
 }
 
-void pfnMessageEnd(void)
+void pfnMessageEnd()
 {
 	if (gpGlobals->deathmatch)
 	{
@@ -1237,7 +1237,7 @@ void pfnPlaybackEvent(int flags, const edict_t *pInvoker, unsigned short eventin
 #endif
 
 
-const char *Cmd_Args( void )
+const char *Cmd_Args()
 {
 	if (isFakeClientCommand)
 	{
@@ -1302,7 +1302,7 @@ const char *Cmd_Argv( int argc )
       #endif
 	}
 }
-int Cmd_Argc( void )
+int Cmd_Argc()
 {
 	if (isFakeClientCommand)
 	{

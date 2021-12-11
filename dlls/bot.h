@@ -78,9 +78,9 @@ typedef int BOOL;
 void FakeClientCommand(edict_t *pBot, char *arg1, char *arg2, char *arg3);
 
 
-const char *Cmd_Args( void );
+const char *Cmd_Args();
 const char *Cmd_Argv( int argc );
-int Cmd_Argc( void );
+int Cmd_Argc();
 
 
 #define LADDER_UNKNOWN  0
@@ -403,7 +403,7 @@ void UTIL_DrawBeam(edict_t *pEntity, Vector start, Vector end, int life, int wid
 
 char *BotChatTypeToString( int iType );
 int BotChatTypeToIndex( const char *pszType );
-void LoadBotChat(void);
+void LoadBotChat();
 void BotTrimBlanks(char *in_string, char *out_string);
 int BotChatTrimTag(char *original_name, char *out_name);
 void BotDropCharacter(char *in_string, char *out_string);

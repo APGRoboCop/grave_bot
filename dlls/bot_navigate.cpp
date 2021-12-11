@@ -76,7 +76,7 @@ float BotChangePitch( bot_t *pBot, float speed )
 	ideal = pEdict->v.idealpitch;
 	
 	// find the difference in the current and ideal angle
-	diff = fabs(current - ideal);
+	diff = std::fabs(current - ideal);
 	
 	speed = speed * pBot->f_frame_time;  // angles per second
 	
@@ -162,7 +162,7 @@ float BotChangeYaw( bot_t *pBot, float speed )
 	ideal = pEdict->v.ideal_yaw;
 	
 	// find the difference in the current and ideal angle
-	diff = fabs(current - ideal);
+	diff = std::fabs(current - ideal);
 
 	// speed that we can turn during this frame...
 	speed = speed * pBot->f_frame_time;
@@ -2419,10 +2419,10 @@ void BotTurnAtWall( bot_t *pBot, TraceResult *tr )
    // D1 and D2 are the difference (in degrees) between the bot's current
    // angle and Y1 or Y2 (respectively).
 
-   D1 = fabs(Y - Y1);
-   if (D1 > 179) D1 = fabs(D1 - 360);
-   D2 = fabs(Y - Y2);
-   if (D2 > 179) D2 = fabs(D2 - 360);
+   D1 = std::fabs(Y - Y1);
+   if (D1 > 179) D1 = std::fabs(D1 - 360);
+   D2 = std::fabs(Y - Y2);
+   if (D2 > 179) D2 = std::fabs(D2 - 360);
 
    // If difference 1 (D1) is more than difference 2 (D2) then the bot will
    // have to turn LESS if it heads in direction Y1 otherwise, head in

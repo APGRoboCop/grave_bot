@@ -51,7 +51,7 @@ bot_research_t g_Researched[2][NUM_RESEARCH_OPTIONS];
 
 float g_flWeaponSwitch = 0;
 
-void BotCheckTeamplay(void)
+void BotCheckTeamplay()
 {
 //	ALERT(at_console, "BotCheckTeamplay\n");
 
@@ -430,7 +430,7 @@ Vector BotBodyTarget( edict_t *pBotEnemy, bot_t *pBot )
 // specifing a weapon_choice allows you to choose the weapon the bot will
 // use (assuming enough ammo exists for that weapon)
 // BotFireWeapon will return TRUE if weapon was fired, FALSE otherwise
-bool BotFireWeapon( Vector v_enemy, bot_t *pBot, int weapon_choice, bool nofire)
+bool BotFireWeapon(Vector v_enemy, bot_t *pBot, int weapon_choice, bool nofire)
 {
 //ALERT(at_console, "BotFireWeapon\n");
 	bot_weapon_select_t *pSelect = nullptr;
@@ -1033,7 +1033,7 @@ void BotShootAtEnemy( bot_t *pBot )
 	}
 
 	// find the difference in the current and ideal angle
-	float diff = fabs(pEdict->v.v_angle.y - pEdict->v.ideal_yaw);
+	float diff = std::fabs(pEdict->v.v_angle.y - pEdict->v.ideal_yaw);
 
 	if (pBot->curr_waypoint_index == -1 || pBot->f_ignore_wpt_time > gpGlobals->time)
 	{

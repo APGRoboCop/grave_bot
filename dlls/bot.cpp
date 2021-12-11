@@ -70,8 +70,8 @@ extern bool b_random_color;
 extern bot_weapon_t weapon_defs[MAX_WEAPONS];
 extern bot_weapon_select_t valve_weapon_select[];
 extern edict_t *listenserver_edict;
-extern void RoleCount( void );
-extern void RoleDetermine( void );
+extern void RoleCount();
+extern void RoleDetermine();
 extern char *RoleToString(int role);
 extern char *SubroleToString(int subrole);
 
@@ -358,7 +358,7 @@ void BotSpawnInit( bot_t *pBot )
 }
 
 
-void BotNameInit( void )
+void BotNameInit()
 {
 //	ALERT(at_console, "BotNameInit\n");
 	FILE *bot_name_fp;
@@ -860,7 +860,7 @@ int BotInFieldOfView(bot_t *pBot, Vector dest)
 	// 45 degrees to the right is the limit of the normal view angle
 	
 	// rsm - START angle bug fix
-	int angle = fabs((int)view_angle - (int)entity_angles.y);
+	int angle = std::fabs((int)view_angle - (int)entity_angles.y);
 	
 	if (angle > 180)
 		angle = 360 - angle;

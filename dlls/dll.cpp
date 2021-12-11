@@ -148,13 +148,13 @@ char *show_menu_4 =
    {"Waypoint Tags\n\n1. Health\n2. Armor\n3. Longjump\n4. Duck Jump\n5. CANCEL"};
 
 
-void BotNameInit(void);
+void BotNameInit();
 void UpdateClientData(const struct edict_s *ent, int sendweapons, struct clientdata_s *cd);
-void ProcessBotCfgFile(void);
+void ProcessBotCfgFile();
 bool ProcessCommand( edict_t *pEntity, const char *pcmd, const char *arg1, const char *arg2,
 	const char *arg3, const char *arg4, const char *arg5);
-void RoleDetermine( void );
-void RoleCount( void );
+void RoleDetermine();
+void RoleCount();
 char *RoleToString(int role);
 char *SubroleToString(int subrole);
 void ClearEdict( edict_t *pEdict);
@@ -285,7 +285,7 @@ C_DLLEXPORT int Meta_Detach (PLUG_LOADTIME now, PL_UNLOAD_REASON reason)
 #endif
 
 
-void GameDLLInit( void )
+void GameDLLInit()
 {
 	int i;
 
@@ -679,7 +679,7 @@ void PlayerPostThink( edict_t *pEntity )
 }
 #endif
 
-void StartFrame( void )
+void StartFrame()
 {
 	if (gpGlobals->deathmatch)
 	{
@@ -1214,7 +1214,7 @@ void FakeClientCommand(edict_t *pBot, char *arg1, char *arg2, char *arg3)
 }
 
 
-void ProcessBotCfgFile(void)
+void ProcessBotCfgFile()
 {
 	int ch;
 	char cmd_line[256];
@@ -2574,7 +2574,7 @@ bool ProcessCommand( edict_t *pEntity, const char *pcmd, const char *arg1, const
 	return FALSE;
 }
 
-void RoleDetermine( void )
+void RoleDetermine()
 {
 	// important entities (scis, resource, breakables)
 	edict_t *pEntity = nullptr;
@@ -2693,7 +2693,7 @@ void RoleDetermine( void )
 	}
 }
 
-void RoleCount( void )
+void RoleCount()
 {
 	// ally players
 	edict_t *pPlayer = nullptr;

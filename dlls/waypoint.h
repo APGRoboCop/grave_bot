@@ -90,7 +90,7 @@ typedef struct path {
 
 
 // waypoint function prototypes...
-void WaypointInit(void);
+void WaypointInit();
 int  WaypointFindPath(PATH **pPath, int *path_index, int waypoint_index, int team);
 int  WaypointFindNearest(edict_t *pEntity, float distance, int team);
 int  WaypointFindNearest(Vector v_src, edict_t *pEntity, float range, int team);
@@ -112,19 +112,18 @@ void WaypointSearchItems(edict_t *pEntity, Vector origin, int wpt_index);
 edict_t *WaypointFindItem( int wpt_index );
 void WaypointAdd(edict_t *pEntity);
 void WaypointAddAiming(edict_t *pEntity);
-int  WaypointFindNearestAiming(Vector v_origin);
 void WaypointDelete(edict_t *pEntity);
 void WaypointUpdate(edict_t *pEntity);
 void WaypointCreatePath(edict_t *pEntity, int cmd);
 void WaypointRemovePath(edict_t *pEntity, int cmd);
 bool WaypointLoad(edict_t *pEntity, char *ext);
-void WaypointSave(void);
+void WaypointSave();
 bool WaypointReachable(Vector v_srv, Vector v_dest, edict_t *pEntity);
 int  WaypointFindReachable(edict_t *pEntity, float range, int team);
 void WaypointPrintInfo(edict_t *pEntity);
 void WaypointThink(edict_t *pEntity);
 void WaypointFloyds(short *shortest_path, short *from_to);
-void WaypointRouteInit(void);
+void WaypointRouteInit();
 unsigned short WaypointRouteFromTo(int src, int dest, int team);
 int  WaypointDistanceFromTo(int src, int dest, int team);
 
