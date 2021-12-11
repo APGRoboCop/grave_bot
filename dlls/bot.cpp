@@ -49,6 +49,8 @@ extern edict_t *pent_info_ctfdetect;
 extern bool checked_teamplay;
 extern int max_team_players[4];
 extern int team_class_limits[4];
+extern int min_bots;
+extern int max_bots;
 extern int max_teams;
 extern bot_research_t g_Researched[2][NUM_RESEARCH_OPTIONS];
 extern float is_team_play;

@@ -7,7 +7,7 @@
 //
 
 #ifndef _WIN32
-#include <string.h>
+#include <cstring>
 #endif
 
 #ifndef METAMOD_BUILD
