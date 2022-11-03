@@ -2288,7 +2288,7 @@ void WaypointThink(edict_t *pEntity)
 {
 	float distance, min_distance;
 	Vector start, end;
-	int i, index;
+	int i;
 	
 	if (g_auto_waypoint)  // is auto waypoint on?
 	{
@@ -2327,6 +2327,7 @@ void WaypointThink(edict_t *pEntity)
 	
 	if (g_waypoint_on)  // display the waypoints if turned on...
 	{
+		int index = 0;
 		for (i=0; i < num_waypoints; i++)
 		{
 			if ((waypoints[i].flags & W_FL_DELETED) == W_FL_DELETED)
