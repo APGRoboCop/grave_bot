@@ -6,7 +6,7 @@ OPTFLAGS =
 CPPFLAGS = ${BASEFLAGS} ${OPTFLAGS} -march=${ARCHFLAG} -m32 \
 	-O2 -mtune=generic -mmmx -msse -msse2 -mfpmath=sse -s \
 	-Wno-write-strings -Wno-unused-local-typedefs -funsafe-math-optimizations \
-	-I"../common" -I"../dlls" -I"../engine" -I"../pm_shared" -I"../metamod" 
+	-I"../common" -I"../dlls" -I"../engine" -I"../pm_shared" -I"../metamod"
 
 OBJ = 	bot.o \
 	bot_client.o \
