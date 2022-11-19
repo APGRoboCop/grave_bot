@@ -59,7 +59,7 @@ edict_t *BotFindEnemy( bot_t *pBot );
 int BotGetEnemyWeapon( edict_t *pEnemy );
 bool BotShouldEngageEnemy( bot_t *pBot, edict_t *pEnemy );
 Vector BotBodyTarget( edict_t *pBotEnemy, bot_t *pBot );
-bool BotFireWeapon( Vector v_enemy, bot_t *pBot, int weapon_choice, bool nofire = false);
+bool BotFireWeapon(const Vector& v_enemy, bot_t *pBot, int weapon_choice, bool nofire = false);
 Vector BotGetLead( bot_t *pBot, edict_t *pEntity, float flProjSpeed);
 void BotShootAtEnemy( bot_t *pBot );
 void BotAssessGrenades( bot_t *pBot );

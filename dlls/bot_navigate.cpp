@@ -456,7 +456,7 @@ bool BotHeadTowardWaypoint( bot_t *pBot )
 				(LONGJUMP_DISTANCE * (800 / CVAR_GET_FLOAT("sv_gravity"))),
 				dont_ignore_monsters, head_hull, pEdict, &tr);
 			// make sure it's clear
-			if (tr.flFraction >= 1.0)
+			if (tr.flFraction >= 1.0f)
 			{	// trace another hull straight down so we can get ground level here
 				UTIL_TraceHull(tr.vecEndPos, tr.vecEndPos - Vector(0,0,8192), dont_ignore_monsters,
 					head_hull, pEdict, &tr);
@@ -765,7 +765,7 @@ bool BotHeadTowardWaypoint( bot_t *pBot )
 					waypoints[pBot->curr_waypoint_index].flags & W_FL_LADDER ||
 					waypoints[pBot->curr_waypoint_index].flags & W_FL_LIFT ||
 					((waypoints[final_lj_wpt].origin - UTIL_GetOrigin(pEdict)).Length() < (LONGJUMP_DISTANCE * 
-					(800 / CVAR_GET_FLOAT("sv_gravity")) * 0.6)))
+					(800 / CVAR_GET_FLOAT("sv_gravity")) * 0.6f)))
 				{	// find the next waypoint instead
 					i = WaypointRouteFromTo(pBot->curr_waypoint_index,
 						nextwaypoint, team);
@@ -865,12 +865,12 @@ void BotEvaluateGoal( bot_t *pBot )
 		return;
 	}
 
-	edict_t *pEdict = pBot->pEdict;
+const edict_t *pEdict = pBot->pEdict;
 
 	// we're dying!  Forget about our goal
 	if (pBot->waypoint_goal != -1 && pEdict->v.health <= 25 && pBot->wpt_goal_type != WPT_GOAL_HEALTH)
 	{
-		pBot->f_waypoint_goal_time = 0;
+		pBot->f_waypoint_goal_time = 0.0f;
 		pBot->waypoint_goal = -1;
 		pBot->b_engaging_enemy = FALSE;
 	}
@@ -1460,7 +1460,7 @@ int BotFindWaypointGoal( bot_t *pBot )
 	// used in for/while loops
 	int i = 0;
 	// current weapon
-	int iId = pBot->current_weapon.iId;
+	const int iId = pBot->current_weapon.iId;
 
 	if (pSelect == nullptr)
 		return -1;
@@ -1472,7 +1472,7 @@ int BotFindWaypointGoal( bot_t *pBot )
 	if (is_team_play)
 		team = UTIL_GetTeam(pEdict);
 
-	int random = RANDOM_LONG(1,100);
+	const int random = RANDOM_LONG(1,100);
 	int health_chance = floor((pBot->max_health - pEdict->v.health));
 	// this forces to get more health if it's less than 25
 	if (health_chance != 0) health_chance += 25;
@@ -2009,7 +2009,7 @@ void BotOnLadder( bot_t *pBot, float moved_distance )
 			   UTIL_TraceLine( v_src, v_dest, dont_ignore_monsters,
 				   pEdict->v.pContainingEntity, &tr);
 			   
-			   if (tr.flFraction < 1.0)  // hit something?
+			   if (tr.flFraction < 1.0f)  // hit something?
 			   {
 				   if (strcmp("func_wall", STRING(tr.pHit->v.classname)) == 0)
 				   {
@@ -2120,8 +2120,8 @@ void BotOnLadder( bot_t *pBot, float moved_distance )
 	}
 	else
 	{	// keep turning toward the waypoint
-		Vector v_direction = waypoints[pBot->curr_waypoint_index].origin - pEdict->v.origin;
-		Vector v_angles = UTIL_VecToAngles(v_direction);
+		const Vector v_direction = waypoints[pBot->curr_waypoint_index].origin - pEdict->v.origin;
+		const Vector v_angles = UTIL_VecToAngles(v_direction);
 	
 		pEdict->v.idealpitch = -v_angles.x;
 		BotFixIdealPitch(pEdict);
@@ -2130,7 +2130,7 @@ void BotOnLadder( bot_t *pBot, float moved_distance )
 		BotFixIdealYaw(pEdict);
 
 		// check if the bot hasn't moved much since the last location...
-		if ((moved_distance <= 1) && (pBot->prev_speed >= 1.0))
+		if ((moved_distance <= 1) && (pBot->prev_speed >= 1.0f))
 		{	// the bot must be stuck, try to jump
 			pEdict->v.button |= IN_JUMP;
 		}
@@ -2695,7 +2695,7 @@ bool BotCanDuckUnder( bot_t *pBot )
 
    TraceResult tr;
    Vector v_duck, v_source, v_dest;
-   edict_t *pEdict = pBot->pEdict;
+   const edict_t *pEdict = pBot->pEdict;
 
    // convert current view angle to vectors for TraceLine math...
 
@@ -2757,7 +2757,7 @@ bool BotCanDuckUnder( bot_t *pBot )
                    pEdict->v.pContainingEntity, &tr);
 
    // if trace didn't hit something, return FALSE
-   if (tr.flFraction >= 1.0)
+   if (tr.flFraction >= 1.0f)
       return FALSE;
 
    // now check same height to one side of the bot...
@@ -2850,8 +2850,8 @@ bool BotFollowUser( bot_t *pBot )
          pBot->f_bot_use_time = gpGlobals->time;  // reset "last visible time"
 
       // face the user
-      Vector v_user = pBot->pBotUser->v.origin - pEdict->v.origin;
-      Vector bot_angles = UTIL_VecToAngles( v_user );
+      const Vector v_user = pBot->pBotUser->v.origin - pEdict->v.origin;
+      const Vector bot_angles = UTIL_VecToAngles( v_user );
 
       pEdict->v.ideal_yaw = bot_angles.y;
 
@@ -2944,7 +2944,7 @@ void BotAvoidContact( bot_t *pBot )
 {
 //	ALERT(at_console, "BotAvoidContact\n");
 	edict_t *pEnt = nullptr;
-	float flMaxDist = 128.0f;
+	const float flMaxDist = 128.0f;
 	Vector vecDir, vecBotDir;
 	TraceResult tr;
 
@@ -2969,7 +2969,7 @@ void BotAvoidContact( bot_t *pBot )
 	// this way we don't have to deal with asin
 	vecBotDir = pBot->v_curr_direction.Normalize() * flMaxDist;//gpGlobals->v_forward * flMaxDist;
 
-	Vector start = pBot->pEdict->v.origin;
+	const Vector start = pBot->pEdict->v.origin;
 	Vector end = start + vecBotDir;
 
 	// trace a line to see if this entity is in the way of the direction we're traveling
@@ -3127,7 +3127,7 @@ void BotDodgeCrabs( bot_t *pBot )
 bool BotLookForDrop( bot_t *pBot )
 {
 //	ALERT(at_console, "BotLookForDrop\n");
-	edict_t *pEdict = pBot->pEdict;
+	const edict_t *pEdict = pBot->pEdict;
 	TraceResult tr;
 	Vector vecStart, vecEnd;
 	// trace a little bit in the direction we're traveling
@@ -3144,7 +3144,7 @@ bool BotLookForDrop( bot_t *pBot )
 
 		const int iContents = POINT_CONTENTS( tr.vecEndPos );
 		// full trace and it's not water down there?
-		if (tr.flFraction >= 1.0 && iContents != CONTENTS_WATER)
+		if (tr.flFraction >= 1.0f && iContents != CONTENTS_WATER)
 			return true;
 	}
 	// no drop found

@@ -66,7 +66,7 @@ edict_t *BotFindEnemy( bot_t *pBot )
 //	ALERT(at_console, "BotFindEnemy\n");
 	Vector vecEnd;
 	static bool flag=TRUE;
-	edict_t *pent = nullptr;
+	const edict_t *pent = nullptr;
 	edict_t *pNewEnemy;
 	edict_t *pRemember = nullptr;
 	float nearestdistance;
@@ -162,8 +162,8 @@ edict_t *BotFindEnemy( bot_t *pBot )
 			// is team play enabled?
 			if (is_team_play > 0.0f)
 			{
-				int player_team = UTIL_GetTeam(pMonster);
-				int bot_team = UTIL_GetTeam(pEdict);
+				const int player_team = UTIL_GetTeam(pMonster);
+				const int bot_team = UTIL_GetTeam(pEdict);
 					
 				// don't target your teammates as long as they're not a scientist and we don't have the mindray
 				if (mod_id == SI_DLL && bot_team == player_team &&
@@ -178,8 +178,8 @@ edict_t *BotFindEnemy( bot_t *pBot )
 			if (!FInViewCone( &vecEnd, pEdict ) ||
 				!FVisible( vecEnd, pEdict ))
 				continue;
-			
-			float distance = (vecEnd - pEdict->v.origin).Length();
+
+			const float distance = (vecEnd - pEdict->v.origin).Length();
 
 			if (mod_id == SI_DLL)
 			{	// only notice scis if they're close and we don't have the mindray
@@ -236,8 +236,8 @@ edict_t *BotFindEnemy( bot_t *pBot )
 				// is team play enabled?
 				if (is_team_play > 0.0f)
 				{
-					int player_team = UTIL_GetTeam(pPlayer);
-					int bot_team = UTIL_GetTeam(pEdict);
+					const int player_team = UTIL_GetTeam(pPlayer);
+					const int bot_team = UTIL_GetTeam(pEdict);
 					
 					// don't target your teammates...
 					if (bot_team == player_team)
@@ -250,7 +250,7 @@ edict_t *BotFindEnemy( bot_t *pBot )
 				if (FInViewCone( &vecEnd, pEdict ) &&
 					FVisible( vecEnd, pEdict ))
 				{
-					float distance = (pPlayer->v.origin - pEdict->v.origin).Length();
+					const float distance = (pPlayer->v.origin - pEdict->v.origin).Length();
 					if (distance < nearestdistance)
 					{
 						nearestdistance = distance;
@@ -272,7 +272,7 @@ edict_t *BotFindEnemy( bot_t *pBot )
 	if (pNewEnemy)
 	{
 		// face the enemy
-		Vector v_enemy = pNewEnemy->v.origin - pEdict->v.origin;
+		const Vector v_enemy = pNewEnemy->v.origin - pEdict->v.origin;
 		Vector bot_angles = UTIL_VecToAngles( v_enemy );
 		/*	Let shoot at enemy handle this!
 		pEdict->v.ideal_yaw = bot_angles.y;
@@ -284,8 +284,8 @@ edict_t *BotFindEnemy( bot_t *pBot )
 		if ((bot_reaction_time > 0) && (pNewEnemy != pBot->pBotEnemy) && (!pRemember))
 		{
 			float react_delay;
-			float delay_min = react_time_min[pBot->bot_skill] * bot_reaction_time;
-			float delay_max = react_time_max[pBot->bot_skill] * bot_reaction_time;
+			const float delay_min = react_time_min[pBot->bot_skill] * bot_reaction_time;
+			const float delay_max = react_time_max[pBot->bot_skill] * bot_reaction_time;
 
 			float distance_delay = log10(v_enemy.Length()) * 0.8f;
 			// don't get an advantage if they're too close
@@ -322,7 +322,7 @@ int BotGetEnemyWeapon( edict_t *pEnemy )
 {
 //	ALERT(at_console, "BotGetEnemyWeapon\n");
 
-	bot_weapon_select_t *pSelect = nullptr;
+	const bot_weapon_select_t *pSelect = nullptr;
 	pSelect = WeaponGetSelectPointer();
 
 	if ((pEnemy->v.flags & FL_CLIENT) && (pSelect != nullptr))
@@ -360,11 +360,11 @@ bool BotShouldEngageEnemy( bot_t *pBot, edict_t *pEnemy )
 	if (mod_id == SI_DLL && pBot->i_carry_type)
 		return FALSE;
 
-	int our_weapon = WeaponGetSelectIndex(pBot->current_weapon.iId);
-	int enemy_weapon = WeaponGetSelectIndex(BotGetEnemyWeapon(pEnemy));
+	const int our_weapon = WeaponGetSelectIndex(pBot->current_weapon.iId);
+	const int enemy_weapon = WeaponGetSelectIndex(BotGetEnemyWeapon(pEnemy));
 
-	float primary_ammo = BotAssessPrimaryAmmo(pBot, pBot->current_weapon.iId);
-	float secondary_ammo = BotAssessSecondaryAmmo(pBot, pBot->current_weapon.iId);
+	const float primary_ammo = BotAssessPrimaryAmmo(pBot, pBot->current_weapon.iId);
+	const float secondary_ammo = BotAssessSecondaryAmmo(pBot, pBot->current_weapon.iId);
 	// don't engage if our ammo is low!
 	if (((primary_ammo == AMMO_CRITICAL) && (secondary_ammo == AMMO_CRITICAL)) ||
 		((primary_ammo == AMMO_CRITICAL) && (secondary_ammo == AMMO_NONE)) ||
@@ -430,18 +430,18 @@ Vector BotBodyTarget( edict_t *pBotEnemy, bot_t *pBot )
 // specifing a weapon_choice allows you to choose the weapon the bot will
 // use (assuming enough ammo exists for that weapon)
 // BotFireWeapon will return TRUE if weapon was fired, FALSE otherwise
-bool BotFireWeapon(Vector v_enemy, bot_t *pBot, int weapon_choice, bool nofire)
+bool BotFireWeapon(const Vector& v_enemy, bot_t *pBot, int weapon_choice, bool nofire)
 {
 //ALERT(at_console, "BotFireWeapon\n");
 	bot_weapon_select_t *pSelect = nullptr;
-	bot_fire_delay_t *pDelay = nullptr;
+	const bot_fire_delay_t *pDelay = nullptr;
 	int select_index;
 	int iId;
 	int primary_percent;
 	
 	edict_t *pEdict = pBot->pEdict;
-	
-	float distance = v_enemy.Length();  // how far away is the enemy?
+
+	const float distance = v_enemy.Length();  // how far away is the enemy?
 	
 	pSelect = WeaponGetSelectPointer();
 	pDelay = WeaponGetDelayPointer();
@@ -472,7 +472,7 @@ bool BotFireWeapon(Vector v_enemy, bot_t *pBot, int weapon_choice, bool nofire)
 					select_index++;
 				
 				// set next time to shoot
-				int skill = pBot->bot_skill;
+				const int skill = pBot->bot_skill;
 				float base_delay, min_delay, max_delay;
 				
 				base_delay = pDelay[select_index].primary_base_delay;
@@ -511,7 +511,7 @@ bool BotFireWeapon(Vector v_enemy, bot_t *pBot, int weapon_choice, bool nofire)
 					select_index++;
 				
 				// set next time to shoot
-				int skill = pBot->bot_skill;
+				const int skill = pBot->bot_skill;
 				float base_delay, min_delay, max_delay;
 				
 				base_delay = pDelay[select_index].secondary_base_delay;
@@ -634,9 +634,9 @@ bool BotFireWeapon(Vector v_enemy, bot_t *pBot, int weapon_choice, bool nofire)
 			use_primary[select_index] = FALSE;
 			use_secondary[select_index] = FALSE;
 			primary_percent = RANDOM_LONG(1, 100);
-			
-			float primary_assess = BotAssessPrimaryAmmo(pBot, pSelect[select_index].iId);
-			float secondary_assess = BotAssessSecondaryAmmo(pBot, pSelect[select_index].iId);
+
+			const float primary_assess = BotAssessPrimaryAmmo(pBot, pSelect[select_index].iId);
+			const float secondary_assess = BotAssessSecondaryAmmo(pBot, pSelect[select_index].iId);
 			// see if there is enough secondary ammo AND
 			// the bot is far enough away to use secondary fire AND
 			// the bot is close enough to the enemy to use secondary fire
@@ -777,7 +777,7 @@ bool BotFireWeapon(Vector v_enemy, bot_t *pBot, int weapon_choice, bool nofire)
 					pBot->f_shoot_time = gpGlobals->time;  // don't let button up
 				else
 				{
-					int skill = pBot->bot_skill;
+					const int skill = pBot->bot_skill;
 					float base_delay, min_delay, max_delay;
 						
 					base_delay = pDelay[final_index].primary_base_delay;
@@ -813,7 +813,7 @@ bool BotFireWeapon(Vector v_enemy, bot_t *pBot, int weapon_choice, bool nofire)
 					pBot->f_shoot_time = gpGlobals->time;  // don't let button up
 				else
 				{
-					int skill = pBot->bot_skill;
+					const int skill = pBot->bot_skill;
 					float base_delay, min_delay, max_delay;
 						
 					base_delay = pDelay[final_index].secondary_base_delay;
@@ -840,8 +840,8 @@ Vector BotGetLead( bot_t *pBot, edict_t *pEntity, float flProjSpeed )
 	if (!pEntity)
 		return BotBodyTarget( pBot->pBotEnemy, pBot );
 	// get our origin and distance to the entity
-	Vector vecOrigin = BotBodyTarget( pBot->pBotEnemy, pBot );
-	float flDistance = (vecOrigin - UTIL_GetOrigin(pBot->pEdict)).Length();
+	const Vector vecOrigin = BotBodyTarget( pBot->pBotEnemy, pBot );
+	const float flDistance = (vecOrigin - UTIL_GetOrigin(pBot->pEdict)).Length();
 	// factor in the entity's velocity multiplied by the percent of distance out of our
 	// weapon's projectile speed
 	Vector vecNewOrigin = vecOrigin;
@@ -867,16 +867,16 @@ void BotShootAtEnemy( bot_t *pBot )
 	if (!pBot->pBotEnemy)
 		return;
 
-	int team = UTIL_GetTeam(pBot->pEdict);
+	const int team = UTIL_GetTeam(pBot->pEdict);
 	float f_distance;
 	float f_velocity;
 	TraceResult tr;
 	edict_t *pEdict = pBot->pEdict;
 	
 	Vector v_enemy_origin = BotBodyTarget( pBot->pBotEnemy, pBot );
-	Vector v_lead_origin = BotGetLead(pBot, pBot->pBotEnemy, WeaponProjectileSpeed(pBot->current_weapon.iId));
+	const Vector v_lead_origin = BotGetLead(pBot, pBot->pBotEnemy, WeaponProjectileSpeed(pBot->current_weapon.iId));
 	// aim for the head and/or body
-	Vector v_enemy = v_lead_origin - GetGunPosition(pEdict);
+	const Vector v_enemy = v_lead_origin - GetGunPosition(pEdict);
 
 	Vector enemy_angle = UTIL_VecToAngles( v_enemy );
 	
@@ -949,7 +949,7 @@ void BotShootAtEnemy( bot_t *pBot )
 	if (pBot->pBotEnemy && mod_id == SI_DLL &&
 		FStrEq(STRING(pBot->pBotEnemy->v.classname), "monster_scientist"))
 	{
-		int enemy_team = UTIL_GetTeam(pBot->pBotEnemy);
+		const int enemy_team = UTIL_GetTeam(pBot->pBotEnemy);
 		// engage if enemy scientist and we don't have anything
 		if (enemy_team != team && pBot->i_carry_type == CARRY_NONE)
 		{
@@ -979,7 +979,7 @@ void BotShootAtEnemy( bot_t *pBot )
 	if (pBot->f_engage_enemy_check <= gpGlobals->time)
 		pBot->b_last_engage = BotShouldEngageEnemy(pBot, pBot->pBotEnemy);
 
-	bool bShouldEngage = pBot->b_last_engage;
+	const bool bShouldEngage = pBot->b_last_engage;
 
 	if ((RANDOM_LONG(1,100) < pBot->i_engage_aggressiveness) && (!pBot->b_engaging_enemy) && 
 		(bShouldEngage))
@@ -1204,8 +1204,8 @@ void BotAssessGrenades( bot_t *pBot )
 		// we don't care how close snarks are, but the others explode
 		if (strcmp("monster_snark", STRING(pGrenade->v.classname)) == 0)
 			mindistance = 0;
-		
-		float distance = (pGrenade->v.origin - pEdict->v.origin).Length();
+
+		const float distance = (pGrenade->v.origin - pEdict->v.origin).Length();
 		// our current enemy is closer, forget the grenade
 		if (pBot->pBotEnemy != nullptr &&
 			(pGrenade->v.origin - UTIL_GetOrigin(pBot->pBotEnemy)).Length() < distance)
@@ -1231,7 +1231,7 @@ void BotAssessGrenades( bot_t *pBot )
 bool BotWeaponPrimaryDistance( bot_t *pBot, float distance, int weapon_id )
 {
 //	ALERT(at_console, "BotWeaponPrimaryDistance\n");
-	bot_weapon_select_t *pSelect = nullptr;
+	const bot_weapon_select_t *pSelect = nullptr;
 	pSelect = WeaponGetSelectPointer();
 	// select pointer not valid?
 	if (pSelect == nullptr)
@@ -1259,7 +1259,7 @@ bool BotWeaponPrimaryDistance( bot_t *pBot, float distance, int weapon_id )
 bool BotWeaponSecondaryDistance( bot_t *pBot, float distance, int weapon_id )
 {
 //	ALERT(at_console, "BotWeaponSecondaryDistance\n");
-	bot_weapon_select_t *pSelect = nullptr;
+	const bot_weapon_select_t *pSelect = nullptr;
 	pSelect = WeaponGetSelectPointer();
 	// select pointer not valid?
 	if (pSelect == nullptr)
@@ -1287,9 +1287,9 @@ bool BotWeaponSecondaryDistance( bot_t *pBot, float distance, int weapon_id )
 float BotAssessPrimaryAmmo( bot_t *pBot, int weapon_id )
 {
 //	ALERT(at_console, "BotAssessPrimaryAmmo\n");
-	bot_weapon_select_t *pSelect = nullptr;
+	const bot_weapon_select_t *pSelect = nullptr;
 	pSelect = WeaponGetSelectPointer();
-	int team = UTIL_GetTeam(pBot->pEdict);
+	const int team = UTIL_GetTeam(pBot->pEdict);
 	// select pointer not valid?
 	if (pSelect == nullptr)
 		return AMMO_NONE;
@@ -1297,7 +1297,7 @@ float BotAssessPrimaryAmmo( bot_t *pBot, int weapon_id )
 	if (weapon_defs[weapon_id].iAmmo1 == -1 || weapon_defs[weapon_id].iAmmo1Max <= 0)
 		return AMMO_NONE;
 
-	int select_index = WeaponGetSelectIndex(weapon_id);
+	const int select_index = WeaponGetSelectIndex(weapon_id);
 
 	int max = weapon_defs[weapon_id].iAmmo1Max;
 	if (mod_id == SI_DLL)
@@ -1319,7 +1319,7 @@ float BotAssessPrimaryAmmo( bot_t *pBot, int weapon_id )
 			max -= WeaponGetAmmoResearchDiff(weapon_id);
 	}
 
-	float ammo_percent = static_cast<float>(pBot->m_rgAmmo[weapon_defs[weapon_id].iAmmo1]) / static_cast<float>(max);
+	const float ammo_percent = static_cast<float>(pBot->m_rgAmmo[weapon_defs[weapon_id].iAmmo1]) / static_cast<float>(max);
 	// is our ammo critical (can't attack with this weapon)
 	if ((weapon_id != pBot->current_weapon.iId &&
 		pBot->m_rgAmmo[weapon_defs[weapon_id].iAmmo1] < pSelect[select_index].min_primary_ammo) ||
@@ -1335,9 +1335,9 @@ float BotAssessPrimaryAmmo( bot_t *pBot, int weapon_id )
 float BotAssessSecondaryAmmo( bot_t *pBot, int weapon_id )
 {
 //	ALERT(at_console, "BotAssessSecondaryAmmo\n");
-	bot_weapon_select_t *pSelect = nullptr;
+	const bot_weapon_select_t *pSelect = nullptr;
 	pSelect = WeaponGetSelectPointer();
-	int team = UTIL_GetTeam(pBot->pEdict);
+	const int team = UTIL_GetTeam(pBot->pEdict);
 	// select pointer not valid?
 	if (pSelect == nullptr)
 		return AMMO_NONE;
@@ -1345,7 +1345,7 @@ float BotAssessSecondaryAmmo( bot_t *pBot, int weapon_id )
 	if (weapon_defs[weapon_id].iAmmo2 == -1 || weapon_defs[weapon_id].iAmmo2Max <= 0)
 		return AMMO_NONE;
 
-	int select_index = WeaponGetSelectIndex(weapon_id);
+	const int select_index = WeaponGetSelectIndex(weapon_id);
 
 	int max = weapon_defs[weapon_id].iAmmo2Max;
 	if (mod_id == SI_DLL)
@@ -1367,7 +1367,7 @@ float BotAssessSecondaryAmmo( bot_t *pBot, int weapon_id )
 			max -= WeaponGetAmmoResearchDiff(weapon_id);
 	}
 
-	float ammo_percent = static_cast<float>(pBot->m_rgAmmo[weapon_defs[weapon_id].iAmmo2]) / static_cast<float>(max);
+	const float ammo_percent = static_cast<float>(pBot->m_rgAmmo[weapon_defs[weapon_id].iAmmo2]) / static_cast<float>(max);
 	// is our ammo critical (can't attack with this weapon)
 	if (pBot->m_rgAmmo[weapon_defs[weapon_id].iAmmo2] < pSelect[select_index].min_secondary_ammo && 
 		(weapon_id == pBot->current_weapon.iId && pBot->current_weapon.iClip2 < pSelect[select_index].min_secondary_ammo))
