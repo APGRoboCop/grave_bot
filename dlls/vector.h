@@ -36,15 +36,12 @@ public:
 		// Vector2D vec2;
 
 		float flLen = Length();
-		if ( flLen == 0 )
+		if ( flLen == 0.0f )
 		{
 			return Vector2D( 0, 0 );
 		}
-		else
-		{
-			flLen = 1 / flLen;
-			return Vector2D( x * flLen, y * flLen );
-		}
+		flLen = 1 / flLen;
+		return Vector2D( x * flLen, y * flLen );
 	}
 
 	vec_t	x, y;
@@ -84,7 +81,7 @@ public:
 	inline Vector Normalize() const
 	{
 		float flLen = Length();
-		if (flLen == 0) return Vector(0,0,1); // ????
+		if (flLen == 0.0f) return Vector(0,0,1); // ????
 		flLen = 1 / flLen;
 		return Vector(x * flLen, y * flLen, z * flLen);
 	}

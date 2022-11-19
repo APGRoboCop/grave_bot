@@ -222,22 +222,22 @@ void BotFixBodyAngles(edict_t *pEdict)
 //	ALERT(at_console, "BotFixBodyAngles\n");
    // check for wrap around of angle...
    if (pEdict->v.angles.x >= 180)
-      pEdict->v.angles.x -= 360 * ((int) (pEdict->v.angles.x / 360) + 1);
+      pEdict->v.angles.x -= 360 * (static_cast<int>(pEdict->v.angles.x / 360) + 1);
 
    if (pEdict->v.angles.x < -180)
-      pEdict->v.angles.x += 360 * ((int) (-pEdict->v.angles.x / 360) + 1);
+      pEdict->v.angles.x += 360 * (static_cast<int>(-pEdict->v.angles.x / 360) + 1);
 
    if (pEdict->v.angles.y >= 180)
-      pEdict->v.angles.y -= 360 * ((int) (pEdict->v.angles.y / 360) + 1);
+      pEdict->v.angles.y -= 360 * (static_cast<int>(pEdict->v.angles.y / 360) + 1);
 
    if (pEdict->v.angles.y < -180)
-      pEdict->v.angles.y += 360 * ((int) (-pEdict->v.angles.y / 360) + 1);
+      pEdict->v.angles.y += 360 * (static_cast<int>(-pEdict->v.angles.y / 360) + 1);
 
    if (pEdict->v.angles.z >= 180)
-      pEdict->v.angles.z -= 360 * ((int) (pEdict->v.angles.z / 360) + 1);
+      pEdict->v.angles.z -= 360 * (static_cast<int>(pEdict->v.angles.z / 360) + 1);
 
    if (pEdict->v.angles.z < -180)
-      pEdict->v.angles.z += 360 * ((int) (-pEdict->v.angles.z / 360) + 1);
+      pEdict->v.angles.z += 360 * (static_cast<int>(-pEdict->v.angles.z / 360) + 1);
 }
 
 
@@ -246,22 +246,22 @@ void BotFixViewAngles(edict_t *pEdict)
 //	ALERT(at_console, "BotFixViewAngles\n");
    // check for wrap around of angle...
    if (pEdict->v.v_angle.x >= 180)
-      pEdict->v.v_angle.x -= 360 * ((int) (pEdict->v.v_angle.x / 360) + 1);
+      pEdict->v.v_angle.x -= 360 * (static_cast<int>(pEdict->v.v_angle.x / 360) + 1);
 
    if (pEdict->v.v_angle.x < -180)
-      pEdict->v.v_angle.x += 360 * ((int) (-pEdict->v.v_angle.x / 360) + 1);
+      pEdict->v.v_angle.x += 360 * (static_cast<int>(-pEdict->v.v_angle.x / 360) + 1);
 
    if (pEdict->v.v_angle.y >= 180)
-      pEdict->v.v_angle.y -= 360 * ((int) (pEdict->v.v_angle.y / 360) + 1);
+      pEdict->v.v_angle.y -= 360 * (static_cast<int>(pEdict->v.v_angle.y / 360) + 1);
 
    if (pEdict->v.v_angle.y < -180)
-      pEdict->v.v_angle.y += 360 * ((int) (-pEdict->v.v_angle.y / 360) + 1);
+      pEdict->v.v_angle.y += 360 * (static_cast<int>(-pEdict->v.v_angle.y / 360) + 1);
 
    if (pEdict->v.v_angle.z >= 180)
-      pEdict->v.v_angle.z -= 360 * ((int) (pEdict->v.v_angle.z / 360) + 1);
+      pEdict->v.v_angle.z -= 360 * (static_cast<int>(pEdict->v.v_angle.z / 360) + 1);
 
    if (pEdict->v.v_angle.z < -180)
-      pEdict->v.v_angle.z += 360 * ((int) (-pEdict->v.v_angle.z / 360) + 1);
+      pEdict->v.v_angle.z += 360 * (static_cast<int>(-pEdict->v.v_angle.z / 360) + 1);
 }
 
 
@@ -281,7 +281,7 @@ bool BotFindWaypoint( bot_t *pBot )
 	
 	for (index=0; index < 3; index++)
 	{
-		min_distance[index] = 9999.0;
+		min_distance[index] = 9999.0f;
 		min_index[index] = -1;
 	}
 	
@@ -338,7 +338,7 @@ bool BotFindWaypoint( bot_t *pBot )
 	if ((RANDOM_LONG(1, 100) <= 20) &&
 		(pBot->f_random_waypoint_time <= gpGlobals->time))
 	{
-		pBot->f_random_waypoint_time = gpGlobals->time + 10.0;
+		pBot->f_random_waypoint_time = gpGlobals->time + 10.0f;
 		
 		if (min_index[2] != -1)
 			index = RANDOM_LONG(0, 2);
@@ -387,7 +387,7 @@ bool BotHeadTowardWaypoint( bot_t *pBot )
 	bool status;
 	float waypoint_distance, min_distance;
 	int team;
-	float pause_time = 0.0;
+	float pause_time = 0.0f;
 	bool touching;
 
 	edict_t *pEdict = pBot->pEdict;
@@ -402,22 +402,22 @@ bool BotHeadTowardWaypoint( bot_t *pBot )
 		team = -1;  // not team play (all waypoints are valid for everyone)
 	
 	// check if the bot has been trying to get to this waypoint for a while...
-	if ((pBot->f_waypoint_time + 5.0) < gpGlobals->time)
+	if ((pBot->f_waypoint_time + 5.0f) < gpGlobals->time)
 	{
 		pBot->curr_waypoint_index = -1;  // forget about this waypoint
 		pBot->waypoint_goal = -1;  // also forget about a goal
 	}
 
 	// no goal, no goal time
-	if ((pBot->waypoint_goal == -1) && (pBot->f_waypoint_goal_time > gpGlobals->time + 2) &&
-		(pBot->f_waypoint_goal_time != 0.0))
-		pBot->f_waypoint_goal_time = 0.0;
+	if ((pBot->waypoint_goal == -1) && (pBot->f_waypoint_goal_time > gpGlobals->time + 2.0f) &&
+		(pBot->f_waypoint_goal_time != 0.0f))
+		pBot->f_waypoint_goal_time = 0.0f;
 
 	// check if we need to find a waypoint...
 	if (pBot->curr_waypoint_index == -1)
 	{		
 		// did we just come off of a ladder or are we underwater?
-		if (((pBot->f_end_use_ladder_time + 2.0) > gpGlobals->time) ||
+		if (((pBot->f_end_use_ladder_time + 2.0f) > gpGlobals->time) ||
 			(pBot->pEdict->v.waterlevel == 3))
 		{
 			// find the nearest visible waypoint
@@ -449,8 +449,8 @@ bool BotHeadTowardWaypoint( bot_t *pBot )
 		// facing pretty close to the waypoint
 		if ((pEdict->v.waterlevel == 0) && (pEdict->v.flags & FL_ONGROUND) &&
 			(pBot->b_longjump) && (vecToWpt.Length() >= (LONGJUMP_DISTANCE * 
-			(800 / CVAR_GET_FLOAT("sv_gravity")) * 0.6)) && (pEdict->v.velocity.Length() > 220) && 
-			(DotProduct(gpGlobals->v_forward, vecToWpt.Normalize()) > 0.99))
+			(800 / CVAR_GET_FLOAT("sv_gravity")) * 0.6f)) && (pEdict->v.velocity.Length() > 220) && 
+			(DotProduct(gpGlobals->v_forward, vecToWpt.Normalize()) > 0.99f))
 		{	// trace a hull toward the current waypoint the distance of a longjump (depending on gravity)
 			UTIL_TraceHull(UTIL_GetOrigin(pEdict), UTIL_GetOrigin(pEdict) + vecToWpt.Normalize() *
 				(LONGJUMP_DISTANCE * (800 / CVAR_GET_FLOAT("sv_gravity"))),
@@ -471,7 +471,7 @@ bool BotHeadTowardWaypoint( bot_t *pBot )
 					// jump!
 					pEdict->v.button |= IN_JUMP;
 					// recognize we'll be in the air for a second most likely
-					pBot->f_longjump_time = gpGlobals->time + 1.0;
+					pBot->f_longjump_time = gpGlobals->time + 1.0f;
 					//SERVER_PRINT( "%s doing longjump!\n", STRING(pEdict->v.netname));
 				}
 			}
@@ -490,10 +490,10 @@ bool BotHeadTowardWaypoint( bot_t *pBot )
 				pEdict->v.pContainingEntity, &tr );
 			
 			// check if line of sight to object is blocked (i.e. not visible)
-			if (tr.flFraction < 1.0)
+			if (tr.flFraction < 1.0f)
 			{
 				// did we just come off of a ladder or are we under water?
-				if (((pBot->f_end_use_ladder_time + 2.0) > gpGlobals->time) ||
+				if (((pBot->f_end_use_ladder_time + 2.0f) > gpGlobals->time) ||
 					(pBot->pEdict->v.waterlevel == 3))
 				{
 					// find the nearest visible waypoint
@@ -532,9 +532,9 @@ bool BotHeadTowardWaypoint( bot_t *pBot )
 		// tracking something, pick goal much more often
 		if (pBot->b_engaging_enemy || pBot->pGoalEnt != nullptr || pBot->v_defend != g_vecZero ||
 			pBot->defend_wpt != -1)
-			pBot->f_waypoint_goal_time = gpGlobals->time + 0.5;
+			pBot->f_waypoint_goal_time = gpGlobals->time + 0.5f;
 		else // don't pick a goal more often than every 120 seconds...
-			pBot->f_waypoint_goal_time = gpGlobals->time + 120.0;
+			pBot->f_waypoint_goal_time = gpGlobals->time + 120.0f;
 			
 		index = BotFindWaypointGoal(pBot);
 
@@ -546,30 +546,30 @@ bool BotHeadTowardWaypoint( bot_t *pBot )
 	waypoint_distance = (UTIL_GetOrigin(pEdict) - waypoints[pBot->curr_waypoint_index].origin).Length();
 	
 	// set the minimum distance from waypoint to be considered "touching" it
-	min_distance = 20.0;
+	min_distance = 20.0f;
 	
 	// if this is a crouch waypoint, bot must be fairly close...
 	if (waypoints[pBot->curr_waypoint_index].flags & W_FL_CROUCH)
-		min_distance = 20.0;
+		min_distance = 20.0f;
 	
 	if (waypoints[pBot->curr_waypoint_index].flags & W_FL_JUMP)
-		min_distance = 20.0;
+		min_distance = 20.0f;
 
 	if (waypoints[pBot->curr_waypoint_index].flags & W_FL_DUCKJUMP)
-		min_distance = 20.0;
+		min_distance = 20.0f;
 	
 	// if this is a ladder waypoint, bot must be fairly close to get on ladder
 	if (waypoints[pBot->curr_waypoint_index].flags & W_FL_LADDER)
-		min_distance = 20.0;
+		min_distance = 20.0f;
 	
 	// if trying to get out of water, need to get very close to waypoint...
 	if (pBot->f_exit_water_time >= gpGlobals->time)
-		min_distance = 20.0;
+		min_distance = 20.0f;
 	
 	touching = FALSE;
 	
 	// did the bot run past the waypoint? (prevent the loop-the-loop problem)
-	if ((pBot->prev_waypoint_distance > 1.0) &&
+	if ((pBot->prev_waypoint_distance > 1.0f) &&
 		(waypoint_distance > pBot->prev_waypoint_distance) && (waypoint_distance < min_distance))
 		touching = TRUE;
 	
@@ -584,13 +584,13 @@ bool BotHeadTowardWaypoint( bot_t *pBot )
 	{
 		bool waypoint_found = FALSE;
 
-		pBot->prev_waypoint_distance = 0.0;
+		pBot->prev_waypoint_distance = 0.0f;
 		// reeval our goal
 		BotEvaluateGoal( pBot );
 		// check if the waypoint is a door waypoint
 		if (waypoints[pBot->curr_waypoint_index].flags & W_FL_DOOR)
 		{
-			pBot->f_dont_avoid_wall_time = gpGlobals->time + 5.0;
+			pBot->f_dont_avoid_wall_time = gpGlobals->time + 5.0f;
 		}
 		
 		// check if the next waypoint is a jump waypoint...
@@ -603,8 +603,8 @@ bool BotHeadTowardWaypoint( bot_t *pBot )
 		if (waypoints[pBot->curr_waypoint_index].flags & W_FL_DUCKJUMP)
 		{
 			pEdict->v.button |= IN_JUMP;  // jump here
-			pBot->f_delay_duck_time = gpGlobals->time + 0.1;
-			pBot->f_do_duck_time = pBot->f_delay_duck_time + 0.4;
+			pBot->f_delay_duck_time = gpGlobals->time + 0.1f;
+			pBot->f_do_duck_time = pBot->f_delay_duck_time + 0.4f;
 		}
 
 		// check if the waypoint is a sniper waypoint...
@@ -625,7 +625,7 @@ bool BotHeadTowardWaypoint( bot_t *pBot )
 				BotFixIdealYaw(pEdict);
 			}
 				
-			pBot->f_pause_time = gpGlobals->time + RANDOM_FLOAT(20.0, 30.0);
+			pBot->f_pause_time = gpGlobals->time + RANDOM_FLOAT(20.0f, 30.0f);
 				
 			// fix f_waypoint_time so bot won't think it is stuck
 			pBot->f_waypoint_time = pBot->f_pause_time;
@@ -639,7 +639,7 @@ bool BotHeadTowardWaypoint( bot_t *pBot )
 			if (waypoints[pBot->waypoint_goal].item[0])
 			{
 				pBot->pBotPickupItem = WaypointFindItem(pBot->waypoint_goal);
-				pBot->f_find_item = gpGlobals->time + 0.2;
+				pBot->f_find_item = gpGlobals->time + 0.2f;
 				pBot->f_last_item_found = gpGlobals->time;
 			}
 
@@ -665,7 +665,7 @@ bool BotHeadTowardWaypoint( bot_t *pBot )
 				(pBot->defend_wpt != -1))
 				pBot->f_waypoint_goal_time = gpGlobals->time;
 			else	// a little delay time, since we'll touch the waypoint before we actually get what it has
-				pBot->f_waypoint_goal_time = gpGlobals->time + 0.25;
+				pBot->f_waypoint_goal_time = gpGlobals->time + 0.25f;
 
 			pBot->waypoint_goal = -1;  // forget this goal waypoint
 			pBot->wpt_goal_type = WPT_GOAL_NONE;
@@ -681,13 +681,13 @@ bool BotHeadTowardWaypoint( bot_t *pBot )
 			// trace a line straight up 100 units...
 			v_src = pEdict->v.origin;
 			v_dest = v_src;
-			v_dest.z = v_dest.z + 100.0;
+			v_dest.z = v_dest.z + 100.0f;
 			
 			// trace a line to destination...
 			UTIL_TraceLine( v_src, v_dest, ignore_monsters,
 				pEdict->v.pContainingEntity, &tr );
 			
-			if (tr.flFraction >= 1.0)
+			if (tr.flFraction >= 1.0f)
 			{
 				// find out what the contents is of the end of the trace...
 				contents = POINT_CONTENTS( tr.vecEndPos );
@@ -707,7 +707,7 @@ bool BotHeadTowardWaypoint( bot_t *pBot )
 						pBot->f_waypoint_time = gpGlobals->time;
 						
 						// keep trying to exit water for next 3 seconds
-						pBot->f_exit_water_time = gpGlobals->time + 3.0;
+						pBot->f_exit_water_time = gpGlobals->time + 3.0f;
 					}
 				}
 			}
@@ -733,7 +733,7 @@ bool BotHeadTowardWaypoint( bot_t *pBot )
 			else if (pBot->b_longjump && (mod_id != SI_DLL ||
 				(mod_id == SI_DLL && pBot->i_carry_type == CARRY_NONE)))
 			{	// search ahead for a waypoint
-				int lj_wpt, prev_lj_wpt, final_lj_wpt; ;
+				int lj_wpt, prev_lj_wpt, final_lj_wpt;
 				prev_lj_wpt = final_lj_wpt = lj_wpt = pBot->curr_waypoint_index;
 				int tries = 8;
 				while (tries > 0)
@@ -818,7 +818,7 @@ bool BotHeadTowardWaypoint( bot_t *pBot )
 
 	// get our distance to the goal ent (if we have one)
 	Vector vecOrigin;
-	float flGoalDist = 9999;
+	float flGoalDist = 9999.0f;
 	if (pBot->pGoalEnt)
 	{
 		vecOrigin = UTIL_GetOrigin(pBot->pGoalEnt);
@@ -944,9 +944,9 @@ void BotEvaluateGoalSI( bot_t *pBot )
 			{	// figure out what our ally humans are doing
 				if (!(pPlayer->v.flags & FL_FAKECLIENT))
 				{	// find closest waypoint
-					temp_index = WaypointFindNearest(pPlayer, 256, team);
+					temp_index = WaypointFindNearest(pPlayer, 256.0f, team);
 					// look for nearby scientists, tech breakables, and resources
-					while ((pEntity = UTIL_FindEntityInSphere(pEntity, pPlayer->v.origin, 512)) != nullptr)
+					while ((pEntity = UTIL_FindEntityInSphere(pEntity, pPlayer->v.origin, 512.0f)) != nullptr)
 					{
 						if (UTIL_GetTeam(pEntity) != team)
 							continue;
@@ -1005,20 +1005,20 @@ void BotEvaluateGoalSI( bot_t *pBot )
 			}
 		}
 
-		float fDefSciPercent = 0;
-		float fDefLocPercent = 0;
-		float fDefTechPercent = 0;
-		float fDefRsrcPercent = 0;
+		float fDefSciPercent = 0.0f;
+		float fDefLocPercent = 0.0f;
+		float fDefTechPercent = 0.0f;
+		float fDefRsrcPercent = 0.0f;
 
 		char *szSearchEnts[] = { "carry_scientist", "monster_scientist", "carry_resource", "item_resource",
 			"func_tech_breakable" };
 
 		if (g_iDefendCount[team] > 0)
 		{	// percentages of defense total that are defending scis, tech breakables, and locations
-			fDefSciPercent = (float)iDefSciCount / (float)g_iDefendCount[team];
-			fDefLocPercent = (float)iDefLocCount / (float)g_iDefendCount[team];
-			fDefTechPercent = (float)iDefTechCount / (float)g_iDefendCount[team];
-			fDefRsrcPercent = (float)iDefRsrcCount / (float)g_iDefendCount[team];
+			fDefSciPercent = static_cast<float>(iDefSciCount) / static_cast<float>(g_iDefendCount[team]);
+			fDefLocPercent = static_cast<float>(iDefLocCount) / static_cast<float>(g_iDefendCount[team]);
+			fDefTechPercent = static_cast<float>(iDefTechCount) / static_cast<float>(g_iDefendCount[team]);
+			fDefRsrcPercent = static_cast<float>(iDefRsrcCount) / static_cast<float>(g_iDefendCount[team]);
 		}
 /*
 		SERVER_PRINT( "Sci %.2f Loc %.2f Tech %.2f Rsrc %.2f\n", fDefSciPercent, fDefLocPercent,
@@ -1034,12 +1034,12 @@ void BotEvaluateGoalSI( bot_t *pBot )
 			// our search ent is breakable and percent is over 10
 			if (((FStrEq(szSearchEnts[i], "carry_scientist") ||
 				FStrEq(szSearchEnts[i], "monster_scientist")) &&
-				(fDefSciPercent >= 0.25)) ||
+				(fDefSciPercent >= 0.25f)) ||
 				((FStrEq(szSearchEnts[i], "carry_resource") ||
 				FStrEq(szSearchEnts[i], "item_resource")) &&
-				(fDefRsrcPercent >= 0.1)) ||
+				(fDefRsrcPercent >= 0.1f)) ||
 				((FStrEq(szSearchEnts[i], "func_tech_breakable")) &&
-				(fDefTechPercent >= 0.1)))
+				(fDefTechPercent >= 0.1f)))
 			{
 				i++;
 				continue;
@@ -1129,7 +1129,7 @@ void BotEvaluateGoalSI( bot_t *pBot )
 
 					iDefenders = 0;
 					// look around the waypoint we found for non-bots
-					while ((pEntity = UTIL_FindEntityInSphere(pEntity, waypoints[temp_index].origin, 128)) != nullptr)
+					while ((pEntity = UTIL_FindEntityInSphere(pEntity, waypoints[temp_index].origin, 128.0f)) != nullptr)
 					{
 						// non players and non team members are skipped
 						if (!(pEntity->v.flags & FL_CLIENT) ||
@@ -1201,7 +1201,7 @@ void BotEvaluateGoalSI( bot_t *pBot )
 				if (!(pPlayer->v.flags & FL_FAKECLIENT))
 				{
 					// look for nearby scientists, tech breakables, resources, and players
-					while ((pEntity = UTIL_FindEntityInSphere(pEntity, pPlayer->v.origin, 512)) != nullptr)
+					while ((pEntity = UTIL_FindEntityInSphere(pEntity, pPlayer->v.origin, 512.0f)) != nullptr)
 					{
 						if (pEntity == pPlayer)
 							continue;
@@ -1271,27 +1271,27 @@ void BotEvaluateGoalSI( bot_t *pBot )
 			}
 		}
 
-		float fAttSciPercent = 0;
-		float fAttAllyPercent = 0;
-		float fAttTechPercent = 0;
-		float fAttRsrcPercent = 0;
+		float fAttSciPercent = 0.0f;
+		float fAttAllyPercent = 0.0f;
+		float fAttTechPercent = 0.0f;
+		float fAttRsrcPercent = 0.0f;
 
 		char *szSearchEnts[] = { "carry_scientist", "monster_scientist", "player", "carry_resource", "item_resource",
 			"func_tech_breakable"};
 
 		if (g_iAttackCount[team] > 0)
 		{	// percentages of attack total that are attack scis, rsrcs, tech breakables, and defending players
-			fAttSciPercent = (float)iAttSciCount / (float)g_iAttackCount[team];
-			fAttAllyPercent = (float)iAttAllyCount / (float)g_iAttackCount[team];
-			fAttTechPercent = (float)iAttTechCount / (float)g_iAttackCount[team];
-			fAttRsrcPercent = (float)iAttRsrcCount / (float)g_iAttackCount[team];
+			fAttSciPercent = static_cast<float>(iAttSciCount) / static_cast<float>(g_iAttackCount[team]);
+			fAttAllyPercent = static_cast<float>(iAttAllyCount) / static_cast<float>(g_iAttackCount[team]);
+			fAttTechPercent = static_cast<float>(iAttTechCount) / static_cast<float>(g_iAttackCount[team]);
+			fAttRsrcPercent = static_cast<float>(iAttRsrcCount) / static_cast<float>(g_iAttackCount[team]);
 		}
 /*
 		SERVER_PRINT( "%s got percents: Sci %.2f Ally %.2f Tech %.2f Rsrc %.2f\n", pBot->name, 
 			fAttSciPercent, fAttAllyPercent, fAttTechPercent, fAttRsrcPercent);
 */
-		float distance = 0;
-		float mindistance = 9999;
+		float distance = 0.0f;
+		float mindistance = 9999.0f;
 
 		if (pBot->i_carry_type != CARRY_NONE)
 		{
@@ -1302,7 +1302,7 @@ void BotEvaluateGoalSI( bot_t *pBot )
 				if (UTIL_GetTeam(pGoal) != team)
 					continue;
 
-				temp_index = WaypointFindNearest(pGoal, 512, team);
+				temp_index = WaypointFindNearest(pGoal, 512.0f, team);
 				distance = WaypointDistanceFromTo(pBot->curr_waypoint_index, temp_index, team);
 				if (distance < mindistance)
 				{
@@ -1328,14 +1328,14 @@ void BotEvaluateGoalSI( bot_t *pBot )
 				// our search ent is breakable and percent is over 10
 				if (((FStrEq(szSearchEnts[i], "carry_scientist") ||
 					FStrEq(szSearchEnts[i], "monster_scientist")) &&
-					(fAttSciPercent >= 0.50)) ||
+					(fAttSciPercent >= 0.50f)) ||
 					/*((FStrEq(szSearchEnts[i], "player")) &&
 					(fAttAllyPercent >= 0.25)) ||*/
 					((FStrEq(szSearchEnts[i], "carry_resource") ||
 					FStrEq(szSearchEnts[i], "item_resource")) &&
-					(fAttRsrcPercent >= 0.15)) ||
+					(fAttRsrcPercent >= 0.15f)) ||
 					((FStrEq(szSearchEnts[i], "func_tech_breakable")) &&
-					(fAttTechPercent >= 0.1)))
+					(fAttTechPercent >= 0.1f)))
 				{
 					i++;
 					continue;
@@ -1344,7 +1344,7 @@ void BotEvaluateGoalSI( bot_t *pBot )
 				iAttackers = 0;
 				iMinAttackers = 32;
 				distance = 0;
-				mindistance = 9999;
+				mindistance = 9999.0f;
 				// loop through and find our goals!
 				while ((pGoal = UTIL_FindEntityByClassname(pGoal, szSearchEnts[i])) != nullptr)
 				{	// so we don't defend ourselves
@@ -1456,7 +1456,7 @@ int BotFindWaypointGoal( bot_t *pBot )
 	pSelect = WeaponGetSelectPointer();
 	// for looping and finding the closest waypoint
 	float distance;
-	float mindistance = 9999;
+	float mindistance = 9999.0f;
 	// used in for/while loops
 	int i = 0;
 	// current weapon
@@ -1586,10 +1586,10 @@ int BotFindWaypointGoal( bot_t *pBot )
 		// to find the closest ammo waypoint
 		int ammo_wpt[3] = {-1,-1,-1};
 		float ammo_dist[3] = {0,0,0};
-		float pri = 1.0;
-		float sec = 1.0;
-		float minpri = 1.0;
-		float minsec = 1.0;
+		float pri = 1.0f;
+		float sec = 1.0f;
+		float minpri = 1.0f;
+		float minsec = 1.0f;
 
 		//if (primary_assess > AMMO_LOW)
 		{	// only go for a new weapon if this weapon has enough ammo
@@ -1717,7 +1717,7 @@ int BotFindWaypointGoal( bot_t *pBot )
 		{
 			if (b_chat_debug)
 			{
-				sprintf(pBot->debugchat, "I found a waypoint goal for enemy at %i!\n", int(pBot->name), index);
+				sprintf(pBot->debugchat, "I found a waypoint goal for enemy at %i!\n", reinterpret_cast<int>(pBot->name), index);
 				UTIL_HostSay(pBot->pEdict, 0, pBot->debugchat);
 			}
 			pBot->wpt_goal_type = WPT_GOAL_ENEMY;
@@ -1785,8 +1785,8 @@ int BotFindWaypointGoalSI( bot_t *pBot )
 	// make code smaller :P
 	edict_t *pEdict = pBot->pEdict;
 	// distance checks
-	float distance = 0;
-	float mindistance = 9999;
+	float distance = 0.0f;
+	float mindistance = 9999.0f;
 	// for weapon goals
 	bot_weapon_select_t *pSelect = nullptr;
 	pSelect = WeaponGetSelectPointer();
@@ -1803,7 +1803,7 @@ int BotFindWaypointGoalSI( bot_t *pBot )
 		if (b_chat_debug)
 			UTIL_HostSay(pEdict, 0, "I've got my goods");
 		pBot->b_equipped = true;
-		pBot->f_equip_time = 0;
+		pBot->f_equip_time = 0.0f;
 	}
 	///////////////
 	// DEFENDING //
@@ -1813,7 +1813,7 @@ int BotFindWaypointGoalSI( bot_t *pBot )
 		if (pBot->role == ROLE_DEFEND)
 		{	// check ammo count if we're defending
 			pBot->b_equipped = false;
-			pBot->f_equip_time = gpGlobals->time + 20.0;
+			pBot->f_equip_time = gpGlobals->time + 20.0f;
 			int select_index = 0;
 			while (pSelect[select_index].iId)
 			{
@@ -1832,7 +1832,7 @@ int BotFindWaypointGoalSI( bot_t *pBot )
 				if (BotAssessPrimaryAmmo(pBot, pSelect[select_index].iId) != AMMO_CRITICAL)
 				{
 					pBot->b_equipped = true;
-					pBot->f_equip_time = 0;
+					pBot->f_equip_time = 0.0f;
 					break;
 				}
 
@@ -1903,14 +1903,14 @@ int BotFindWaypointGoalSI( bot_t *pBot )
 
 			// is the bot carrying this weapon and weapon has full ammo?
 			if (pEdict->v.weapons & (1<<pSelect[select_index].iId) &&
-				BotAssessPrimaryAmmo(pBot, pSelect[select_index].iId) >= 1.0)
+				BotAssessPrimaryAmmo(pBot, pSelect[select_index].iId) >= 1.0f)
 			{
 				select_index++;  // skip to next weapon
 				continue;
 			}
 
 			distance = 0;
-			mindistance = 9999;
+			mindistance = 9999.0f;
 			// find our weapon (weapon_experimental)
 			temp_index = WaypointFindNearestWeapon(pEdict, pBot->curr_waypoint_index, team,
 				W_FL_WEAPON, pSelect[select_index].iId);
@@ -1979,7 +1979,7 @@ void BotOnLadder( bot_t *pBot, float moved_distance )
 //	ALERT(at_console, "BotOnLadder\n");
    Vector v_src, v_dest, view_angles;
    TraceResult tr;
-   float angle = 0.0;
+   float angle = 0.0f;
    bool done = FALSE;
 
    edict_t *pEdict = pBot->pEdict;
@@ -1990,16 +1990,16 @@ void BotOnLadder( bot_t *pBot, float moved_distance )
 	   if (pBot->ladder_dir == LADDER_UNKNOWN)
 	   {
 		   // try to square up the bot on the ladder...
-		   while ((!done) && (angle < 180.0))
+		   while ((!done) && (angle < 180.0f))
 		   {
 			   // try looking in one direction (forward + angle)
 			   view_angles = pEdict->v.v_angle;
 			   view_angles.y = pEdict->v.v_angle.y + angle;
 			   
-			   if (view_angles.y < 0.0)
-				   view_angles.y += 360.0;
-			   if (view_angles.y > 360.0)
-				   view_angles.y -= 360.0;
+			   if (view_angles.y < 0.0f)
+				   view_angles.y += 360.0f;
+			   if (view_angles.y > 360.0f)
+				   view_angles.y -= 360.0f;
 			   
 			   MAKE_VECTORS( view_angles );
 			   
@@ -2035,10 +2035,10 @@ void BotOnLadder( bot_t *pBot, float moved_distance )
 				   view_angles = pEdict->v.v_angle;
 				   view_angles.y = pEdict->v.v_angle.y - angle;
 				   
-				   if (view_angles.y < 0.0)
-					   view_angles.y += 360.0;
-				   if (view_angles.y > 360.0)
-					   view_angles.y -= 360.0;
+				   if (view_angles.y < 0.0f)
+					   view_angles.y += 360.0f;
+				   if (view_angles.y > 360.0f)
+					   view_angles.y -= 360.0f;
 				   
 				   MAKE_VECTORS( view_angles );
 				   
@@ -2048,7 +2048,7 @@ void BotOnLadder( bot_t *pBot, float moved_distance )
 				   UTIL_TraceLine( v_src, v_dest, dont_ignore_monsters,
 					   pEdict->v.pContainingEntity, &tr);
 				   
-				   if (tr.flFraction < 1.0)  // hit something?
+				   if (tr.flFraction < 1.0f)  // hit something?
 				   {
 					   if (strcmp("func_wall", STRING(tr.pHit->v.classname)) == 0)
 					   {
@@ -2091,7 +2091,7 @@ void BotOnLadder( bot_t *pBot, float moved_distance )
 		   pEdict->v.v_angle.x = -60;  // look upwards
 		   
 		   // check if the bot hasn't moved much since the last location...
-		   if ((moved_distance <= 1) && (pBot->prev_speed >= 1.0))
+		   if ((moved_distance <= 1) && (pBot->prev_speed >= 1.0f))
 		   {
 			   // the bot must be stuck, change directions...
 			   
@@ -2104,7 +2104,7 @@ void BotOnLadder( bot_t *pBot, float moved_distance )
 		   pEdict->v.v_angle.x = 60;  // look downwards
 		   
 		   // check if the bot hasn't moved much since the last location...
-		   if ((moved_distance <= 1) && (pBot->prev_speed >= 1.0))
+		   if ((moved_distance <= 1) && (pBot->prev_speed >= 1.0f))
 		   {
 			   // the bot must be stuck, change directions...
 			   
@@ -2187,7 +2187,7 @@ void BotUnderWater( bot_t *pBot )
                       pEdict->v.pContainingEntity, &tr);
    
       // check if the trace didn't hit anything (i.e. nothing in the way)...
-      if (tr.flFraction >= 1.0)
+      if (tr.flFraction >= 1.0f)
       {
          // find out what the contents is of the end of the trace...
          contents = POINT_CONTENTS( tr.vecEndPos );
@@ -2206,7 +2206,7 @@ void BotUnderWater( bot_t *pBot )
                             pEdict->v.pContainingEntity, &tr);
    
             // check if the trace hit something...
-            if (tr.flFraction < 1.0)
+            if (tr.flFraction < 1.0f)
             {
                contents = POINT_CONTENTS( tr.vecEndPos );
    
@@ -2239,7 +2239,7 @@ void BotUseLift( bot_t *pBot, float moved_distance )
    }
 
    // check if the bot has waited too long for the lift to move...
-   if (((pBot->f_use_button_time + 2.0) < gpGlobals->time) &&
+   if (((pBot->f_use_button_time + 2.0f) < gpGlobals->time) &&
        (!pBot->b_lift_moving))
    {
       // clear use button flag
@@ -2291,7 +2291,7 @@ void BotUseLift( bot_t *pBot, float moved_distance )
                       pEdict->v.pContainingEntity, &tr2);
 
       // check if we hit a wall or didn't find a floor...
-      if ((tr1.flFraction < 1.0) || (tr2.flFraction >= 1.0))
+      if ((tr1.flFraction < 1.0f) || (tr2.flFraction >= 1.0f))
       {
          // try tracing to the RIGHT side next...
          UTIL_TraceLine( v_src, v_right, dont_ignore_monsters,
@@ -2300,7 +2300,7 @@ void BotUseLift( bot_t *pBot, float moved_distance )
                          pEdict->v.pContainingEntity, &tr2);
 
          // check if we hit a wall or didn't find a floor...
-         if ((tr1.flFraction < 1.0) || (tr2.flFraction >= 1.0))
+         if ((tr1.flFraction < 1.0f) || (tr2.flFraction >= 1.0f))
          {
             // try tracing to the LEFT side next...
             UTIL_TraceLine( v_src, v_left, dont_ignore_monsters,
@@ -2309,7 +2309,7 @@ void BotUseLift( bot_t *pBot, float moved_distance )
                             pEdict->v.pContainingEntity, &tr2);
 
             // check if we hit a wall or didn't find a floor...
-            if ((tr1.flFraction < 1.0) || (tr2.flFraction >= 1.0))
+            if ((tr1.flFraction < 1.0f) || (tr2.flFraction >= 1.0f))
             {
                // only thing to do is turn around...
                pEdict->v.ideal_yaw += 180;  // turn all the way around
@@ -2350,7 +2350,7 @@ bool BotStuckInCorner( bot_t *pBot )
    UTIL_TraceLine( v_src, v_dest, dont_ignore_monsters,
                    pEdict->v.pContainingEntity, &tr);
 
-   if (tr.flFraction >= 1.0)
+   if (tr.flFraction >= 1.0f)
       return FALSE;  // no wall, so not in a corner
 
    // trace 45 degrees to the left...
@@ -2360,7 +2360,7 @@ bool BotStuckInCorner( bot_t *pBot )
    UTIL_TraceLine( v_src, v_dest, dont_ignore_monsters,
                    pEdict->v.pContainingEntity, &tr);
 
-   if (tr.flFraction >= 1.0)
+   if (tr.flFraction >= 1.0f)
       return FALSE;  // no wall, so not in a corner
 
    return TRUE;  // bot is in a corner
@@ -2405,14 +2405,14 @@ void BotTurnAtWall( bot_t *pBot, TraceResult *tr )
    Y1 = Normal.y - 90;
    if (RANDOM_LONG(1, 100) <= 50)
    {
-      Y1 = Y1 - RANDOM_FLOAT(5.0, 20.0);
+      Y1 = Y1 - RANDOM_FLOAT(5.0f, 20.0f);
    }
    if (Y1 < 0) Y1 += 360;
 
    Y2 = Normal.y + 90;
    if (RANDOM_LONG(1, 100) <= 50)
    {
-      Y2 = Y2 + RANDOM_FLOAT(5.0, 20.0);
+      Y2 = Y2 + RANDOM_FLOAT(5.0f, 20.0f);
    }
    if (Y2 > 359) Y2 -= 360;
 
@@ -2470,7 +2470,7 @@ bool BotCantMoveForward( bot_t *pBot, TraceResult *tr )
                    pEdict->v.pContainingEntity, tr);
 
    // check if the trace hit something...
-   if (tr->flFraction < 1.0)
+   if (tr->flFraction < 1.0f)
    {
       return TRUE;  // bot's head will hit something
    }
@@ -2485,7 +2485,7 @@ bool BotCantMoveForward( bot_t *pBot, TraceResult *tr )
                    pEdict->v.pContainingEntity, tr);
 
    // check if the trace hit something...
-   if (tr->flFraction < 1.0)
+   if (tr->flFraction < 1.0f)
    {
       return TRUE;  // bot's body will hit something
    }
@@ -2534,7 +2534,7 @@ bool BotCanJumpUp( bot_t *pBot, bool *bDuckJump)
                    pEdict->v.pContainingEntity, &tr);
 
    // if trace hit something, check duck jump...
-   if (tr.flFraction < 1.0)
+   if (tr.flFraction < 1.0f)
       check_duck = TRUE;
 
    if (!check_duck)
@@ -2548,7 +2548,7 @@ bool BotCanJumpUp( bot_t *pBot, bool *bDuckJump)
                       pEdict->v.pContainingEntity, &tr);
 
       // if trace hit something, check duck jump...
-      if (tr.flFraction < 1.0)
+      if (tr.flFraction < 1.0f)
          check_duck = TRUE;
    }
 
@@ -2563,7 +2563,7 @@ bool BotCanJumpUp( bot_t *pBot, bool *bDuckJump)
                       pEdict->v.pContainingEntity, &tr);
 
       // if trace hit something, check duck jump...
-      if (tr.flFraction < 1.0)
+      if (tr.flFraction < 1.0f)
          check_duck = TRUE;
    }
 
@@ -2578,7 +2578,7 @@ bool BotCanJumpUp( bot_t *pBot, bool *bDuckJump)
                       pEdict->v.pContainingEntity, &tr);
 
       // if trace hit something, return FALSE
-      if (tr.flFraction < 1.0)
+      if (tr.flFraction < 1.0f)
          return FALSE;
 
       // now check same height on the other side of the bot...
@@ -2590,7 +2590,7 @@ bool BotCanJumpUp( bot_t *pBot, bool *bDuckJump)
                       pEdict->v.pContainingEntity, &tr);
 
       // if trace hit something, return FALSE
-      if (tr.flFraction < 1.0)
+      if (tr.flFraction < 1.0f)
          return FALSE;
 
       // now check same height on the other side of the bot...
@@ -2602,7 +2602,7 @@ bool BotCanJumpUp( bot_t *pBot, bool *bDuckJump)
                       pEdict->v.pContainingEntity, &tr);
 
       // if trace hit something, return FALSE
-      if (tr.flFraction < 1.0)
+      if (tr.flFraction < 1.0f)
          return FALSE;
    }
 
@@ -2634,7 +2634,7 @@ bool BotCanJumpUp( bot_t *pBot, bool *bDuckJump)
                    pEdict->v.pContainingEntity, &tr);
 
    // if trace hit something, return FALSE
-   if (tr.flFraction < 1.0)
+   if (tr.flFraction < 1.0f)
       return FALSE;
 
    // now check same height to one side of the bot...
@@ -2655,7 +2655,7 @@ bool BotCanJumpUp( bot_t *pBot, bool *bDuckJump)
                    pEdict->v.pContainingEntity, &tr);
 
    // if trace hit something, return FALSE
-   if (tr.flFraction < 1.0)
+   if (tr.flFraction < 1.0f)
       return FALSE;
 
    // now check same height on the other side of the bot...
@@ -2676,7 +2676,7 @@ bool BotCanJumpUp( bot_t *pBot, bool *bDuckJump)
                    pEdict->v.pContainingEntity, &tr);
 
    // if trace hit something, return FALSE
-   if (tr.flFraction < 1.0)
+   if (tr.flFraction < 1.0f)
       return FALSE;
 
    return TRUE;
@@ -2716,7 +2716,7 @@ bool BotCanDuckUnder( bot_t *pBot )
                    pEdict->v.pContainingEntity, &tr);
 
    // if trace hit something, return FALSE
-   if (tr.flFraction < 1.0)
+   if (tr.flFraction < 1.0f)
       return FALSE;
 
    // now check same height to one side of the bot...
@@ -2728,7 +2728,7 @@ bool BotCanDuckUnder( bot_t *pBot )
                    pEdict->v.pContainingEntity, &tr);
 
    // if trace hit something, return FALSE
-   if (tr.flFraction < 1.0)
+   if (tr.flFraction < 1.0f)
       return FALSE;
 
    // now check same height on the other side of the bot...
@@ -2740,7 +2740,7 @@ bool BotCanDuckUnder( bot_t *pBot )
                    pEdict->v.pContainingEntity, &tr);
 
    // if trace hit something, return FALSE
-   if (tr.flFraction < 1.0)
+   if (tr.flFraction < 1.0f)
       return FALSE;
 
    // now trace from the ground up to check for object to duck under...
@@ -2770,7 +2770,7 @@ bool BotCanDuckUnder( bot_t *pBot )
                    pEdict->v.pContainingEntity, &tr);
 
    // if trace didn't hit something, return FALSE
-   if (tr.flFraction >= 1.0)
+   if (tr.flFraction >= 1.0f)
       return FALSE;
 
    // now check same height on the other side of the bot...
@@ -2783,7 +2783,7 @@ bool BotCanDuckUnder( bot_t *pBot )
                    pEdict->v.pContainingEntity, &tr);
 
    // if trace didn't hit something, return FALSE
-   if (tr.flFraction >= 1.0)
+   if (tr.flFraction >= 1.0f)
       return FALSE;
 
    return TRUE;
@@ -2864,7 +2864,7 @@ bool BotFollowUser( bot_t *pBot )
       else if (f_distance > 50)  // walk if distance is closer
          pBot->f_move_speed = pBot->f_max_speed / 2;
       else                     // don't move if close enough
-         pBot->f_move_speed = 0.0;
+         pBot->f_move_speed = 0.0f;
 
       return TRUE;
    }
@@ -2896,9 +2896,9 @@ bool BotCheckWallOnLeft( bot_t *pBot )
                    pEdict->v.pContainingEntity, &tr);
 
    // check if the trace hit something...
-   if (tr.flFraction < 1.0)
+   if (tr.flFraction < 1.0f)
    {
-      if (pBot->f_wall_on_left < 1.0)
+      if (pBot->f_wall_on_left < 1.0f)
          pBot->f_wall_on_left = gpGlobals->time;
 
       return TRUE;
@@ -2926,9 +2926,9 @@ bool BotCheckWallOnRight( bot_t *pBot )
                    pEdict->v.pContainingEntity, &tr);
 
    // check if the trace hit something...
-   if (tr.flFraction < 1.0)
+   if (tr.flFraction < 1.0f)
    {
-      if (pBot->f_wall_on_right < 1.0)
+      if (pBot->f_wall_on_right < 1.0f)
          pBot->f_wall_on_right = gpGlobals->time;
 
       return TRUE;
@@ -2944,7 +2944,7 @@ void BotAvoidContact( bot_t *pBot )
 {
 //	ALERT(at_console, "BotAvoidContact\n");
 	edict_t *pEnt = nullptr;
-	float flMaxDist = 128;
+	float flMaxDist = 128.0f;
 	Vector vecDir, vecBotDir;
 	TraceResult tr;
 
@@ -2955,7 +2955,7 @@ void BotAvoidContact( bot_t *pBot )
 	if (sin < -1) sin = -1;
 	if (sin > 1) sin = 1;
 
-	float dgrad = asin(sin) * 180 / PI;
+	float dgrad = asin(sin) * 180 / M_PI;
 	bot_angle.y += dgrad;
 
 	if (bot_angle.y > 180)
@@ -3036,13 +3036,13 @@ void BotAvoidContact( bot_t *pBot )
 		UTIL_TraceLine(pBot->pEdict->v.origin, pBot->pEdict->v.origin + 
 			vecMove * 64, dont_ignore_monsters, pBot->pEdict, &tr);
 		
-		if (tr.flFraction < 1.0)
+		if (tr.flFraction < 1.0f)
 		{
 			// trace a line to see if something is blocking where we should go
 			UTIL_TraceLine(pBot->pEdict->v.origin, pBot->pEdict->v.origin + 
 				-vecMove * 64, dont_ignore_monsters, pBot->pEdict, &tr);
 
-			if (tr.flFraction >= 1.0)
+			if (tr.flFraction >= 1.0f)
 			{	// go the opposite way
 				vecMove = -vecMove;
 			}
@@ -3050,7 +3050,7 @@ void BotAvoidContact( bot_t *pBot )
 
 		//if (tr.flFraction >= 1.0)
 		{
-			pBot->f_do_avoid_time = gpGlobals->time + 0.5;
+			pBot->f_do_avoid_time = gpGlobals->time + 0.5f;
 			pBot->avoid_dir = vecMove;
 		}
 	}
@@ -3062,11 +3062,11 @@ void BotDodgeCrabs( bot_t *pBot )
 {
 //	ALERT(at_console, "BotDodgeCrabs\n");
 	edict_t *pEnt = nullptr;
-	float flMaxDist = 512;
+	float flMaxDist = 512.0f;
 	Vector vecDir;
 	TraceResult tr;
 
-	while ((pEnt = UTIL_FindEntityInSphere( pEnt, pBot->pEdict->v.origin, 512 )) != nullptr)
+	while ((pEnt = UTIL_FindEntityInSphere( pEnt, pBot->pEdict->v.origin, 512.0f )) != nullptr)
 	{
 		// only think about headcrabs
 		if (strcmp("monster_headcrab", STRING(pEnt->v.classname)) != 0)
@@ -3097,7 +3097,7 @@ void BotDodgeCrabs( bot_t *pBot )
 		vecDir = (pBot->pEdict->v.origin + pBot->pEdict->v.view_ofs) - 
 			(pBot->pAvoid->v.origin + pBot->pAvoid->v.view_ofs);
 		
-		if (DotProduct((pBot->pAvoid->v.velocity).Normalize(), vecDir.Normalize()) > 0.9)
+		if (DotProduct((pBot->pAvoid->v.velocity).Normalize(), vecDir.Normalize()) > 0.9f)
 		{	// this code is used to make the bot strafe out of the way regardless of its angles
 			// dodge perpendicular to the crab's direction
 			Vector vecMove = CrossProduct(vecDir.Normalize(), Vector(0,0,1));
@@ -3106,19 +3106,19 @@ void BotDodgeCrabs( bot_t *pBot )
 			UTIL_TraceLine(pBot->pEdict->v.origin, pBot->pEdict->v.origin + 
 				vecMove * 64, dont_ignore_monsters, pBot->pEdict, &tr);
 			
-			if (tr.flFraction < 1.0)
+			if (tr.flFraction < 1.0f)
 			{
 				// trace a line to see if something is blocking where we should go
 				UTIL_TraceLine(pBot->pEdict->v.origin, pBot->pEdict->v.origin + 
 					-vecMove * 64, dont_ignore_monsters, pBot->pEdict, &tr);
 
-				if (tr.flFraction >= 1.0)
+				if (tr.flFraction >= 1.0f)
 				{	// go the opposite way
 					vecMove = -vecMove;
 				}
 			}
 
-			pBot->f_do_avoid_time = gpGlobals->time + 0.5;
+			pBot->f_do_avoid_time = gpGlobals->time + 0.5f;
 			pBot->avoid_dir = vecMove;
 		}
 	}
@@ -3136,13 +3136,13 @@ bool BotLookForDrop( bot_t *pBot )
 	UTIL_TraceLine(vecStart, vecEnd, ignore_monsters,
 		pEdict->v.pContainingEntity, &tr);
 	// make sure nothing is in the way
-	if (tr.flFraction >= 1.0)
+	if (tr.flFraction >= 1.0f)
 	{	// trace down 400 units
 		vecStart = tr.vecEndPos;
 		vecEnd = vecStart - Vector(0,0,400);
 		UTIL_TraceLine(vecStart, vecEnd, ignore_monsters, pEdict->v.pContainingEntity, &tr);
-	
-		int iContents = POINT_CONTENTS( tr.vecEndPos );
+
+		const int iContents = POINT_CONTENTS( tr.vecEndPos );
 		// full trace and it's not water down there?
 		if (tr.flFraction >= 1.0 && iContents != CONTENTS_WATER)
 			return true;

@@ -333,7 +333,7 @@ void BotClient_Valve_Damage(void *p, edict_t *pEdict)
 			if (pBot->pBotEnemy == nullptr)
 			{
 				pBot->dmg_origin = damage_origin;
-				pBot->f_dmg_time = gpGlobals->time + 1.0;
+				pBot->f_dmg_time = gpGlobals->time + 1.0f;
 				
 				// stop using health or HEV stations...
 				pBot->b_use_health_station = FALSE;
@@ -385,7 +385,7 @@ void BotClient_Valve_ScreenFade(void *p, edict_t *pEdict)
 		state = 0;
 		
 		length = (duration + hold_time) / 4096;
-		pBot->blinded_time = gpGlobals->time + length - 2.0;
+		pBot->blinded_time = gpGlobals->time + length - 2.0f;
 	}
 	else
 	{

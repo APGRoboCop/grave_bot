@@ -167,7 +167,7 @@ void UTIL_HostSay( edict_t *pEntity, int teamonly, char *message )
 		sprintf( text, "%c%s: ", 2, STRING( pEntity->v.netname ) );
 	
 	j = sizeof(text) - 2 - strlen(text);  // -2 for /n and null terminator
-	if ( (int)strlen(message) > j )
+	if ( static_cast<int>(strlen(message)) > j )
 		message[j] = 0;
 	
 	strcat( text, message );
@@ -442,9 +442,9 @@ bool FVisible( const Vector &vecOrigin, edict_t *pEdict )
 	
 	// look through caller's eyes
 	vecLookerOrigin = pEdict->v.origin + pEdict->v.view_ofs;
-	
-	int bInWater = (POINT_CONTENTS (vecOrigin) == CONTENTS_WATER);
-	int bLookerInWater = (POINT_CONTENTS (vecLookerOrigin) == CONTENTS_WATER);
+
+	const int bInWater = (POINT_CONTENTS (vecOrigin) == CONTENTS_WATER);
+	const int bLookerInWater = (POINT_CONTENTS (vecLookerOrigin) == CONTENTS_WATER);
 	
 	// don't look through water
 	if (bInWater != bLookerInWater)
@@ -452,7 +452,7 @@ bool FVisible( const Vector &vecOrigin, edict_t *pEdict )
 	
 	UTIL_TraceLine(vecLookerOrigin, vecOrigin, ignore_monsters, ignore_glass, pEdict, &tr);
 	
-	if (tr.flFraction != 1.0)
+	if (tr.flFraction != 1.0f)
 	{
 		return FALSE;  // Line of sight is not established
 	}
@@ -470,9 +470,9 @@ bool FHullClear( const Vector &vecOrigin, edict_t *pEdict )
 	
 	// look through caller's eyes
 	vecLookerOrigin = pEdict->v.origin + pEdict->v.view_ofs;
-	
-	int bInWater = (POINT_CONTENTS (vecOrigin) == CONTENTS_WATER);
-	int bLookerInWater = (POINT_CONTENTS (vecLookerOrigin) == CONTENTS_WATER);
+
+	const int bInWater = (POINT_CONTENTS (vecOrigin) == CONTENTS_WATER);
+	const int bLookerInWater = (POINT_CONTENTS (vecLookerOrigin) == CONTENTS_WATER);
 	
 	// don't look through water
 	if (bInWater != bLookerInWater)
@@ -480,7 +480,7 @@ bool FHullClear( const Vector &vecOrigin, edict_t *pEdict )
 	
 	UTIL_TraceHull(vecLookerOrigin, vecOrigin, ignore_monsters, head_hull, pEdict, &tr);
 	
-	if (tr.flFraction != 1.0)
+	if (tr.flFraction != 1.0f)
 	{
 		return FALSE;  // Line of sight is not established
 	}
@@ -521,7 +521,7 @@ bool UpdateSounds(edict_t *pEdict, edict_t *pPlayer)
 	float distance;
 	static bool check_footstep_sounds = TRUE;
 	static float footstep_sounds_on;
-	float sensitivity = 1.0;
+	float sensitivity = 1.0f;
 	float volume;
 	
 	// update sounds made by this player, alert bots if they are nearby...
@@ -532,14 +532,14 @@ bool UpdateSounds(edict_t *pEdict, edict_t *pPlayer)
 		footstep_sounds_on = CVAR_GET_FLOAT("mp_footsteps");
 	}
 	
-	if (footstep_sounds_on > 0.0)
+	if (footstep_sounds_on > 0.0f)
 	{
 		// check if this player is moving fast enough to make sounds...
-		if (pPlayer->v.velocity.Length2D() > 220.0)
+		if (pPlayer->v.velocity.Length2D() > 220.0f)
 		{
-			volume = 500.0;  // volume of sound being made (just pick something)
-			
-			Vector v_sound = pPlayer->v.origin - pEdict->v.origin;
+			volume = 500.0f;  // volume of sound being made (just pick something)
+
+			const Vector v_sound = pPlayer->v.origin - pEdict->v.origin;
 			
 			distance = v_sound.Length();
 			
@@ -552,7 +552,7 @@ bool UpdateSounds(edict_t *pEdict, edict_t *pPlayer)
 				{
 					// just use dmg time, does the same thing
 					pBot->dmg_origin = v_sound;
-					pBot->f_dmg_time = gpGlobals->time + 1.0;
+					pBot->f_dmg_time = gpGlobals->time + 1.0f;
 					
 					// stop using health or HEV stations...
 					pBot->b_use_health_station = FALSE;

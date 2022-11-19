@@ -398,7 +398,7 @@ int WaypointFindNearest(edict_t *pEntity, float range, int team)
 			UTIL_TraceLine( vecOrigin + pEntity->v.view_ofs, waypoints[i].origin,
 				ignore_monsters, pEntity->v.pContainingEntity, &tr );
 			
-			if (tr.flFraction >= 1.0)
+			if (tr.flFraction >= 1.0f)
 			{
 				min_index = i;
 				min_distance = distance;
@@ -425,7 +425,7 @@ int WaypointFindNearest(Vector v_src, edict_t *pEntity, float range, int team)
 	// find the nearest waypoint...
 	
 	min_index = -1;
-	min_distance = 9999.0;
+	min_distance = 9999.0f;
 	
 	for (index=0; index < num_waypoints; index++)
 	{
@@ -448,7 +448,7 @@ int WaypointFindNearest(Vector v_src, edict_t *pEntity, float range, int team)
 			UTIL_TraceLine( v_src, waypoints[index].origin, ignore_monsters,
 				pEntity->v.pContainingEntity, &tr );
 			
-			if (tr.flFraction >= 1.0)
+			if (tr.flFraction >= 1.0f)
 			{
 				min_index = index;
 				min_distance = distance;
@@ -478,7 +478,7 @@ int WaypointFindNearest(edict_t *pEntity, float range, int team, int exclude[])
 	// find the nearest waypoint...
 	
 	min_index = -1;
-	min_distance = 9999.0;
+	min_distance = 9999.0f;
 	
 	for (i=0; i < num_waypoints; i++)
 	{
@@ -513,7 +513,7 @@ int WaypointFindNearest(edict_t *pEntity, float range, int team, int exclude[])
 			UTIL_TraceLine( vecOrigin + pEntity->v.view_ofs, waypoints[i].origin,
 				ignore_monsters, pEntity->v.pContainingEntity, &tr );
 			
-			if (tr.flFraction >= 1.0)
+			if (tr.flFraction >= 1.0f)
 			{
 				min_index = i;
 				min_distance = distance;
@@ -540,7 +540,7 @@ int WaypointFindNearest(Vector v_src, edict_t *pEntity, float range, int team, i
 	// find the nearest waypoint...
 	
 	min_index = -1;
-	min_distance = 9999.0;
+	min_distance = 9999.0f;
 	
 	for (index=0; index < num_waypoints; index++)
 	{
@@ -575,7 +575,7 @@ int WaypointFindNearest(Vector v_src, edict_t *pEntity, float range, int team, i
 			UTIL_TraceLine( v_src, waypoints[index].origin, ignore_monsters,
 				pEntity->v.pContainingEntity, &tr );
 			
-			if (tr.flFraction >= 1.0)
+			if (tr.flFraction >= 1.0f)
 			{
 				min_index = index;
 				min_distance = distance;
@@ -603,7 +603,7 @@ int WaypointFindNearestGoal(edict_t *pEntity, int src, int team, int flags)
 	// find the nearest waypoint with the matching flags...
 	
 	min_index = -1;
-	min_distance = 99999;
+	min_distance = 99999.0f;
 	
 	for (index=0; index < num_waypoints; index++)
 	{
@@ -659,7 +659,7 @@ int WaypointFindNearestGoal(edict_t *pEntity, int src, int team, int flags, int 
 	// find the nearest waypoint with the matching flags...
 	
 	min_index = -1;
-	min_distance = 9999;
+	min_distance = 9999.0f;
 	
 	for (index=0; index < num_waypoints; index++)
 	{
@@ -727,7 +727,7 @@ int WaypointFindNearestGoal(edict_t *pEntity, int src, int team, int flags, char
 	// find the nearest waypoint with the matching flags...
 	
 	min_index = -1;
-	min_distance = 99999;
+	min_distance = 99999.0f;
 	
 	for (index=0; index < num_waypoints; index++)
 	{
@@ -786,7 +786,7 @@ int WaypointFindNearestGoal(Vector v_src, edict_t *pEntity, float range, int tea
 	// find the nearest waypoint with the matching flags...
 	
 	min_index = -1;
-	min_distance = 99999;
+	min_distance = 99999.0f;
 	
 	for (index=0; index < num_waypoints; index++)
 	{
@@ -838,7 +838,7 @@ int WaypointFindNearestGoal(Vector v_src, edict_t *pEntity, float range, int tea
 	// find the nearest waypoint with the matching flags...
 	
 	min_index = -1;
-	min_distance = 99999;
+	min_distance = 99999.0f;
 	
 	for (index=0; index < num_waypoints; index++)
 	{
@@ -1133,7 +1133,7 @@ int WaypointFindNearestWeapon(edict_t *pEntity, int src, int team, int flags, in
 	edict_t *wpt_item;
 	bool found = false;
 	// for weapon goals
-	bot_weapon_select_t *pSelect = nullptr;
+	const bot_weapon_select_t *pSelect = nullptr;
 	pSelect = WeaponGetSelectPointer();
 	
 	if (num_waypoints < 1 || pSelect == nullptr)
@@ -1142,7 +1142,7 @@ int WaypointFindNearestWeapon(edict_t *pEntity, int src, int team, int flags, in
 	// find the nearest waypoint with the matching flags...
 	
 	min_index = -1;
-	min_distance = 99999;
+	min_distance = 99999.0f;
 	
 	for (index=0; index < num_waypoints; index++)
 	{
@@ -1208,7 +1208,7 @@ int WaypointFindNearestAiming(Vector v_origin)
 {
 	int index;
 	int min_index = -1;
-	int min_distance = 9999.0;
+	int min_distance = 9999.0f;
 	float distance;
 	
 	if (num_waypoints < 1)
@@ -1266,7 +1266,7 @@ void WaypointDrawBeam(edict_t *pEntity, Vector start, Vector end, int width,
 void WaypointSearchItems(edict_t *pEntity, Vector origin, int wpt_index)
 {
 	edict_t *pent = nullptr;
-	float radius = 40;
+	const float radius = 40.0f;
 	TraceResult tr;
 	float distance;
 	float min_distance;
@@ -1278,7 +1278,7 @@ void WaypointSearchItems(edict_t *pEntity, Vector origin, int wpt_index)
 	nearest_name[0] = 0;      // null out nearest_name string
 	nearest_pent = nullptr;
 	
-	min_distance = 9999.0;
+	min_distance = 9999.0f;
 	
 	//********************************************************
 	// look for the nearest health, armor, ammo, weapon, etc.
@@ -1383,7 +1383,7 @@ void WaypointSearchItems(edict_t *pEntity, Vector origin, int wpt_index)
 edict_t *WaypointFindItem( int wpt_index )
 {
 	edict_t *pent = nullptr;
-	float radius = 40;
+	const float radius = 40.0f;
 	TraceResult tr;
 	float distance;
 	float min_distance;
@@ -2027,7 +2027,7 @@ bool WaypointReachable(Vector v_src, Vector v_dest, edict_t *pEntity)
 			pEntity->v.pContainingEntity, &tr );
 		
 		// if waypoint is visible from current position (even behind head)...
-		if (tr.flFraction >= 1.0)
+		if (tr.flFraction >= 1.0f)
 		{
 			// check for special case of both waypoints being underwater...
 			if ((POINT_CONTENTS( v_src ) == CONTENTS_WATER) &&
@@ -2039,9 +2039,9 @@ bool WaypointReachable(Vector v_src, Vector v_dest, edict_t *pEntity)
 			// check for special case of waypoint being suspended in mid-air...
 			
 			// is dest waypoint higher than src? (45 is max jump height)
-			if (v_dest.z > (v_src.z + 45.0))
+			if (v_dest.z > (v_src.z + 45.0f))
 			{
-				Vector v_new_src = v_dest;
+				const Vector v_new_src = v_dest;
 				Vector v_new_dest = v_dest;
 				
 				v_new_dest.z = v_new_dest.z - 50;  // straight down 50 units
@@ -2050,7 +2050,7 @@ bool WaypointReachable(Vector v_src, Vector v_dest, edict_t *pEntity)
 					pEntity->v.pContainingEntity, &tr);
 				
 				// check if we didn't hit anything, if not then it's in mid-air
-				if (tr.flFraction >= 1.0)
+				if (tr.flFraction >= 1.0f)
 				{
 					return FALSE;  // can't reach this one
 				}
@@ -2058,36 +2058,36 @@ bool WaypointReachable(Vector v_src, Vector v_dest, edict_t *pEntity)
 			
 			// check if distance to ground increases more than jump height
 			// at points between source and destination...
-			
-			Vector v_direction = (v_dest - v_src).Normalize();  // 1 unit long
+
+			const Vector v_direction = (v_dest - v_src).Normalize();  // 1 unit long
 			Vector v_check = v_src;
 			Vector v_down = v_src;
 			
-			v_down.z = v_down.z - 1000.0;  // straight down 1000 units
+			v_down.z = v_down.z - 1000.0f;  // straight down 1000 units
 			
 			UTIL_TraceLine(v_check, v_down, ignore_monsters,
 				pEntity->v.pContainingEntity, &tr);
 			
-			last_height = tr.flFraction * 1000.0;  // height from ground
+			last_height = tr.flFraction * 1000.0f;  // height from ground
 			
 			distance = (v_dest - v_check).Length();  // distance from goal
 			
-			while (distance > 10.0)
+			while (distance > 10.0f)
 			{
 				// move 10 units closer to the goal...
-				v_check = v_check + (v_direction * 10.0);
+				v_check = v_check + (v_direction * 10.0f);
 				
 				v_down = v_check;
-				v_down.z = v_down.z - 1000.0;  // straight down 1000 units
+				v_down.z = v_down.z - 1000.0f;  // straight down 1000 units
 				
 				UTIL_TraceLine(v_check, v_down, ignore_monsters,
 					pEntity->v.pContainingEntity, &tr);
 				
-				curr_height = tr.flFraction * 1000.0;  // height from ground
+				curr_height = tr.flFraction * 1000.0f;  // height from ground
 				
 				// is the difference in the last height and the current height
 				// higher that the jump height?
-				if ((last_height - curr_height) > 45.0)
+				if ((last_height - curr_height) > 45.0f)
 				{
 					// can't get there from here...
 					return FALSE;
@@ -2116,7 +2116,7 @@ int WaypointFindReachable(edict_t *pEntity, float range, int team)
 	
 	// find the nearest waypoint...
 	
-	min_distance = 9999.0;
+	min_distance = 9999.0f;
 	
 	for (i=0; i < num_waypoints; i++)
 	{
@@ -2139,7 +2139,7 @@ int WaypointFindReachable(edict_t *pEntity, float range, int team)
 			UTIL_TraceLine( pEntity->v.origin + pEntity->v.view_ofs, waypoints[i].origin,
 				ignore_monsters, pEntity->v.pContainingEntity, &tr );
 			
-			if (tr.flFraction >= 1.0)
+			if (tr.flFraction >= 1.0f)
 			{
 				if (WaypointReachable(pEntity->v.origin, waypoints[i].origin, pEntity))
 				{
@@ -2167,7 +2167,7 @@ void WaypointPrintInfo(edict_t *pEntity)
 	int flags;
 
 	// find the nearest waypoint...
-	index = WaypointFindNearest(pEntity, 50.0, -1);
+	index = WaypointFindNearest(pEntity, 50.0f, -1);
 	
 	if (index == -1)
 		return;
@@ -2297,7 +2297,7 @@ void WaypointThink(edict_t *pEntity)
 		
 		if (distance > 200)
 		{
-			min_distance = 9999.0;
+			min_distance = 9999.0f;
 			
 			// check that no other reachable waypoints are nearby...
 			for (i=0; i < num_waypoints; i++)
@@ -2323,7 +2323,7 @@ void WaypointThink(edict_t *pEntity)
 		}
 	}
 	
-	min_distance = 9999.0;
+	min_distance = 9999.0f;
 	
 	if (g_waypoint_on)  // display the waypoints if turned on...
 	{
@@ -2391,7 +2391,7 @@ void WaypointThink(edict_t *pEntity)
 			{
 				PATH *p;
 				
-				f_path_time = gpGlobals->time + 1.0;
+				f_path_time = gpGlobals->time + 1.0f;
 				
 				p = paths[index];
 				
@@ -2403,8 +2403,8 @@ void WaypointThink(edict_t *pEntity)
 					{
 						if (p->index[i] != -1)
 						{
-							Vector v_src = waypoints[index].origin;
-							Vector v_dest = waypoints[p->index[i]].origin;
+							const Vector v_src = waypoints[index].origin;
+							const Vector v_dest = waypoints[p->index[i]].origin;
 							
 							int color[3] = {255,255,255};
 							if (waypoints[p->index[i]].flags & W_FL_TEAM_SPECIFIC)
@@ -2659,7 +2659,7 @@ void WaypointRouteInit()
 				{
 					if (paths[row] != nullptr)
 					{
-						PATH *p = paths[row];
+						const PATH *p = paths[row];
 						
 						while (p)
 						{
@@ -2677,8 +2677,8 @@ void WaypointRouteInit()
 									{
 										distance = (waypoints[row].origin - waypoints[index].origin).Length();
 										
-										if (distance > (float)WAYPOINT_MAX_DISTANCE)
-											distance = (float)WAYPOINT_MAX_DISTANCE;
+										if (distance > static_cast<float>(WAYPOINT_MAX_DISTANCE))
+											distance = static_cast<float>(WAYPOINT_MAX_DISTANCE);
 										
 										if (distance > REACHABLE_RANGE)
 										{

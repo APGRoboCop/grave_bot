@@ -367,7 +367,7 @@ void pfnMessageBegin(int msg_dest, int msg_type, const float *pOrigin, edict_t *
 	{
 		int index = -1;
 		
-		if (debug_engine) { fp=fopen("bot.txt","a"); fprintf(fp,"pfnMessageBegin: edict=%x dest=%d type=%d\n",unsigned(ed),msg_dest,msg_type); fclose(fp); }
+		if (debug_engine) { fp=fopen("bot.txt","a"); fprintf(fp,"pfnMessageBegin: edict=%x dest=%d type=%d\n",reinterpret_cast<unsigned>(ed),msg_dest,msg_type); fclose(fp); }
 		
 		if (ed)
 		{
@@ -920,7 +920,7 @@ void pfnSetClientMaxspeed(const edict_t *pEdict, float fNewMaxspeed)
 	if (debug_engine)
 	{
 		fp = fopen("bot.txt", "a");
-		fprintf(fp, "pfnSetClientMaxspeed: edict=%x %f\n", unsigned(pEdict), fNewMaxspeed);
+		fprintf(fp, "pfnSetClientMaxspeed: edict=%x %f\n", reinterpret_cast<unsigned>(pEdict), fNewMaxspeed);
 		fclose(fp);
 	}
 	

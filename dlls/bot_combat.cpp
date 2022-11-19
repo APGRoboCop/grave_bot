@@ -35,21 +35,21 @@ extern edict_t *listenserver_edict;
 extern bool b_chat_debug;
 FILE *fp;
 
-float aim_tracking_x_scale[5] = {0, 1.0, 2.0, 3.0, 4.0};
-float aim_tracking_y_scale[5] = {0, 1.0, 2.0, 3.0, 4.0};
+float aim_tracking_x_scale[5] = {0.0f, 1.0f, 2.0f, 3.0f, 4.0f};
+float aim_tracking_y_scale[5] = {0.0f, 1.0f, 2.0f, 3.0f, 4.0f};
 // who is vomiting?
 float g_flVomiting[32];
 // reaction time multiplier
 extern float bot_reaction_time;
-float react_time_min[5] = {0.01, 0.05, 0.08, 0.1, 0.15};
-float react_time_max[5] = {0.01, 0.08, 0.1, 0.15, 0.2};
+float react_time_min[5] = {0.01f, 0.05f, 0.08f, 0.1f, 0.15f};
+float react_time_max[5] = {0.01f, 0.08f, 0.1f, 0.15f, 0.2f};
 // how transparent does our target have to be before we
 // can't see them?  Diffs per bot level
 int renderamt_threshold[5] = {16, 32, 48, 64, 80};
 
 bot_research_t g_Researched[2][NUM_RESEARCH_OPTIONS];
 
-float g_flWeaponSwitch = 0;
+float g_flWeaponSwitch = 0.0f;
 
 void BotCheckTeamplay()
 {
@@ -108,20 +108,20 @@ edict_t *BotFindEnemy( bot_t *pBot )
 			if (pBot->f_bot_see_enemy_time > (gpGlobals->time - 2))
 				pRemember = pBot->pBotEnemy;
 			pBot->pBotEnemy = nullptr;
-			pBot->f_ignore_wpt_time = 0.0;
+			pBot->f_ignore_wpt_time = 0.0f;
 		}
 	}
 	
 	pent = nullptr;
 	pNewEnemy = nullptr;
-	nearestdistance = 1000;
+	nearestdistance = 1000.0f;
 	
 	if (pNewEnemy == nullptr)
 	{
 		edict_t *pMonster = nullptr;
 		Vector vecEnd;
 			
-		nearestdistance = 2500;
+		nearestdistance = 2500.0f;
 		
 		if (pRemember)
 			nearestdistance = (UTIL_GetOrigin(pRemember) - UTIL_GetOrigin(pEdict)).Length();
@@ -160,7 +160,7 @@ edict_t *BotFindEnemy( bot_t *pBot )
 				continue;
 
 			// is team play enabled?
-			if (is_team_play > 0.0)
+			if (is_team_play > 0.0f)
 			{
 				int player_team = UTIL_GetTeam(pMonster);
 				int bot_team = UTIL_GetTeam(pEdict);
@@ -234,7 +234,7 @@ edict_t *BotFindEnemy( bot_t *pBot )
 					BotCheckTeamplay();
 				
 				// is team play enabled?
-				if (is_team_play > 0.0)
+				if (is_team_play > 0.0f)
 				{
 					int player_team = UTIL_GetTeam(pPlayer);
 					int bot_team = UTIL_GetTeam(pEdict);
@@ -287,9 +287,9 @@ edict_t *BotFindEnemy( bot_t *pBot )
 			float delay_min = react_time_min[pBot->bot_skill] * bot_reaction_time;
 			float delay_max = react_time_max[pBot->bot_skill] * bot_reaction_time;
 
-			float distance_delay = log10(v_enemy.Length()) * 0.8;
+			float distance_delay = log10(v_enemy.Length()) * 0.8f;
 			// don't get an advantage if they're too close
-			if (distance_delay < 1.0) distance_delay = 1.0;
+			if (distance_delay < 1.0f) distance_delay = 1.0f;
 
 			react_delay = RANDOM_FLOAT(delay_min, delay_max) * distance_delay;
 			
@@ -307,8 +307,8 @@ edict_t *BotFindEnemy( bot_t *pBot )
 	}
 	
 	// has the bot NOT seen an ememy for at least 5 seconds (time to reload)?
-	if ((pBot->f_bot_see_enemy_time > 0) &&
-		((pBot->f_bot_see_enemy_time + 5.0) <= gpGlobals->time))
+	if ((pBot->f_bot_see_enemy_time > 0.0f) &&
+		((pBot->f_bot_see_enemy_time + 5.0f) <= gpGlobals->time))
 	{
 		pBot->f_bot_see_enemy_time = -1;  // so we won't keep reloading
 		
@@ -484,13 +484,10 @@ bool BotFireWeapon(Vector v_enemy, bot_t *pBot, int weapon_choice, bool nofire)
 				
 				return TRUE;
 			}
-			else
-			{
-				pEdict->v.button |= IN_ATTACK;   // charge the weapon
-				pBot->f_shoot_time = gpGlobals->time;  // keep charging
+			pEdict->v.button |= IN_ATTACK;   // charge the weapon
+			pBot->f_shoot_time = gpGlobals->time;  // keep charging
 				
-				return TRUE;
-			}
+			return TRUE;
 		}
 		
 		// are we charging the secondary fire?
@@ -526,13 +523,10 @@ bool BotFireWeapon(Vector v_enemy, bot_t *pBot, int weapon_choice, bool nofire)
 				
 				return TRUE;
 			}
-			else
-			{
-				pEdict->v.button |= IN_ATTACK2;  // charge the weapon
-				pBot->f_shoot_time = gpGlobals->time;  // keep charging
+			pEdict->v.button |= IN_ATTACK2;  // charge the weapon
+			pBot->f_shoot_time = gpGlobals->time;  // keep charging
 				
-				return TRUE;
-			}
+			return TRUE;
 		}
 		
 		select_index = 0;
@@ -610,7 +604,7 @@ bool BotFireWeapon(Vector v_enemy, bot_t *pBot, int weapon_choice, bool nofire)
 			
 			// forget about the GI Distabilizer if they're already vomiting
 			if (mod_id == SI_DLL && pSelect[select_index].iId == SI_WEAPON_VOMIT && pBot->pBotEnemy &&
-				(g_flVomiting[ENTINDEX(pBot->pBotEnemy)-1] + 0.5) > gpGlobals->time)
+				(g_flVomiting[ENTINDEX(pBot->pBotEnemy)-1] + 0.5f) > gpGlobals->time)
 			{
 				//ALERT( at_console, "Skipping %s, already vomiting\n", pSelect[select_index].weapon_name);
 				select_index++;
@@ -724,8 +718,8 @@ bool BotFireWeapon(Vector v_enemy, bot_t *pBot, int weapon_choice, bool nofire)
 			//g_flWeaponSwitch = gpGlobals->time + 1.0;
 			//ALERT( at_console, "Switching to %s\n", pSelect[final_index].weapon_name);
 			UTIL_SelectItem(pEdict, pSelect[final_index].weapon_name);
-			pBot->f_shoot_time = gpGlobals->time + 0.5;
-			pBot->f_reload_time = 0;
+			pBot->f_shoot_time = gpGlobals->time + 0.5f;
+			pBot->f_reload_time = 0.0f;
 			return FALSE;
 		}
 		
@@ -753,7 +747,7 @@ bool BotFireWeapon(Vector v_enemy, bot_t *pBot, int weapon_choice, bool nofire)
 		// zoom in if crossbow
 		if ((((mod_id == CRABBED_DLL || mod_id == VALVE_DLL) && iId == VALVE_WEAPON_CROSSBOW) ||
 			(mod_id == SI_DLL && iId == SI_WEAPON_CROSSBOW)) &&
-			(pEdict->v.fov == 0))
+			(pEdict->v.fov == 0.0f))
 		{
 			pEdict->v.button |= IN_ATTACK2;
 			return TRUE;
@@ -852,16 +846,16 @@ Vector BotGetLead( bot_t *pBot, edict_t *pEntity, float flProjSpeed )
 	// weapon's projectile speed
 	Vector vecNewOrigin = vecOrigin;
 	// so we don't divide by 0
-	if (flProjSpeed > 0)
+	if (flProjSpeed > 0.0f)
 	{
 		vecNewOrigin.x += pEntity->v.velocity.x * (flDistance/flProjSpeed);
 		vecNewOrigin.y += pEntity->v.velocity.y * (flDistance/flProjSpeed);
 		vecNewOrigin.z += pEntity->v.velocity.z * (flDistance/flProjSpeed);
 	}
 	// factor in a small amount of the bot's current velocity
-	vecNewOrigin.x += pBot->pEdict->v.velocity.x * -0.005;
-	vecNewOrigin.y += pBot->pEdict->v.velocity.y * -0.005;
-	vecNewOrigin.z += pBot->pEdict->v.velocity.z * -0.005;
+	vecNewOrigin.x += pBot->pEdict->v.velocity.x * -0.005f;
+	vecNewOrigin.y += pBot->pEdict->v.velocity.y * -0.005f;
+	vecNewOrigin.z += pBot->pEdict->v.velocity.z * -0.005f;
 
 	return vecNewOrigin;
 }
@@ -902,7 +896,7 @@ void BotShootAtEnemy( bot_t *pBot )
 
 	if (pBot->f_aim_tracking_time < gpGlobals->time && pBot->bot_skill > 0)
 	{
-		pBot->f_aim_tracking_time = gpGlobals->time + RANDOM_FLOAT(0.5, 3.0);
+		pBot->f_aim_tracking_time = gpGlobals->time + RANDOM_FLOAT(0.5f, 3.0f);
 
 		pBot->f_aim_x_angle_delta = 
 			RANDOM_FLOAT(-aim_tracking_x_scale[pBot->bot_skill],aim_tracking_x_scale[pBot->bot_skill]);
@@ -915,7 +909,7 @@ void BotShootAtEnemy( bot_t *pBot )
 	// bot skill 1 (0 for indexes) has perfect aim
 	if (pBot->bot_skill > 0)
 	{	// speed of enemy matters (don't let it be less than 1)
-		f_velocity = fmax(pBot->pBotEnemy->v.velocity.Length() * 0.01, 1);
+		f_velocity = fmax(pBot->pBotEnemy->v.velocity.Length() * 0.01f, 1);
 		// multiple our deltas by the velocity
 		d_x += pBot->f_aim_x_angle_delta * f_velocity;
 		d_y += pBot->f_aim_y_angle_delta * f_velocity;
@@ -948,7 +942,7 @@ void BotShootAtEnemy( bot_t *pBot )
 	// allow 15 seconds for the mindray to regen it's ammo if it's low
 	if (mod_id == SI_DLL && pBot->current_weapon.iId == SI_WEAPON_MINDRAY &&
 		BotAssessPrimaryAmmo(pBot, SI_WEAPON_MINDRAY) == AMMO_CRITICAL)
-		pBot->f_mindray_regen_time = gpGlobals->time + 15.0;
+		pBot->f_mindray_regen_time = gpGlobals->time + 15.0f;
 
 	// if this is Science and Industry and our enemy is a scientist, run at them
 	// and attack with the briefcase!
@@ -960,16 +954,16 @@ void BotShootAtEnemy( bot_t *pBot )
 		if (enemy_team != team && pBot->i_carry_type == CARRY_NONE)
 		{
 			pBot->f_move_speed = pBot->f_max_speed;
-			pBot->f_ignore_wpt_time = gpGlobals->time + 0.2;
+			pBot->f_ignore_wpt_time = gpGlobals->time + 0.2f;
 		}
 
 		if (FInViewCone(&v_enemy_origin, pEdict) && FVisible(v_enemy_origin, pEdict))
 		{	// switch to the briefcase
-			if (pBot->f_shoot_time <= gpGlobals->time && f_distance <= 128.0 && enemy_team != team &&
+			if (pBot->f_shoot_time <= gpGlobals->time && f_distance <= 128.0f && enemy_team != team &&
 				pBot->current_weapon.iId != SI_WEAPON_BRIEFCASE && pBot->i_carry_type == CARRY_NONE)
 				BotFireWeapon(v_enemy, pBot, SI_WEAPON_BRIEFCASE, true);
 			// actually hit them
-			if (pBot->f_shoot_time <= gpGlobals->time && f_distance <= 50.0 && enemy_team != team &&
+			if (pBot->f_shoot_time <= gpGlobals->time && f_distance <= 50.0f && enemy_team != team &&
 				pBot->i_carry_type == CARRY_NONE)
 				BotFireWeapon(v_enemy, pBot, SI_WEAPON_BRIEFCASE);
 /*			// use mindray if we have it, it's an enemy sci and we're carrying something, or it's an ally sci
@@ -1004,7 +998,7 @@ void BotShootAtEnemy( bot_t *pBot )
 
 	// see if we should engage the enemy every half second
 	if (pBot->f_engage_enemy_check <= gpGlobals->time)
-		pBot->f_engage_enemy_check = gpGlobals->time + 0.5;
+		pBot->f_engage_enemy_check = gpGlobals->time + 0.5f;
 
 	if (pBot->b_engaging_enemy && !bShouldEngage)
 	{
@@ -1013,7 +1007,7 @@ void BotShootAtEnemy( bot_t *pBot )
 			sprintf(pBot->debugchat, "I gave up engaging %s!\n", STRING(pBot->pBotEnemy->v.netname));
 			UTIL_HostSay(pBot->pEdict, 0, pBot->debugchat);
 		}
-		pBot->f_ignore_wpt_time = 0.0;
+		pBot->f_ignore_wpt_time = 0.0f;
 		pBot->b_engaging_enemy = FALSE;
 		if (pBot->old_waypoint_goal != -1)
 		{
@@ -1027,7 +1021,7 @@ void BotShootAtEnemy( bot_t *pBot )
 		if (f_distance < 512 && FInViewCone( &v_enemy_origin, pEdict ) &&
 			FHullClear( v_enemy_origin, pEdict ))
 		{
-			pBot->f_ignore_wpt_time = gpGlobals->time + 0.1;
+			pBot->f_ignore_wpt_time = gpGlobals->time + 0.1f;
 		}
 
 	}
@@ -1047,7 +1041,7 @@ void BotShootAtEnemy( bot_t *pBot )
 			// get the direction we're traveling
 			bot_angle = pBot->pEdict->v.v_angle;
 			bot_angle.x = 0;
-			float dgrad = asin(pBot->f_strafe_speed / pBot->f_max_speed) * 180 / PI;
+			float dgrad = asin(pBot->f_strafe_speed / pBot->f_max_speed) * 180 / M_PI;
 			bot_angle.y += dgrad;
 
 			if (bot_angle.y > 180)
@@ -1063,9 +1057,9 @@ void BotShootAtEnemy( bot_t *pBot )
 			UTIL_TraceLine(vecSrc, vecSrc + vecEnd, dont_ignore_monsters, pEdict, &tr);
 
 			// switch our strafe direction every so often or if something is in the way
-			if (pBot->f_strafe_chng_dir <= gpGlobals->time || tr.flFraction < 1.0)
+			if (pBot->f_strafe_chng_dir <= gpGlobals->time || tr.flFraction < 1.0f)
 			{
-				pBot->f_strafe_chng_dir = gpGlobals->time + RANDOM_FLOAT(1.0, 3.0);
+				pBot->f_strafe_chng_dir = gpGlobals->time + RANDOM_FLOAT(1.0f, 3.0f);
 				pBot->b_strafe_direction = !pBot->b_strafe_direction;//RANDOM_LONG(0,1) ? true : false;
 			}
 			// go strafe crazy!
@@ -1103,7 +1097,7 @@ void BotShootAtEnemy( bot_t *pBot )
 //					if (listenserver_edict)
 //						WaypointDrawBeam(listenserver_edict, vecSrc, vecSrc + vecEnd, 20, 0, 255, 32, 32, 200, 10);
 
-					if (tr.flFraction >= 1.0)
+					if (tr.flFraction >= 1.0f)
 					{
 						//SERVER_PRINT( "Clear longjump path found\n");
 						pBot->b_combat_longjump = TRUE;
@@ -1115,29 +1109,29 @@ void BotShootAtEnemy( bot_t *pBot )
 					// try other direction;
 					mod *= -1;
 				}
-				pBot->f_combat_longjump = gpGlobals->time + 0.2;
+				pBot->f_combat_longjump = gpGlobals->time + 0.2f;
 			}
 		}
 
 		// stop trying to longjump after half a second
-		if ((pBot->f_combat_longjump < gpGlobals->time - 0.5) && (pBot->b_combat_longjump))
+		if ((pBot->f_combat_longjump < gpGlobals->time - 0.5f) && (pBot->b_combat_longjump))
 			pBot->b_combat_longjump = FALSE;
 
 		// longjump
 		if ((pEdict->v.waterlevel == 0) && (pEdict->v.flags & FL_ONGROUND) &&
 			(pBot->b_longjump) && (pEdict->v.velocity.Length() > 220) && (pBot->b_combat_longjump) &&
-			(diff <= 0.01))
+			(diff <= 0.01f))
 		{
 			// don't try to move for 1.0 seconds, otherwise the longjump
 			// is fucked up	
-			pBot->f_longjump_time = gpGlobals->time + 1.0;
+			pBot->f_longjump_time = gpGlobals->time + 1.0f;
 			// we're don trying to do a longjump
 			pBot->b_combat_longjump = FALSE;
 			// don't do another one for a certain amount of time
 			if (RANDOM_LONG(1,100) > 10)
-				pBot->f_combat_longjump = gpGlobals->time + 1.0;//RANDOM_FLOAT(0.5, 1.0);
+				pBot->f_combat_longjump = gpGlobals->time + 1.0f;//RANDOM_FLOAT(0.5, 1.0);
 			else
-				pBot->f_combat_longjump = gpGlobals->time + RANDOM_LONG(3.0,10.0);
+				pBot->f_combat_longjump = gpGlobals->time + RANDOM_LONG(3.0f,10.0f);
 			// actually do the longjump
 			if (mod_id != SI_DLL)	// S&I auto longjumps, HLDM/Crabbed don't
 				pEdict->v.button |= IN_DUCK;
@@ -1148,7 +1142,7 @@ void BotShootAtEnemy( bot_t *pBot )
 		}
 
 		if (pBot->f_longjump_time > gpGlobals->time)
-			pBot->f_move_speed = pBot->f_strafe_speed = 0;
+			pBot->f_move_speed = pBot->f_strafe_speed = 0.0f;
 	}
 	// is it time to shoot yet?
 	if ((pBot->f_shoot_time <= gpGlobals->time) && !(pBot->pEdict->v.flags & FL_GODMODE) &&
@@ -1170,10 +1164,10 @@ void BotAssessGrenades( bot_t *pBot )
 	edict_t *pGrenade = nullptr;
 	edict_t *pNewGrenade = nullptr;
 	Vector vecEnd;
-	float nearestdistance = 16384;
-	float mindistance = 256;
+	float nearestdistance = 16384.0f;
+	float mindistance = 256.0f;
 	// search the world for grenades...
-	while (!FNullEnt(pGrenade = UTIL_FindEntityInSphere (pGrenade, pEdict->v.origin, 1000)))
+	while (!FNullEnt(pGrenade = UTIL_FindEntityInSphere (pGrenade, pEdict->v.origin, 1000.0f)))
 	{
 		vecEnd = pGrenade->v.origin;
 		
@@ -1206,7 +1200,7 @@ void BotAssessGrenades( bot_t *pBot )
 			!FVisible( vecEnd, pEdict ))
             continue;
 		
-		mindistance = 256;
+		mindistance = 256.0f;
 		// we don't care how close snarks are, but the others explode
 		if (strcmp("monster_snark", STRING(pGrenade->v.classname)) == 0)
 			mindistance = 0;
@@ -1252,8 +1246,7 @@ bool BotWeaponPrimaryDistance( bot_t *pBot, float distance, int weapon_id )
 			select_index++;
 			continue;
 		}
-		else
-			break;
+		break;
 	}
 
 	if ((distance < pSelect[select_index].primary_min_distance) &&
@@ -1281,8 +1274,7 @@ bool BotWeaponSecondaryDistance( bot_t *pBot, float distance, int weapon_id )
 			select_index++;
 			continue;
 		}
-		else
-			break;
+		break;
 	}
 
 	if ((distance < pSelect[select_index].secondary_min_distance) &&
@@ -1327,7 +1319,7 @@ float BotAssessPrimaryAmmo( bot_t *pBot, int weapon_id )
 			max -= WeaponGetAmmoResearchDiff(weapon_id);
 	}
 
-	float ammo_percent = (float)pBot->m_rgAmmo[weapon_defs[weapon_id].iAmmo1] / (float)max;
+	float ammo_percent = static_cast<float>(pBot->m_rgAmmo[weapon_defs[weapon_id].iAmmo1]) / static_cast<float>(max);
 	// is our ammo critical (can't attack with this weapon)
 	if ((weapon_id != pBot->current_weapon.iId &&
 		pBot->m_rgAmmo[weapon_defs[weapon_id].iAmmo1] < pSelect[select_index].min_primary_ammo) ||
@@ -1375,7 +1367,7 @@ float BotAssessSecondaryAmmo( bot_t *pBot, int weapon_id )
 			max -= WeaponGetAmmoResearchDiff(weapon_id);
 	}
 
-	float ammo_percent = (float)pBot->m_rgAmmo[weapon_defs[weapon_id].iAmmo2] / (float)max;
+	float ammo_percent = static_cast<float>(pBot->m_rgAmmo[weapon_defs[weapon_id].iAmmo2]) / static_cast<float>(max);
 	// is our ammo critical (can't attack with this weapon)
 	if (pBot->m_rgAmmo[weapon_defs[weapon_id].iAmmo2] < pSelect[select_index].min_secondary_ammo && 
 		(weapon_id == pBot->current_weapon.iId && pBot->current_weapon.iClip2 < pSelect[select_index].min_secondary_ammo))

@@ -88,7 +88,7 @@ int default_bot_skill = 2;
 bool b_random_color = TRUE;
 int isFakeClientCommand = 0;
 int fake_arg_count;
-float bot_check_time = 30.0;
+float bot_check_time = 30.0f;
 int min_bots = -1;
 int max_bots = -1;
 int num_bots = 0;
@@ -96,12 +96,12 @@ int prev_num_bots = 0;
 bool g_GameRules = FALSE;
 edict_t *clients[32];
 edict_t *listenserver_edict = nullptr;
-float welcome_time = 0.0;
+float welcome_time = 0.0f;
 bool welcome_sent = FALSE;
 int g_menu_waypoint;
 int g_menu_state = 0;
 
-float is_team_play = 0.0;
+float is_team_play = 0.0f;
 char team_names[MAX_TEAMS][MAX_TEAMNAME_LENGTH];
 int num_teams = 0;
 bool checked_teamplay = FALSE;
@@ -121,11 +121,11 @@ Vector g_vecPoint2 = g_vecZero;
 
 FILE *bot_cfg_fp = nullptr;
 bool need_to_open_cfg = TRUE;
-float bot_cfg_pause_time = 0.0;
-float respawn_time = 0.0;
+float bot_cfg_pause_time = 0.0f;
+float respawn_time = 0.0f;
 bool spawn_time_reset = FALSE;
 // reaction time multiplier
-float bot_reaction_time = 1.0;
+float bot_reaction_time = 1.0f;
 extern float speed_mod[5];
 extern float react_time_min[5];
 extern float react_time_max[5];
@@ -215,23 +215,23 @@ C_DLLEXPORT int Meta_Query (char *ifvers, plugin_info_t **pPlugInfo, mutil_funcs
       sscanf (ifvers, "%d:%d", &mmajor, &mminor);
       sscanf (META_INTERFACE_VERSION, "%d:%d", &pmajor, &pminor);
 
-      if ((pmajor > mmajor) || ((pmajor == mmajor) && (pminor > mminor)))
+      if (pmajor > mmajor || pmajor == mmajor && pminor > mminor)
       {
          LOG_CONSOLE (PLID, "metamod version is too old for this plugin; update metamod");
          LOG_ERROR (PLID, "metamod version is too old for this plugin; update metamod");
-         return (FALSE);
+         return FALSE;
       }
 
       // if plugin has older major interface version, it's incompatible (update plugin)
-      else if (pmajor < mmajor)
+      if (pmajor < mmajor)
       {
-         LOG_CONSOLE (PLID, "metamod version is incompatible with this plugin; please find a newer version of this plugin");
-         LOG_ERROR (PLID, "metamod version is incompatible with this plugin; please find a newer version of this plugin");
-         return (FALSE);
+	      LOG_CONSOLE (PLID, "metamod version is incompatible with this plugin; please find a newer version of this plugin");
+	      LOG_ERROR (PLID, "metamod version is incompatible with this plugin; please find a newer version of this plugin");
+	      return FALSE;
       }
    }
 
-   return (TRUE); // tell metamod this plugin looks safe
+   return TRUE; // tell metamod this plugin looks safe
 }
 
 
@@ -359,19 +359,19 @@ int DispatchSpawn( edict_t *pent )
 			
 			g_GameRules = TRUE;
 			
-			is_team_play = 0.0;
+			is_team_play = 0.0f;
 			memset(team_names, 0, sizeof(team_names));
 			num_teams = 0;
 			checked_teamplay = FALSE;
 			
-			bot_cfg_pause_time = 0.0;
-			respawn_time = 0.0;
+			bot_cfg_pause_time = 0.0f;
+			respawn_time = 0.0f;
 			spawn_time_reset = FALSE;
 			
 			prev_num_bots = num_bots;
 			num_bots = 0;
 			
-			bot_check_time = gpGlobals->time + 30.0;
+			bot_check_time = gpGlobals->time + 30.0f;
 
 			// reset all research data
 			if (mod_id == SI_DLL)
@@ -516,7 +516,7 @@ BOOL ClientConnect( edict_t *pEntity, const char *pszName, const char *pszAddres
 		if (strcmp(pszAddress, "127.0.0.1") != 0)
 		{
 			// don't try to add bots for 60 seconds, give client time to get added
-			bot_check_time = gpGlobals->time + 60.0;
+			bot_check_time = gpGlobals->time + 60.0f;
 			
 			for (i=0; i < 32; i++)
 			{
@@ -684,21 +684,21 @@ void StartFrame()
 	if (gpGlobals->deathmatch)
 	{
 		edict_t *pPlayer;
-		static float role_check_time = 5.0;
-		static float check_server_cmd = 0.0;
+		static float role_check_time = 5.0f;
+		static float check_server_cmd = 0.0f;
 		static int i, index, player_index, bot_index;
-		static float previous_time = -1.0;
+		static float previous_time = -1.0f;
 		char msg[256];
 		int count;
 		static float si_researchall = 0;
 	
 		// if a new map has started then (MUST BE FIRST IN StartFrame)...
-		if ((gpGlobals->time + 0.1) < previous_time)
+		if ((gpGlobals->time + 0.1f) < previous_time)
 		{
 			char filename[256];
 			char mapname[64];
 
-			check_server_cmd = 0.0;  // reset at start of map
+			check_server_cmd = 0.0f;  // reset at start of map
 			
 			// check if mapname_bot.cfg file exists...
 			
@@ -716,13 +716,13 @@ void StartFrame()
 				{
 					bots[index].is_used = FALSE;
 					bots[index].respawn_state = 0;
-					bots[index].kick_time = 0.0;
+					bots[index].kick_time = 0.0f;
 				}
 				
 				if (IS_DEDICATED_SERVER())
-					bot_cfg_pause_time = gpGlobals->time + 5.0;
+					bot_cfg_pause_time = gpGlobals->time + 5.0f;
 				else
-					bot_cfg_pause_time = gpGlobals->time + 20.0;
+					bot_cfg_pause_time = gpGlobals->time + 20.0f;
 			}
 			else
 			{
@@ -735,7 +735,7 @@ void StartFrame()
 					{
 						bots[index].is_used = FALSE;
 						bots[index].respawn_state = 0;
-						bots[index].kick_time = 0.0;
+						bots[index].kick_time = 0.0f;
 					}
 					
 					if (bots[index].is_used)  // is this slot used?
@@ -745,7 +745,7 @@ void StartFrame()
 					}
 					
 					// check for any bots that were very recently kicked...
-					if ((bots[index].kick_time + 5.0) > previous_time)
+					if ((bots[index].kick_time + 5.0f) > previous_time)
 					{
 						if (mod_id != SI_DLL)
 							bots[index].respawn_state = RESPAWN_NEED_TO_RESPAWN;
@@ -753,27 +753,27 @@ void StartFrame()
 						count++;
 					}
 					else
-						bots[index].kick_time = 0.0;  // reset to prevent false spawns later
+						bots[index].kick_time = 0.0f;  // reset to prevent false spawns later
 				}
 				
 				// set the respawn time
 				if (IS_DEDICATED_SERVER())
-					respawn_time = gpGlobals->time + 5.0;
+					respawn_time = gpGlobals->time + 5.0f;
 				else
-					respawn_time = gpGlobals->time + 20.0;
+					respawn_time = gpGlobals->time + 20.0f;
 			}
 			
-			bot_check_time = gpGlobals->time + 30.0;
+			bot_check_time = gpGlobals->time + 30.0f;
 		}
 
 		if (!IS_DEDICATED_SERVER())
 		{
 			if ((listenserver_edict != nullptr) && (welcome_sent == FALSE) &&
-				(welcome_time < 1.0))
+				(welcome_time < 1.0f))
 			{
 				// are they out of observer mode yet?
 				if (IsAlive(listenserver_edict))
-					welcome_time = gpGlobals->time + 5.0;  // welcome in 5 seconds
+					welcome_time = gpGlobals->time + 5.0f;  // welcome in 5 seconds
 			}
 			
 			if ((welcome_time > 0.0) && (welcome_time < gpGlobals->time) &&
@@ -788,8 +788,8 @@ void StartFrame()
 		else
 		{
 			if ((welcome_sent == FALSE) &&
-				(welcome_time < 1.0))
-				welcome_time = gpGlobals->time + 5.0;  // welcome in 5 seconds
+				(welcome_time < 1.0f))
+				welcome_time = gpGlobals->time + 5.0f;  // welcome in 5 seconds
 			
 			if ((welcome_time > 0.0) && (welcome_time < gpGlobals->time) &&
 				(welcome_sent == FALSE))
@@ -831,7 +831,7 @@ void StartFrame()
 		}
 		
 		// are we currently respawning bots and is it time to spawn one yet?
-		if ((respawn_time > 1.0) && (respawn_time <= gpGlobals->time))
+		if ((respawn_time > 1.0f) && (respawn_time <= gpGlobals->time))
 		{
 			int index = 0;
 			
@@ -858,11 +858,11 @@ void StartFrame()
 				
 				respawn_time = gpGlobals->time + 2;  // set next respawn time
 				
-				bot_check_time = gpGlobals->time + 5.0;
+				bot_check_time = gpGlobals->time + 5.0f;
 			}
 			else
 			{
-				respawn_time = 0.0;
+				respawn_time = 0.0f;
 			}
 		}
 		
@@ -901,9 +901,9 @@ void StartFrame()
 				}
 				
 				if (IS_DEDICATED_SERVER())
-					bot_cfg_pause_time = gpGlobals->time + 5.0;
+					bot_cfg_pause_time = gpGlobals->time + 5.0f;
 				else
-					bot_cfg_pause_time = gpGlobals->time + 20.0;
+					bot_cfg_pause_time = gpGlobals->time + 20.0f;
 			}
 			
 			if (!IS_DEDICATED_SERVER() && !spawn_time_reset)
@@ -914,17 +914,17 @@ void StartFrame()
 					{
 						spawn_time_reset = TRUE;
 						
-						if (respawn_time >= 1.0)
-							respawn_time = fmin(respawn_time, gpGlobals->time + (float)1.0);
+						if (respawn_time >= 1.0f)
+							respawn_time = fmin(respawn_time, gpGlobals->time + 1.0f);
 						
-						if (bot_cfg_pause_time >= 1.0)
-							bot_cfg_pause_time = fmin(bot_cfg_pause_time, gpGlobals->time + (float)1.0);
+						if (bot_cfg_pause_time >= 1.0f)
+							bot_cfg_pause_time = fmin(bot_cfg_pause_time, gpGlobals->time + 1.0f);
 					}
 				}
 			}
 			
 			if ((bot_cfg_fp) &&
-				(bot_cfg_pause_time >= 1.0) && (bot_cfg_pause_time <= gpGlobals->time))
+				(bot_cfg_pause_time >= 1.0f) && (bot_cfg_pause_time <= gpGlobals->time))
 			{
 				// process bot.cfg file options...
 				ProcessBotCfgFile();
@@ -935,9 +935,9 @@ void StartFrame()
 		// if time to check for server commands then do so...
 		if ((check_server_cmd <= gpGlobals->time) && IS_DEDICATED_SERVER())
 		{
-			check_server_cmd = gpGlobals->time + 1.0;
-			
-			char *cvar_bot = const_cast<char *>(CVAR_GET_STRING("gravebot"));
+			check_server_cmd = gpGlobals->time + 1.0f;
+
+			const char *cvar_bot = const_cast<char *>(CVAR_GET_STRING("gravebot"));
 			
 			if ( cvar_bot && cvar_bot[0] )
 			{
@@ -1000,7 +1000,7 @@ void StartFrame()
 		{
 			int count = 0;
 			
-			bot_check_time = gpGlobals->time + 5.0;
+			bot_check_time = gpGlobals->time + 5.0f;
 			
 			for (i = 0; i < 32; i++)
 			{
@@ -1018,7 +1018,7 @@ void StartFrame()
 
 		if (role_check_time <= gpGlobals->time)
 		{	// redo our role check and determines
-			role_check_time = gpGlobals->time + 1.0;
+			role_check_time = gpGlobals->time + 1.0f;
 			RoleCount();
 			RoleDetermine();
 		}
@@ -2615,7 +2615,7 @@ void RoleDetermine()
 	// loop through both teams and determine attack and defend percentages
 	for (myteam = 0; myteam < 2; myteam++)
 	{
-		int plrtotal = UTIL_PlayersOnTeam(myteam);
+		const int plrtotal = UTIL_PlayersOnTeam(myteam);
 
 		edict_t *pEntity = nullptr;
 
@@ -2626,20 +2626,20 @@ void RoleDetermine()
 	
 		// Score percent
 		if (g_lTeamScore[enemyteam] > 0)
-			fTeamPercentScore[myteam] = (float)g_lTeamScore[myteam] / (float)g_lTeamScore[enemyteam];
+			fTeamPercentScore[myteam] = static_cast<float>(g_lTeamScore[myteam]) / static_cast<float>(g_lTeamScore[enemyteam]);
 		else // forces everyone to attack if enemy is way ahead (mathematically can't happen!)
-			fTeamPercentScore[myteam] = (float)g_lTeamScore[myteam];
+			fTeamPercentScore[myteam] = static_cast<float>(g_lTeamScore[myteam]);
 		// Sci percent
 		if (g_iSciCount[enemyteam] > 0)
-			fTeamPercentSci[myteam] = (float)g_iSciCount[myteam] / (float)g_iSciCount[enemyteam];
+			fTeamPercentSci[myteam] = static_cast<float>(g_iSciCount[myteam]) / static_cast<float>(g_iSciCount[enemyteam]);
 		else // forces everyone to attack if enemy has all scis
-			fTeamPercentSci[myteam] = (float)g_iSciCount[myteam];
+			fTeamPercentSci[myteam] = static_cast<float>(g_iSciCount[myteam]);
 		
 		if (g_fl_si_defend[myteam] < 0)
 		{
-			g_flDefend[myteam] = 0.5 * fTeamPercentScore[myteam] * 
+			g_flDefend[myteam] = 0.5f * fTeamPercentScore[myteam] * 
 				(fTeamPercentSci[myteam] * (fTeamPercentSci[myteam] == 1.0) ? 
-				1.0 : ((float)g_iSciCount[myteam] / ((scitotal != 0) ? scitotal : 1)));
+				1.0 : (static_cast<float>(g_iSciCount[myteam]) / ((scitotal != 0) ? scitotal : 1)));
 		}
 		else
 			g_flDefend[myteam] = g_fl_si_defend[myteam];
@@ -2651,7 +2651,7 @@ void RoleDetermine()
 		else if (g_flDefend[myteam] > 1)
 			g_flDefend[myteam] = 1;
 
-		g_flAttack[myteam] = 1.0 - g_flDefend[myteam];
+		g_flAttack[myteam] = 1.0f - g_flDefend[myteam];
 
 		// can't have less than 0% attacking
 		if (g_flAttack[myteam] < 0)
@@ -2665,9 +2665,9 @@ void RoleDetermine()
 		g_flAttack[myteam] = 0.0;
 */
 		// only calculate if not everyone is defending and not everyone is attacking
-		if (g_flDefend[myteam] < 1.0 && g_flDefend[myteam] > 0.0)
+		if (g_flDefend[myteam] < 1.0f && g_flDefend[myteam] > 0.0f)
 		{
-			float plrworth = 1/(float)plrtotal;
+			const float plrworth = 1/static_cast<float>(plrtotal);
 			for (i = 1; i <= plrtotal; i++)
 			{	// this player above the defend percent?
 				if (i * plrworth > g_flDefend[myteam])
@@ -2676,10 +2676,10 @@ void RoleDetermine()
 				g_iDefendGoal[myteam]++;
 			}
 		}
-		else if (g_flDefend[myteam] >= 1.0)	// everyone defend!
+		else if (g_flDefend[myteam] >= 1.0f)	// everyone defend!
 			g_iDefendGoal[myteam] = plrtotal;
-		else if (g_flDefend[myteam] <= 0.0)	// everyone attack!
-			g_iDefendGoal[myteam] = 0;
+		else if (g_flDefend[myteam] <= 0.0f)	// everyone attack!
+			g_iDefendGoal[myteam] = 0.0f;
 
 		// attack amount based off defense amount
 		g_iAttackGoal[myteam] = plrtotal - g_iDefendGoal[myteam];
@@ -2740,9 +2740,9 @@ void RoleCount()
 								Player is by a item_resource on the enemy team, they must be attacking
 								the enemy to get the resource!
 					*/
-					temp_index = WaypointFindNearest(pPlayer, 512, team);
+					temp_index = WaypointFindNearest(pPlayer, 512.0f, team);
 					
-					while ((pEntity = UTIL_FindEntityInSphere( pEntity, pPlayer->v.origin, 512 )) != nullptr)
+					while ((pEntity = UTIL_FindEntityInSphere( pEntity, pPlayer->v.origin, 512.0f )) != nullptr)
 					{	// only consider goal entities (scis, resources, breakables)
 						if ((strcmp("monster_scientist", STRING(pEntity->v.classname)) != 0) &&
 							(strcmp("carry_scientist", STRING(pEntity->v.classname)) != 0) &&
@@ -2750,8 +2750,8 @@ void RoleCount()
 							(strcmp("item_resource", STRING(pEntity->v.classname)) != 0) &&
 							(strcmp("func_tech_breakable", STRING(pEntity->v.classname)) != 0))
 							continue;
-						
-						int ent_wpt_index = WaypointFindNearest(pEntity, 512, team);
+
+						const int ent_wpt_index = WaypointFindNearest(pEntity, 512.0f, team);
 						// valid nearby waypoint?
 						if (ent_wpt_index != -1)
 							distance = WaypointDistanceFromTo(temp_index, ent_wpt_index, team);
@@ -2778,7 +2778,7 @@ void RoleCount()
 				}
 				else if (pPlayer->v.flags & FL_FAKECLIENT)
 				{	// FAKE CLIENTS (BOTS)
-					bot_t *pAllyBot = UTIL_GetBotPointer(pPlayer);
+					const bot_t *pAllyBot = UTIL_GetBotPointer(pPlayer);
 
 					if (pAllyBot != nullptr)
 					{

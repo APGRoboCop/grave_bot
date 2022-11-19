@@ -276,4 +276,6 @@ float WeaponProjectileSpeed( int iId )
 				return 0;
 		}
 	}
+
+	return 0;
 }
