@@ -13,7 +13,7 @@
 
 #define MAX_WAYPOINTS 1024
 
-#define REACHABLE_RANGE 400.0
+#define REACHABLE_RANGE 400.0f
 
 // defines for waypoint flags field (32 bits are available)
 #define W_FL_TEAM        ((1<<0) + (1<<1))  /* allow for 4 teams (0-3) */

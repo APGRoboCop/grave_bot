@@ -53,7 +53,7 @@ void BotStartGame( bot_t *pBot )
 				FakeClientCommand(pEdict, "spectate", nullptr, nullptr);
 			
 			// select our team after one second
-			if (pBot->f_create_time + 1.0 <= gpGlobals->time)
+			if (pBot->f_create_time + 1.0f <= gpGlobals->time)
 				pBot->start_action = MSG_SI_TEAM_SELECT;  // force team selection
 
 			return;

@@ -1951,7 +1951,7 @@ void BotThink( bot_t *pBot )
 				// check if the bot hasn't moved much since the last location
 				// (and NOT on a ladder since ladder stuck handled elsewhere)
 				// (don't check for stuck if f_dont_check_stuck in the future)
-				if ((moved_distance <= 1.0) && (pBot->prev_speed >= 1.0f) &&
+				if ((moved_distance <= 1.0f) && (pBot->prev_speed >= 1.0f) &&
 					(pEdict->v.movetype != MOVETYPE_FLY) &&
 					(pBot->f_dont_check_stuck < gpGlobals->time))
 				{

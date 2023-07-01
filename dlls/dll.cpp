@@ -776,7 +776,7 @@ void StartFrame()
 					welcome_time = gpGlobals->time + 5.0f;  // welcome in 5 seconds
 			}
 			
-			if ((welcome_time > 0.0) && (welcome_time < gpGlobals->time) &&
+			if ((welcome_time > 0.0f) && (welcome_time < gpGlobals->time) &&
 				(welcome_sent == FALSE))
 			{
 				// let's send a welcome message to this client...
@@ -791,7 +791,7 @@ void StartFrame()
 				(welcome_time < 1.0f))
 				welcome_time = gpGlobals->time + 5.0f;  // welcome in 5 seconds
 			
-			if ((welcome_time > 0.0) && (welcome_time < gpGlobals->time) &&
+			if ((welcome_time > 0.0f) && (welcome_time < gpGlobals->time) &&
 				(welcome_sent == FALSE))
 			{
 				// let's send a welcome message

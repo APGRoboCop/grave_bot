@@ -1293,7 +1293,7 @@ void WaypointSearchItems(edict_t *pEntity, Vector origin, int wpt_index)
 			UTIL_TraceLine( origin, pent->v.origin, ignore_monsters, nullptr, &tr );
 		
 		// make sure entity is visible...
-		if ((tr.flFraction >= 1.0) || (strcmp("func_healthcharger", STRING(pent->v.classname)) == 0) ||
+		if ((tr.flFraction >= 1.0f) || (strcmp("func_healthcharger", STRING(pent->v.classname)) == 0) ||
 			(strcmp("func_recharge", STRING(pent->v.classname)) == 0))
 		{
 			strcpy(item_name, STRING(pent->v.classname));
@@ -1405,7 +1405,7 @@ edict_t *WaypointFindItem( int wpt_index )
 		UTIL_TraceLine( origin, pent->v.origin, ignore_monsters, nullptr, &tr );
 		
 		// make sure entity is visible...
-		if ((tr.flFraction >= 1.0) || (tr.pHit == pent))
+		if ((tr.flFraction >= 1.0f) || (tr.pHit == pent))
 		{
 			strcpy(item_name, STRING(pent->v.classname));
 			
@@ -2343,7 +2343,7 @@ void WaypointThink(edict_t *pEntity)
 					min_distance = distance;
 				}
 				
-				if ((wp_display_time[i] + 1.0) < gpGlobals->time)
+				if ((wp_display_time[i] + 1.0f) < gpGlobals->time)
 				{
 					if (waypoints[i].flags & W_FL_CROUCH)
 					{
